@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>플레이북 앱 핵심 기능 기획</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brand: #DC3545;
+  --brand-strong: #B92938;
+  --bg: #FAF3E7;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F7F0E0;
+  --text-primary: #2C2419;
+  --text-secondary: #5C4F3F;
+  --text-tertiary: #999;
+  --border: #E5DCC8;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+  --p1-color: #DC3545;
+  --p2-color: #B86B23;
+  --p3-color: #4A7E3A;
+  --area-library: #DC3545;
+  --area-book: #B86B23;
+  --area-progress: #5D4A8A;
+  --area-parental: #4A7E3A;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* 상단 헤더 */
+.app-header {
+  background: linear-gradient(135deg, var(--brand) 0%, #B92938 100%);
+  color: white;
+  padding: 24px 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.app-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.app-subtitle {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.app-version {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-left: 8px;
+}
+
+/* GNB 탭 */
+nav.tab-nav {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 4px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.tab-btn:hover { color: var(--text-primary); background: var(--bg-elevated); }
+.tab-btn.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 600; }
+
+.tab-btn-count {
+  display: inline-block;
+  background: var(--bg-elevated);
+  color: var(--text-tertiary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 4px;
+}
+
+.tab-btn.active .tab-btn-count { background: var(--brand); color: white; }
+
+/* 메인 */
+main.app-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+section.tab-section { display: none; }
+section.tab-section.active { display: block; }
+
+/* 개요 탭 */
+.overview-intro {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--brand);
+  box-shadow: var(--shadow-sm);
+}
+
+.overview-intro h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.overview-intro p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.overview-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 32px 0 16px 0;
+  color: var(--text-primary);
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.area-card {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-left: 4px solid;
+  box-shadow: var(--shadow-sm);
+}
+
+.area-card-icon { font-size: 28px; margin-bottom: 8px; }
+.area-card-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.area-card-count {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.priorities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.priority-card {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 20px;
+  border-top: 4px solid;
+  box-shadow: var(--shadow-sm);
+}
+
+.priority-card-label {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.priority-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.priority-card-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* 출시 일정 */
+.schedule-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.schedule-card {
+  background: var(--bg-surface);
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brand);
+}
+
+.schedule-phase {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.schedule-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.schedule-focus {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 4px;
+  padding-left: 12px;
+  position: relative;
+}
+
+.schedule-focus::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+}
+
+/* 기능 명세 탭 */
+.filter-bar {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-btn {
+  background: var(--bg-elevated);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.filter-btn:hover { border-color: var(--brand); color: var(--brand); }
+
+.filter-btn.active {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+.filter-btn[data-p1].active { background: var(--p1-color); border-color: var(--p1-color); }
+.filter-btn[data-p2].active { background: var(--p2-color); border-color: var(--p2-color); }
+.filter-btn[data-p3].active { background: var(--p3-color); border-color: var(--p3-color); }
+
+.feature-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+.feature-count strong { color: var(--brand); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* 기능 카드 */
+.feature-card {
+  background: var(--bg-surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-card-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.feature-card-header:hover { background: var(--bg-elevated); }
+
+.feature-card-id {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  background: var(--bg-elevated);
+  padding: 3px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.feature-card-pri {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.feature-card-pri[data-pri="P1"] { background: var(--p1-color); }
+.feature-card-pri[data-pri="P2"] { background: var(--p2-color); }
+.feature-card-pri[data-pri="P3"] { background: var(--p3-color); }
+
+/* 상태 배지 */
+.feature-card-status {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.feature-card-status[data-status="todo"]    { background: #F0EBE0; color: #8A7B63; border-color: #E0D6C2; }
+.feature-card-status[data-status="mockup"]  { background: #E6F0FB; color: #2A6BB0; border-color: #C5DDF5; }
+.feature-card-status[data-status="wip"]     { background: #FBF1DE; color: #B0791F; border-color: #F0DFB8; }
+.feature-card-status[data-status="done"]    { background: #E3F3E5; color: #2E7D3B; border-color: #C4E6C9; }
+
+/* 기능 카드 내 애널리틱스 이벤트 칩 */
+.event-chip {
+  display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2A6BB0;
+  background: #EAF2FB;
+  border: 1px solid #C5DDF5;
+  border-radius: 5px;
+  padding: 2px 7px;
+  margin-right: 4px;
+}
+.event-role { font-size: 12px; color: var(--text-secondary); }
+.event-row { margin-bottom: 6px; line-height: 1.7; }
+
+/* 클릭 가능한 링크들 */
+.event-chip-link { cursor: pointer; transition: background 0.15s; }
+.event-chip-link:hover { background: #D6E6F7; }
+.mockup-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+  background: #FBEEF0;
+  border: 1px solid #F2CDD3;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mockup-link:hover { background: #F7DEE2; }
+.dep-link {
+  cursor: pointer;
+  color: #2A6BB0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.dep-link:hover { color: #1A4E85; }
+.feature-card-highlight {
+  animation: cardFlash 2s ease;
+}
+@keyframes cardFlash {
+  0%, 100% { box-shadow: var(--shadow-sm); }
+  15% { box-shadow: 0 0 0 3px var(--brand); }
+}
+
+/* 이벤트 ↔ 게이트 매트릭스 */
+.matrix-wrap { overflow-x: auto; margin: 16px 0 8px; }
+.matrix {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  min-width: 640px;
+  font-size: 12px;
+}
+.matrix th, .matrix td {
+  border: 1px solid var(--border);
+  padding: 9px 10px;
+  text-align: center;
+}
+.matrix thead th {
+  background: var(--bg-elevated);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.matrix th.matrix-evhead {
+  text-align: left;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-weight: 600;
+  background: var(--bg-surface);
+  color: #2A6BB0;
+  white-space: nowrap;
+}
+.matrix td.cell-primary { background: #2A6BB0; color: #fff; font-weight: 700; }
+.matrix td.cell-support { background: #D6E6F7; color: #2A6BB0; font-weight: 600; }
+.matrix td.cell-none { color: var(--text-tertiary); }
+.matrix-gate-icon { font-size: 15px; display: block; }
+.matrix-gate-label { font-size: 10px; color: var(--text-secondary); }
+.matrix-legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0; font-size: 12px; align-items: center; }
+.matrix-legend-item { display: flex; align-items: center; gap: 6px; }
+.matrix-legend-box { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border); }
+.matrix-note {
+  font-size: 12px; color: var(--text-secondary);
+  background: var(--bg-surface); border-left: 3px solid var(--brand);
+  border-radius: 6px; padding: 10px 12px; margin-top: 8px;
+}
+
+/* 개요 진행현황 섹션 */
+.progress-overview {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.progress-stat {
+  flex: 1;
+  min-width: 120px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+.progress-stat-num { font-size: 28px; font-weight: 800; line-height: 1; }
+.progress-stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+.progress-stat[data-k="todo"]   .progress-stat-num { color: #8A7B63; }
+.progress-stat[data-k="mockup"] .progress-stat-num { color: #2A6BB0; }
+.progress-stat[data-k="wip"]    .progress-stat-num { color: #B0791F; }
+.progress-stat[data-k="done"]   .progress-stat-num { color: #2E7D3B; }
+.progress-bar-track {
+  height: 14px;
+  border-radius: 7px;
+  background: #F0EBE0;
+  overflow: hidden;
+  display: flex;
+  margin: 4px 0 16px;
+}
+.progress-bar-seg { height: 100%; }
+.progress-bar-seg[data-k="mockup"] { background: #4D8FD6; }
+.progress-bar-seg[data-k="wip"]    { background: #D6A23E; }
+.progress-bar-seg[data-k="done"]   { background: #4CAF50; }
+.progress-flow {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid #2A6BB0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.progress-flow strong { color: var(--text-primary); }
+
+.feature-card-area {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.feature-card-area-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.feature-card-title-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.feature-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.feature-card-summary {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.feature-card-toggle {
+  color: var(--text-tertiary);
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.feature-card.open .feature-card-toggle { transform: rotate(180deg); }
+
+.feature-card-body {
+  display: none;
+  padding: 0 20px 20px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.feature-card.open .feature-card-body { display: block; }
+
+.feature-detail-row {
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.feature-detail-row:last-child { border-bottom: none; }
+
+.feature-detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+
+.feature-detail-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.feature-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-detail-list li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.feature-detail-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+  font-size: 10px;
+  top: 8px;
+}
+
+.feature-detail-meta {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.feature-detail-meta-key {
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.feature-detail-meta-val {
+  color: var(--text-primary);
+}
+
+/* 시각 시안 탭 */
+.tools-intro {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--brand);
+}
+
+.tools-intro h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tools-intro p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.tool-cat-nav {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.tool-cat-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tool-cat-btn:hover { color: var(--brand); border-color: var(--brand); }
+.tool-cat-btn.active { background: var(--brand); color: white; border-color: var(--brand); }
+
+.tool-section {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+
+.tool-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.tool-section-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* 와이어프레임 */
+.wireframe-wrap { display: flex; flex-direction: column; gap: 20px; }
+
+.wireframe-meta {
+  display: flex;
+  gap: 18px;
+  padding: 12px 16px;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.wireframe-meta-item strong { color: var(--text-primary); margin-right: 6px; }
+
+.wireframe-svg-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(180deg, #FBE4B5 0%, #FAF3E7 100%);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.wireframe-svg {
+  max-width: 100%;
+  height: auto;
+  max-height: 700px;
+}
+
+.wireframe-legend, .wireframe-notes {
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.wireframe-legend h4, .wireframe-notes h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.legend-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wireframe-notes ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.wireframe-notes li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.wireframe-notes li strong { color: var(--text-primary); }
+
+/* 트랜지션 */
+.transition-wrap, .reward-wrap { display: flex; flex-direction: column; gap: 20px; }
+
+.transition-controls, .reward-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.transition-play-btn, .reward-play-btn {
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.transition-play-btn:hover, .reward-play-btn:hover {
+  background: var(--brand-strong);
+  transform: translateY(-1px);
+}
+
+.transition-time {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.transition-stage {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(180deg, #FBE4B5 0%, #FAF3E7 50%, #F0DBB5 100%);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.trans-book {
+  position: absolute;
+  left: 30px;
+  top: 60%;
+  transform: translateY(-50%);
+  width: 130px;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.trans-book-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: 1.5px solid #5C3F1F;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #C8102E, #A00D24);
+}
+
+.trans-book-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.trans-book-decoration { font-size: 24px; color: #FFD78A; }
+
+.trans-book-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #FBF5E7;
+  border: 1.5px solid #5C3F1F;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.trans-content-left, .trans-content-right { flex: 1; padding: 12px; color: #5C3F1F; }
+.trans-content-left { border-right: 1px dashed #5C3F1F; }
+
+.trans-toc-title, .trans-info-title { font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+
+.trans-toc-item {
+  font-size: 9px;
+  padding: 3px 0;
+  border-bottom: 1px dotted #5C3F1F;
+  opacity: 0;
+}
+
+.trans-info-desc { font-size: 8px; color: #888; margin-bottom: 4px; }
+.trans-info-pages { font-size: 8px; font-style: italic; }
+
+@keyframes transBookAnim {
+  0% { transform: translateY(-50%) scale(1); left: 30px; top: 60%; }
+  10% { transform: translateY(-50%) scale(0.97); left: 30px; top: 60%; }
+  20% { transform: translateY(-50%) scale(1.15); left: 30px; top: 50%; }
+  30%, 100% { transform: translate(-50%, -50%) scale(1.4); left: 50%; top: 50%; width: 220px; height: 280px; }
+}
+
+@keyframes transCoverFlip {
+  0%, 50% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-180deg); }
+}
+
+@keyframes transContentShow {
+  0%, 70% { opacity: 0; visibility: hidden; }
+  80% { opacity: 0; visibility: visible; }
+  100% { opacity: 1; visibility: visible; }
+}
+
+@keyframes transTocFade {
+  0% { opacity: 0; transform: translateX(-4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.trans-book.playing { animation: transBookAnim 1s ease-out forwards; }
+.trans-book.playing .trans-book-cover { animation: transCoverFlip 1s ease-in-out forwards; }
+.trans-book.playing .trans-book-content { animation: transContentShow 1s ease-out forwards; }
+.trans-book.playing .trans-toc-item:nth-child(2) { animation: transTocFade 0.2s ease-out 0.8s forwards; }
+.trans-book.playing .trans-toc-item:nth-child(3) { animation: transTocFade 0.2s ease-out 0.88s forwards; }
+.trans-book.playing .trans-toc-item:nth-child(4) { animation: transTocFade 0.2s ease-out 0.96s forwards; }
+
+/* 키프레임 표 */
+.keyframe-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.keyframe-table th, .keyframe-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.keyframe-table th { background: var(--bg-elevated); font-weight: 700; }
+
+.keyframe-table td:first-child {
+  font-family: monospace;
+  color: var(--brand);
+  font-weight: 600;
+  width: 60px;
+}
+
+.keyframe-table td:nth-child(2) { font-weight: 600; width: 100px; }
+
+.transition-keyframes, .reward-keyframes,
+.transition-notes, .reward-notes {
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.transition-keyframes h4, .reward-keyframes h4,
+.transition-notes h4, .reward-notes h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.transition-notes ul, .reward-notes ul { margin: 0; padding-left: 20px; }
+
+.transition-notes li, .reward-notes li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.transition-notes li strong, .reward-notes li strong { color: var(--text-primary); }
+
+/* 보상 */
+.reward-color-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.reward-color-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.reward-color-btn.active { border-color: #333; transform: scale(1.15); }
+
+.reward-stage {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(180deg, #2A1A0F 0%, #4A2E1F 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.reward-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  pointer-events: none;
+}
+
+.reward-star {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 96px;
+  color: #C8102E;
+  text-shadow: 0 0 20px rgba(255,215,138,0.8);
+  z-index: 3;
+}
+
+.reward-star-glow {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle, #C8102E66 0%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.reward-stamp {
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -150px);
+  opacity: 0;
+  width: 80px;
+  height: 80px;
+  background: #FFD78A;
+  border: 3px solid #5C3F1F;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.reward-stamp-inner {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5C3F1F;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.reward-message {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFD78A;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 3;
+}
+
+.reward-buttons {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  z-index: 3;
+}
+
+.reward-action-btn {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #5C3F1F;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5C3F1F;
+  cursor: pointer;
+}
+
+.reward-action-btn.primary {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
+@keyframes rewardOverlay { 0% { background: rgba(0,0,0,0); } 100% { background: rgba(0,0,0,0.4); } }
+@keyframes rewardStar {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); }
+  60% { transform: translate(-50%, -50%) scale(1.2) rotate(8deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+@keyframes rewardStarGlow {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  60% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0.3; }
+}
+@keyframes rewardStamp {
+  0% { transform: translate(-50%, -150px) rotate(-15deg); opacity: 0; }
+  50% { transform: translate(-50%, 10px) rotate(0deg); opacity: 1; }
+  70% { transform: translate(-50%, -8px) rotate(2deg); opacity: 1; }
+  100% { transform: translate(-50%, 0) rotate(0deg); opacity: 1; }
+}
+@keyframes rewardMessage {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes rewardButtons {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.reward-stage.playing .reward-overlay { animation: rewardOverlay 0.4s ease-out forwards; }
+.reward-stage.playing .reward-star { animation: rewardStar 0.6s ease-out 0.4s forwards; }
+.reward-stage.playing .reward-star-glow { animation: rewardStarGlow 0.6s ease-out 0.4s forwards; }
+.reward-stage.playing .reward-stamp { animation: rewardStamp 0.8s ease-out 1.0s forwards; }
+.reward-stage.playing .reward-message { animation: rewardMessage 0.5s ease-out 1.6s forwards; }
+.reward-stage.playing .reward-buttons { animation: rewardButtons 0.5s ease-out 2.0s forwards; }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .priorities-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; align-items: stretch; gap: 12px; }
+}
+
+/* ===== 애널리틱스 탭 ===== */
+.analytics-intro {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--brand);
+  box-shadow: var(--shadow-sm);
+}
+
+.analytics-intro-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.analytics-intro h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.analytics-intro-badge {
+  background: var(--brand);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.analytics-intro-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+.analytics-intro p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.analytics-constraints {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: #FFF5F5;
+  border-left: 3px solid var(--brand);
+  border-radius: 6px;
+}
+
+.analytics-constraints-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.analytics-constraints ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.analytics-constraints li {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+.analytics-section {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.analytics-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.analytics-section-num {
+  display: inline-block;
+  background: var(--brand);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.analytics-section-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* 도구 3계층 */
+.tools-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tool-layer-card {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  border-left: 4px solid var(--brand);
+}
+
+.tool-layer-card[data-layer="기반층"] { border-left-color: #DC3545; }
+.tool-layer-card[data-layer="제품 분석층"] { border-left-color: #5D4A8A; }
+.tool-layer-card[data-layer="스토어층"] { border-left-color: #4A7E3A; }
+
+.tool-layer-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tool-layer-cost {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.tool-layer-tool {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: 6px;
+}
+
+.tool-layer-role {
+  font-size: 13px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.tool-layer-reason {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.tool-layer-alt {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+
+.analytics-caveat {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #FFF8E6;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--p2-color);
+}
+
+/* KPI 테이블 */
+.kpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.kpi-table th, .kpi-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.kpi-table th {
+  background: var(--bg-elevated);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-table tr.primary {
+  background: rgba(220, 53, 69, 0.04);
+}
+
+.kpi-table tr.primary td:first-child {
+  position: relative;
+  padding-left: 28px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.kpi-table tr.primary td:first-child::before {
+  content: "★";
+  position: absolute;
+  left: 10px;
+  color: var(--brand);
+}
+
+.kpi-primary-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: rgba(220, 53, 69, 0.06);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--brand);
+  line-height: 1.6;
+}
+
+/* 이벤트 명세 */
+.events-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.event-card {
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.event-card.critical { border-left: 4px solid var(--brand); }
+
+.event-card-name {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.event-card-name-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-card-critical-badge {
+  display: inline-block;
+  background: var(--brand);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.event-card-params {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.event-param {
+  font-family: monospace;
+  font-size: 10px;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.event-card-purpose {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* 파라미터 타입 */
+.param-types {
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+
+.param-types h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.param-type-row {
+  display: grid;
+  grid-template-columns: 140px 80px 1fr;
+  gap: 12px;
+  font-size: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.param-type-row:last-child { border-bottom: none; }
+
+.param-type-name {
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.param-type-type {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.param-type-desc { color: var(--text-secondary); }
+
+/* 예시 코드 */
+.code-block {
+  background: #2C2419;
+  color: #FBF5E7;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 12px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block .comment { color: #B8A07F; }
+
+/* 게이트 */
+.gates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.gate-card {
+  background: var(--bg-elevated);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--brand);
+}
+
+.gate-card-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.gate-card-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.gate-card-threshold {
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  background: rgba(220, 53, 69, 0.08);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.gate-card-data {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.gate-card-method {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.gate-strategy {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(220, 53, 69, 0.06);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  border-left: 3px solid var(--brand);
+}
+
+/* 구현 체크리스트 */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklist-item {
+  padding: 12px 16px;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  border-left: 3px solid var(--brand);
+}
+
+.checklist-item-main {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklist-checkbox {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.checklist-item-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  margin-left: 24px;
+  line-height: 1.6;
+}
+
+.checklist-item-sub::before {
+  content: "└ ";
+  color: var(--text-tertiary);
+}
+
+.precondition-warn {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: #FFF5F5;
+  border-radius: 8px;
+  border-left: 3px solid var(--brand);
+}
+
+.precondition-warn-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.precondition-warn ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.precondition-warn li {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.5.9</span></div>
+    <div class="app-subtitle">서재 · 책 선택 · 진도 관리 · 보호자 영역 (4영역 × P1/P2/P3 우선순위)</div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" data-tab="overview">개요</button>
+    <button class="tab-btn" data-tab="features">기능 명세 <span class="tab-btn-count">18</span></button>
+    <button class="tab-btn" data-tab="tools">시각 시안 <span class="tab-btn-count">6</span></button>
+    <button class="tab-btn" data-tab="analytics">애널리틱스 <span class="tab-btn-count">7</span></button>
+  </div>
+</nav>
+
+<main class="app-main">
+
+  <section class="tab-section active" id="section-overview">
+    <div class="overview-intro">
+      <h2>핵심 기능 기획서</h2>
+      <p>플레이북 앱의 핵심 기능 4영역만 다룹니다. 동화 콘텐츠 (캐릭터·페이지·인터랙션·시그니처)는 별도 기획 파트에서 진행되며, 시퀀스 대시보드 (playbook_dashboard_v051.html)에서 작품·교육 도구를 참조합니다.</p>
+    </div>
+
+    <div class="overview-section-title">진행 현황</div>
+    <div class="progress-flow" id="progress-flow"></div>
+    <div class="progress-overview" id="progress-overview"></div>
+    <div class="progress-bar-track" id="progress-bar"></div>
+
+    <div class="overview-section-title">4영역</div>
+    <div class="areas-grid" id="areas-grid"></div>
+
+    <div class="overview-section-title">우선순위</div>
+    <div class="priorities-grid" id="priorities-grid"></div>
+
+    <div class="overview-section-title">출시 일정 (7주 · v1.0 빨간모자)</div>
+    <div class="schedule-timeline" id="schedule-timeline"></div>
+  </section>
+
+  <section class="tab-section" id="section-features">
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label">우선순위</span>
+        <div id="filter-priority" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">영역</span>
+        <div id="filter-area" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">상태</span>
+        <div id="filter-status" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+      <div class="feature-count" id="feature-count-display"></div>
+    </div>
+    <div class="features-grid" id="features-grid"></div>
+  </section>
+
+  <section class="tab-section" id="section-tools">
+    <div class="tools-intro">
+      <h2>시각 시안 (작업자용)</h2>
+      <p>앱 핵심 기능을 위한 시각 시안과 인터랙티브 미리보기. 일러스트레이터·UX 디자이너·Unity 개발자가 모션과 디자인 명세를 동일하게 이해할 수 있도록 한 곳에서 제공.</p>
+    </div>
+    <nav class="tool-cat-nav" id="tool-cat-nav"></nav>
+    <div id="tool-content"></div>
+  </section>
+
+  <section class="tab-section" id="section-analytics">
+    <div id="analytics-content"></div>
+  </section>
+
+</main>
+
+<script>
+'use strict';
+
+const AREAS = [{"id":"library","label":"서재 메인 화면","icon":"📚","color":"#DC3545"},{"id":"book","label":"책 선택 + 자동 펼침","icon":"📖","color":"#B86B23"},{"id":"progress","label":"진도 관리 + 자동 저장","icon":"💾","color":"#5D4A8A"},{"id":"parental","label":"보호자 영역 + 설정","icon":"👨‍👩‍👧","color":"#4A7E3A"}];
+const PRIORITIES = [{"id":"P1","label":"P1 필수","desc":"이것만으로도 \"기본 동작\"이 가능","color":"#DC3545"},{"id":"P2","label":"P2 강력 권장","desc":"학부모 만족 + 출시 가능 수준","color":"#B86B23"},{"id":"P3","label":"P3 있으면 좋음","desc":"출시 후 업데이트로 추가 가능","color":"#4A7E3A"}];
+const FEATURES = [{"id":"F-01","priority":"P1","area":"library","title":"서재 5권 책 진열","summary":"1단 책장에 5권 face-out 진열. 작품별 액센트 컬러 표지.","overview":"앱 첫 진입 화면. 5권의 책이 책장에 정면(face-out) 진열되어 5세가 한눈에 모든 작품을 인지. 어린이 시선 + 살짝 비스듬 앵글로 자연스러운 \"내 방 책장\" 메타포.","uiux":["배경: 따뜻한 베이지 #FAF3E7 + 황혼 황금빛 광원 #F4A261","책장: 갈색 나무 톤 #8C5A1F, 1단 (2단은 시선 분산)","앵글: 어린이 시선 + 위 5° (살짝 비스듬)","5권 face-out: 작품별 액센트 컬러 표지 (빨강·갈색·보라·황금·녹색)","소품: 1인 소파, 작은 램프, 깔개","광고·결제 영역 절대 없음"],"data":["Work { id, title, accentColor, isReleased, releaseDate }","WorkOrder: 진열 순서 (출시일 기반 또는 사용자 활동 기반)"],"tech":["Unity UI 또는 네이티브 (결정 필요)","메인 일러스트레이터 1명 전담 (톤 일관성)","5권 표지 + 배경 + 소품 일러스트"],"policy":["광고 영역 없음 — 마케팅 가치 \"광고 없음\"","결제 유도 없음 (MVP 무료)"],"deliverables":["서재 와이어프레임 → Figma 정밀화","메인 일러스트 무드보드 + 컬러 팔레트","5권 책 표지 일러스트","서재 배경 + 소품 일러스트","Unity 화면 구현 + 입력 처리"],"owner":"메인 일러스트레이터 + UX 디자이너 + Unity 개발자","dependencies":"작품 5편 메타데이터 + 액센트 컬러 확정","status":"mockup","analyticsEvents":[{"name":"book_open","role":"서재에서 작품 진입 시 발화"}],"mockupRef":"wireframe"},{"id":"F-02","priority":"P1","area":"library","title":"본/안 본 책 시각 구분","summary":"이어보기·새 책·완독·미출시 4가지 상태를 5세가 즉시 인지.","overview":"5세가 글자가 아닌 시각 단서로 \"어느 책 봤지?\"를 즉시 인지. 4가지 상태별 다른 시각 표현.","uiux":["이어보기: 책 위쪽에 책갈피 튀어나옴 #FFD78A","새 책 (안 봄): 표지에 작은 반짝임 ★ 1~3개","완독: 표지 우상단에 큰 별 도장 + 미세 글로우","미출시 (Coming Soon): 책 실루엣 + 흐릿한 옅은 색","글자 라벨 보조 가능 (이어보기·새 책 등) — 학부모 인지용"],"data":["UserWorkState { workId, status: 'unread'|'reading'|'completed'|'locked' }","ReadProgress { workId, completedChapters[], totalChapters }"],"tech":["상태 변경 시 즉시 시각 갱신 (앱 재진입 시)","4가지 시각 자산 (반짝임 · 책갈피 · 도장 · 실루엣)"],"policy":[],"deliverables":["4가지 상태 시각 자산 (책갈피·반짝임·도장·실루엣)","Unity 상태 → 시각 매핑 구현"],"owner":"일러스트레이터 + Unity 개발자","dependencies":"F-01 서재 5권 진열 + F-07 챕터 상태 추적","status":"mockup","mockupRef":"wireframe"},{"id":"F-03","priority":"P1","area":"book","title":"책 펼침 트랜지션 (1초 모션)","summary":"책 탭 → 1초 부드러운 펼침 → 챕터 목차. 5단계 키프레임.","overview":"동화책을 펼치는 자연스러운 메타포. 5단계 키프레임의 1초 모션. 시각 시안 탭에서 인터랙티브 미리보기 확인 가능.","uiux":["0.0s 탭: 책이 살짝 눌림 (scale 0.97). 미세한 햅틱","0.1s 부상: 책장에서 들어 올려짐 (scale 1.0→1.15)","0.3s 중앙 이동: 화면 중앙으로. 서재 배경 페이드 아웃","0.5s 펼침: 표지가 좌측으로 회전 rotateY 0°→-180°","0.8s 내용 등장: 챕터 목차가 글자별 fade-in (각 80ms 간격)","1.0s 완료: 인터랙티브 영역 활성화"],"data":["PageState: opening → toc_visible 전환"],"tech":["Unity DOTween 또는 Unity Timeline","책 본체 = 단일 GameObject (Scale·Position·Rotation 시퀀스)","펼침은 두 GameObject — 표지(회전) + 안쪽 페이지(정적)","Easing: 부상 ease-out-back, 펼침 ease-in-out, 내용 ease-out"],"policy":[],"deliverables":["트랜지션 시안 (시각 시안 탭 참조)","Unity DOTween 또는 Timeline 구현","페이지 종이 텍스처","오디오 동기화 (톡·종이·띵)"],"owner":"Unity 개발자 + 모션 디자이너 + 사운드 디자이너","dependencies":"F-01 서재 5권 진열","status":"mockup","mockupRef":"transition"},{"id":"F-04","priority":"P1","area":"book","title":"챕터 목차 화면","summary":"펼친 책의 좌측 페이지 = 챕터 목차, 우측 페이지 = 작품 소개.","overview":"책 펼침 후 보이는 챕터 목차 화면. 좌우 페이지 구조. 각 챕터의 본/안 본 상태 표시.","uiux":["좌측 페이지: 챕터 목차 리스트 (예: C1 새 마을 · C2A 곧장 갔을 때 · C2B 꽃 따러 갔을 때)","각 챕터 옆 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","우측 페이지: 작품 소개 + 시그니처 페이지 미리보기 (작은 일러스트)","페이지 하단: 좌측 \"← 책장으로\" 버튼 + 우측 \"이어보기\" / \"처음부터\" 버튼","분기 챕터 (C2A·C2B)는 들여쓰기 또는 그룹 표시"],"data":["Chapter { id, title, summary, pageCount, hasSignaturePage }","UserChapterState { workId, chapterId, status, lastPageId, completedAt }"],"tech":["Unity UI Canvas (좌우 페이지 레이아웃)","종이 텍스처 배경"],"policy":[],"deliverables":["챕터 목차 화면 UI 시안","상태 아이콘 자산 (☐ ◐ ★)","Unity 구현 + 데이터 바인딩"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-03 책 펼침 트랜지션 + F-07 챕터 상태 추적","status":"mockup","analyticsEvents":[{"name":"book_open","role":"챕터 목차 진입(작품 열람) 시 발화"}],"mockupRef":"transition"},{"id":"F-05","priority":"P1","area":"book","title":"마지막 페이지 자동 이동","summary":"이어보기 탭 시 마지막 본 페이지로 직접 점프.","overview":"이어보기 중인 작품 선택 시 마지막 본 페이지로 직접 이동. 챕터 1 첫 페이지로 가는 게 아니라 정확한 마지막 위치 복원.","uiux":["이어보기 중인 작품 → \"이어보기\" 버튼이 기본 강조","탭 시: 마지막 본 페이지로 직접 점프 (페이드 인 트랜지션)","앱 재시작 시 마지막 작품·페이지 기억","여러 작품 동시 진행 가능 (각 독립 진도)"],"data":["UserWorkState.currentPageId, lastPlayedAt","AppState.lastActiveWorkId"],"tech":["로컬 저장 (SQLite or PlayerPrefs)","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 fallback"],"policy":[],"deliverables":["자동 이동 로직","데이터 무결성 테스트 (강제 종료 후 복원)"],"owner":"Unity 개발자 + BE","dependencies":"F-04 챕터 목차 + F-06 자동 저장","status":"mockup","mockupRef":"reader"},{"id":"F-06","priority":"P1","area":"progress","title":"페이지 단위 자동 저장","summary":"페이지 종료 시 자동 저장. 사용자가 의식하지 않게.","overview":"페이지 단위 자동 저장. 자동 저장 표시 없음 (자동 저장의 미덕). 로컬만 (서버 전송 절대 없음).","uiux":["저장 표시 UI 없음 — 사용자가 의식하지 않게","저장 시점: 페이지 종료 + 챕터 종료 + 앱 백그라운드 진입","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 안전 복원"],"data":["UserWorkState { workId, status, currentChapterId, currentPageId, completedChapters[], chosenBranches[], lastPlayedAt }","UserAppState { lastActiveWorkId, lastUpdatedAt }"],"tech":["SQLite (Unity) 또는 PlayerPrefs JSON","트랜잭션 처리 (앱 강제 종료에도 일관성)"],"policy":["로컬만 — COPPA 2026 + 한국법 대응","어린이 식별자 UUID만 (이메일·이름 X)","서버 전송 절대 없음"],"deliverables":["SQLite 스키마 또는 PlayerPrefs 구조","자동 저장 구현","데이터 무결성 테스트"],"owner":"Unity 개발자 + BE","dependencies":"없음 (독립)","status":"todo","analyticsEvents":[{"name":"chapter_complete","role":"챕터 마지막 페이지 저장 시점에 발화"},{"name":"book_complete","role":"마지막 챕터 완료 저장 시 발화 (완독률 핵심)"}]},{"id":"F-07","priority":"P1","area":"progress","title":"본/안 본 챕터 상태 추적","summary":"각 챕터의 상태 (안 봄·이어보기·완독) 추적 + 시각화.","overview":"5세가 \"어느 챕터 봤지?\"를 즉시 인지할 수 있도록 챕터별 상태 추적. 본/안 본의 명확한 시각 구분.","uiux":["각 챕터 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","이어보기 중 챕터: 진행률 ?% 표시 (선택)","분기 챕터 (C2A·C2B)는 별도 추적","재생 중 페이지 시퀀스: 상단 작은 진행 표시 (예: \"3 / 8\")"],"data":["UserChapterState { workId, chapterId, status, lastPageId, completedPages[], completedAt }","ChapterProgress { workId, chapterId, completedPagesCount, totalPages }"],"tech":["페이지 종료 시 챕터 상태 갱신","챕터 마지막 페이지 도달 시 'completed' 상태로"],"policy":[],"deliverables":["챕터 상태 데이터 모델 + DB 스키마","상태 갱신 로직","상태 → 시각 매핑"],"owner":"Unity 개발자 + BE","dependencies":"F-06 자동 저장","status":"todo","analyticsEvents":[{"name":"chapter_start","role":"챕터 상태가 'reading'으로 전환될 때 발화 (완독률 퍼널 시작)"},{"name":"chapter_complete","role":"챕터 'completed' 전환 시 발화"},{"name":"book_complete","role":"모든 챕터 완료 판정 시 발화"}]},{"id":"F-08","priority":"P2","area":"parental","title":"보호자 잠금 (부모 게이트)","summary":"우상단 톱니바퀴 + 긴 누름 3초 + 곱셈 확인.","overview":"어린이가 우발적으로 접근하지 않도록 보호자 영역 진입 시 부모 게이트. COPPA 2026 권장 방식.","uiux":["진입 버튼: 서재 우상단 작은 톱니바퀴 아이콘","1단계: 긴 누름 3초 (어린이 우회 가능성 낮음)","2단계: 두 자릿수 곱셈 풀기 (7 × 8 = ?) — 어린이 차단 명확","권장: 1+2 혼합 (긴 누름 후 곱셈 확인)","실패 시 부드러운 안내 \"한번 더\"","통과 후 어른 톤 별도 UI (5세 톤과 명확히 분리)"],"data":["ParentalGateAttempt { attemptedAt, succeeded } — 보안 분석용"],"tech":["긴 누름 progress 시각 피드백 (3초 progress)","곱셈 입력 큰 숫자 키패드"],"policy":["COPPA 2026: 부모 동의 + 부모 게이트 필수"],"deliverables":["부모 게이트 UI 시안","긴 누름 progress 애니메이션","곱셈 입력 키패드","Unity 구현"],"owner":"Unity 개발자 + UX 디자이너 + 법무 자문","dependencies":"없음","status":"todo","mockupRef":"wireframe"},{"id":"F-09","priority":"P2","area":"parental","title":"기본 통계 화면","summary":"자녀 활동 통계: 작품별 진행률 + 일/주별 활동 시간.","overview":"보호자 영역에서만 표시되는 자녀 활동 통계. \"부드러운 자랑\" 톤 — 자녀를 격려하는 어조.","uiux":["진입: 보호자 영역 → \"자녀 활동\" 메뉴","기본: 5편 작품 × 진행률 막대 (0~100%) + 마지막 본 날짜","일별 활동 시간: 막대 그래프 7일","주별 활동 시간: 막대 그래프 4주","인터랙션 응답 수: 작품별 카운트","통계 데이터 삭제 가능 (학부모 선택)"],"data":["UserPageHistory { pageId, visitedAt, durationSec }","DailyActivity { date, totalDurationSec, pagesVisited }"],"tech":["Unity 막대 그래프 컴포넌트 또는 외부 라이브러리","일별/주별 집계 로직"],"policy":["통계 데이터 로컬만","통계 삭제 권한 (보호자)"],"deliverables":["통계 화면 UI 시안","막대 그래프 컴포넌트","일별/주별 집계 로직","통계 삭제 기능"],"owner":"Unity 개발자 + UX 디자이너","dependencies":"F-08 부모 게이트 + F-06 자동 저장","status":"todo"},{"id":"F-10","priority":"P2","area":"parental","title":"설정 — 볼륨 (4채널)","summary":"전체 / BGM / SFX / 내레이션 슬라이더 + 청각 보호.","overview":"기본적인 사용자 설정. 5세 보호 + 학부모 편의. 4채널 볼륨 + 최대 볼륨 제한.","uiux":["진입: 보호자 영역 → \"설정\" 메뉴","4채널 슬라이더 0~100%: 전체 / BGM / SFX / 내레이션","최대 볼륨 제한 (5세 청각 보호): 시스템 볼륨 80% 캡","기본값: 전체 70%, BGM 60%, SFX 80%, 내레이션 90%"],"data":["AudioSettings { master, bgm, sfx, narration } (PlayerPrefs)"],"tech":["Unity Audio Mixer 4채널 구성","시스템 볼륨 80% 캡 처리"],"policy":["어린이 청각 보호 (디바이스 시스템 볼륨 캡)"],"deliverables":["설정 화면 UI","볼륨 슬라이더 컴포넌트","Unity Audio Mixer 설정"],"owner":"Unity 개발자 + 사운드 디자이너","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-11","priority":"P2","area":"parental","title":"설정 — 자막","summary":"자막 ON/OFF + 크기 3단계 (작음·중간·큼).","overview":"내레이션 자막을 화면 하단에 표시. 학부모 동반 시청 시 + 청각 장애 가족 배려.","uiux":["자막 토글: ON / OFF","자막 크기 3단계: 작음 (12pt) / 중간 (16pt) / 큼 (20pt)","위치: 화면 하단 중앙","배경: 반투명 검정 (가독성)","타이밍: 내레이션 음성과 동기화 (페이지 timeline 데이터 활용)"],"data":["SubtitleSettings { enabled, size }","Page.timeline 데이터의 내레이션 텍스트 활용"],"tech":["내레이션 텍스트를 페이지 데이터에서 추출","오디오와 시각 동기화"],"policy":["접근성 (Apple Guidelines + WCAG)"],"deliverables":["자막 표시 시스템","자막 폰트 + 크기 변경 처리","내레이션 텍스트 데이터 정리"],"owner":"Unity 개발자 + 콘텐츠 기획자","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-12","priority":"P1","area":"parental","title":"다운로드 관리 (챕터 단위)","summary":"챕터별 다운로드/삭제 + 작품 일괄 다운로드 + 저장 공간 표시. 구매=모든 기기 공통, 다운로드=기기별.","overview":"챕터 단위 다운로드/삭제. 사용자가 보는 챕터만 받아 저장 공간을 아끼고, 구매한 챕터(또는 책 1권)만 선택적으로 내려받는다. 핵심 원칙은 구매와 다운로드의 분리 — 구매(엔타이틀먼트)는 계정에 귀속되어 모든 기기에서 공통으로 열리고, 다운로드 완료 상태는 기기에 귀속되어 같은 챕터도 기기마다 다르게 보인다. 가정에서 태블릿 여러 대를 쓰는 상황을 보장. 1차 출시는 현재 기기 기준으로 관리하고, 기기별 다운로드 상태 표시는 출시 후 업데이트로 확장한다.","uiux":["진입: 보호자 영역(F-08 통과) → \"다운로드\" 메뉴. 부모용 관리 화면","상단: 현재 기기명 표시 + \"구매=모든 기기 공통, 다운로드=기기별\" 안내 배너","작품 > 챕터 트리: 작품명 아래 챕터별 상태 + 크기. 작품 단위 접기/펼치기","챕터 상태 5종: 완료 / 다운로드 중(진행률+취소) / 미다운로드(구매함, 받기) / 업데이트 필요(OTA) / 미구매 잠금(구매 필요→F-18)","작품 단위 일괄: \"전체 받기\"(구매한 챕터 한꺼번에)","전체 단위 일괄: \"구매한 챕터 모두 받기\" / \"이 기기 정리\"(삭제로 공간 확보)","저장 공간 상단 표시 (이 기기 기준 — 플레이북 사용량 / 여유 공간)"],"data":["UserEntitlement { workId, unlockedChapters[], ownsFullBook } — 계정 귀속(모든 기기 공통)","DevicePackage { deviceId, workId, chapterId, version, sizeBytes, status, downloadedAt } — 기기 귀속","DownloadJob { workId, chapterId, progress, startedAt, error? }","status 5종: completed / downloading / not_downloaded / update_required / locked"],"tech":["OTA 챕터 단위 다운로드 (CDN 결정 + Unity 구현)","챕터 패키지 포맷 (JSON + 에셋 번들), 챕터별 독립 다운로드/삭제","엔타이틀먼트(구매)는 서버/계정에서 조회 — 기기 독립. 다운로드 상태는 로컬(기기) 저장","구매 상태(F-18) 확인 후 다운로드 허용. 미구매 챕터는 잠금 → 페이월","[출시 후] 기기별 다운로드 상태 동기화 — \"내 기기들\" 목록. 1차 출시는 현재 기기 기준"],"policy":["구매는 계정 귀속 — 기기 변경/추가 시 구매 복원(F-18)으로 재다운로드 가능","동시 사용 기기 수 정책(무제한 vs 상한)은 비즈니스 정책으로 확정 필요"],"deliverables":["다운로드 관리 화면 UI (작품 > 챕터 트리, 상태 5종)","OTA 챕터 단위 다운로드 시스템","챕터 패키지 포맷","디바이스 저장 공간 표시 (현재 기기 기준)","\"구매=모든 기기 공통\" 안내 + 다른 기기 재다운로드 지원","[출시 후] 기기별 다운로드 상태 표시 확장"],"owner":"Unity 개발자 + BE + 인프라","dependencies":"F-08 부모 게이트 + F-18 구매/결제 + Soft Launch 일정","status":"mockup","mockupRef":"download"},{"id":"F-13","priority":"P3","area":"library","title":"첫 실행 온보딩","summary":"3단계 짧은 안내 (환영 · 책 선택 · 학부모 안내).","overview":"앱 첫 실행 시 짧은 온보딩. 5세 친화 + 학부모 안내.","uiux":["1단계 환영: \"안녕, 플레이북에 어서 와!\" + 메인 캐릭터","2단계 책 선택: 손가락 애니메이션 \"책을 톡 눌러봐\"","3단계 학부모 안내: \"부모님께 알려주세요\" (긴 누름으로 보호자 영역)","스킵 옵션 (우상단)","두 번째 실행부터는 표시 안 함"],"data":["AppState.onboardingCompleted"],"tech":["Unity 온보딩 컨트롤러","손가락 애니메이션 (튜토리얼 hint)"],"policy":[],"deliverables":["온보딩 3단계 화면 시안","손가락 hint 애니메이션","Unity 구현"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-01 서재 5권 진열 + F-08 부모 게이트","status":"todo"},{"id":"F-14","priority":"P3","area":"parental","title":"알림 (Opt-in)","summary":"다음 챕터 알림 (학부모 동의 시).","overview":"챕터 경계에서 \"다음 챕터 알림 받기\" 토글. 학부모 동의 (Opt-in). 다음날 같은 시간대 한 번만.","uiux":["Opt-in: 챕터 경계에서 \"다음 챕터를 알림으로 받기\" 토글","발송: 다음날 같은 시간대 + 한 번만 (스팸 회피)","내용: \"새 챕터가 기다리고 있어요! — [작품] 다음 챕터\"","보호자 영역에서 모든 알림 끄기 가능"],"data":["NotificationSettings { enabled, optInPerWork[] }","ScheduledNotification { workId, chapterId, scheduledAt }"],"tech":["Unity Local Notifications (UnityEngine.iOS / Android)","권한 요청 시 부모 게이트 적용"],"policy":["어린이 앱 알림은 학부모 동의 필수","Push 권한 요청 시 부모 게이트"],"deliverables":["알림 Opt-in UI","Unity Local Notifications 구현","보호자 영역 알림 설정"],"owner":"Unity 개발자","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-15","priority":"P3","area":"book","title":"챕터 완료 보상 애니메이션","summary":"챕터 완독 시 별·도장 4단계 애니메이션.","overview":"챕터 완독 시 별·도장 애니메이션. 시각 시안 탭에서 인터랙티브 미리보기.","uiux":["0.0s 페이드인: 반투명 검정 layer (opacity 0→0.4)","0.4s 별 등장: scale 0→1.2→1.0 (ease-out-back) + 광채 확산","1.0s 도장 등장: translateY -50→0 (ease-out-bounce)","1.6s 축하 메시지: \"잘했어요!\" fade-in","2.5s 다음 단계 버튼: \"다음 챕터로\" / \"오늘은 여기까지\"","별 색상 = 작품 액센트 컬러","도장 = 책 모양 + 챕터 번호"],"data":["ChapterCompletion { workId, chapterId, completedAt, animationShown }"],"tech":["Unity Timeline 애니메이션","별/도장 일러스트 5종 (작품별 다른 컬러)","효과음 동기화"],"policy":[],"deliverables":["보상 시안 (시각 시안 탭 참조)","별·도장 일러스트 5종","축하 효과음","Unity Timeline 구현"],"owner":"일러스트레이터 + Unity 개발자 + 사운드 디자이너","dependencies":"F-07 챕터 상태 추적","status":"todo","mockupRef":"reward"},{"id":"F-16","priority":"P3","area":"library","title":"사운드 디자인 (UI 효과음)","summary":"책 탭·펼침·챕터 선택·페이지 전환·완료 효과음 10~15개.","overview":"내레이션·BGM·SFX 외의 \"앱 인터페이스\" 효과음. UI 피드백 사운드.","uiux":["책 탭: 부드러운 책 표지 \"톡\" 소리","책 펼침: 종이 페이지 넘어가는 소리","챕터 선택: 부드러운 \"띵\"","페이지 전환: 미세한 종이 소리 (반복 부담 없게)","챕터 완료: \"띠리링\" 작은 축하 멜로디 (1.5초 이내)","보호자 영역 진입: 차분한 톤 (어린이 톤 X)"],"data":["SfxLibrary: 효과음 카탈로그 + 트리거 매핑"],"tech":["Unity Audio Mixer + Sound Effect 채널","효과음 파일 압축 (mp3/ogg)"],"policy":[],"deliverables":["사운드 디자이너 위촉","효과음 세트 10~15개","Unity Audio Mixer 설정"],"owner":"사운드 디자이너 + Unity 개발자","dependencies":"없음","status":"todo"},{"id":"F-17","priority":"P1","area":"progress","title":"애널리틱스 계측 (이벤트 7종)","summary":"완독률·리텐션·유료전환 측정을 위한 SDK 연동 + 이벤트 7종을 출시 빌드에 포함. 개인정보 미수집 설계.","overview":"MVP의 GO/STOP 판정을 '감'이 아닌 '데이터'로 내리기 위한 계측 구현. 측정 전략·KPI·게이트 정의는 애널리틱스 탭 참조. 본 기능은 그 정의를 코드로 구현하는 개발 작업이다. 완독률은 출시 빌드에 이벤트가 포함돼야만 측정 가능하므로 1권 MVP 출시 전 필수 완료(P1).","uiux":["사용자 노출 UI 없음 — 백그라운드 계측","계측 자체가 사용자 경험을 방해하지 않도록 비동기 전송","보호자 영역 통계 화면(F-09)과 데이터 소스 일부 공유 가능"],"data":["이벤트 7종: book_open · chapter_start · chapter_complete · book_complete · interaction_tap · paywall_view · purchase_success","핵심 퍼널: chapter_start → book_complete (완독률)","모든 이벤트는 콘텐츠 식별자(book_id 등)·행동만 기록 — 개인 식별 정보 금지"],"tech":["Firebase Analytics 연동 — 키즈 설정(tag_for_child_directed_treatment) ON, 광고 ID 수집 OFF","Amplitude SDK 연동 — 완독률 퍼널·코호트 리텐션·작품별 비교","대시보드 구성: 완독률 퍼널 / 코호트 리텐션 / 작품별 비교 + 게이트 기준선(완독률 40% 등)","SDK는 데이터 처리 위탁 — 개인정보 처리방침에 수탁사 명시 + 보관기간 제한"],"policy":["개정 COPPA(2026-04) + 국내 PIPA — 기기 ID·IP는 개인정보, 부모 동의 필요","'데이터-프리' 설계: 개인 식별 없이 행동 이벤트만 수집 (제품 신뢰 자산)","[법무] 부모 동의 흐름·처리방침·수탁사 명시는 출시 전 법무 검토 필수"],"deliverables":["Firebase SDK 연동 + 키즈 설정 적용","Amplitude SDK 연동 + 이벤트 7종 구현","이벤트 파라미터 개인정보 미포함 검증","애널리틱스 대시보드 + 게이트 기준선 구성","출시 빌드 이벤트 포함 최종 확인"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-06 자동 저장 + F-07 챕터 상태 추적 (이벤트 발생 지점)","status":"todo","analyticsEvents":[{"name":"interaction_tap","role":"페이지 인터랙션(predict/quiz/vocab 등) 응답 시 발화 — 콘텐츠 파트와 연계"}]},{"id":"F-18","priority":"P1","area":"book","status":"mockup","title":"인앱 구매 (챕터/책 단위)","summary":"챕터 1 무료 · 챕터 2부터 인앱 구매. 챕터 개별 구매 + 책 1권 번들 구매 옵션.","overview":"MVP 수익화의 핵심. 챕터 1은 무료로 열어 진입 장벽을 없애고, 챕터 2부터 인앱 구매로 전환. 사용자는 보고 싶은 챕터만 개별 구매하거나, 책 1권을 통째로(번들 할인) 구매할 수 있다. 결제 시점이 완독률·유료전환 퍼널(F-17)의 paywall_view·purchase_success 이벤트 발생 지점이다.","uiux":["챕터 1: 무료 — 잠금 표시 없음","챕터 2+: 잠금 자물쇠 표시. 탭 시 구매 화면(paywall)","구매 화면 2옵션: \"이 챕터만\" / \"책 전체 받기(번들, 할인)\"","구매 완료 즉시 해당 챕터 잠금 해제 + 다운로드(F-12) 트리거","결제 진입은 보호자 게이트(F-08) 통과 권장 — 어린이 우발 결제 방지","가격·번들 할인율 표시. 이미 구매한 챕터는 번들가에서 제외 계산"],"data":["Product { productId, type: \"chapter\"|\"book_bundle\", workId, chapterId?, price }","Purchase { productId, workId, chapterId?, purchasedAt, storeTxnId }","UserEntitlement { workId, unlockedChapters[], ownsFullBook }"],"tech":["StoreKit(iOS) / Google Play Billing — 인앱 소비성 아님(영구 잠금 해제)","서버 영수증 검증 또는 로컬 검증 정책 결정 필요","번들 구매 시 unlockedChapters 일괄 갱신 + ownsFullBook=true","구매 복원(Restore Purchases) 지원 — 스토어 가이드라인 필수"],"policy":["어린이 앱 결제: 보호자 게이트 + 스토어 부모 통제 준수","Apple Guideline 3.1.1 인앱 구매 / Google Play 결제 정책 준수","가격·번들 조건 명확 고지 (다크패턴 금지)"],"deliverables":["구매 화면(paywall) UI 시안 — 챕터/번들 2옵션","StoreKit / Play Billing 연동","엔타이틀먼트 관리 + 구매 복원","구매 → 잠금해제 → 다운로드 연결 로직"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-04 챕터 목차 + F-08 부모 게이트 + F-12 다운로드 + F-17 애널리틱스","analyticsEvents":[{"name":"paywall_view","role":"챕터 2+ 잠금 탭 → 구매 화면 노출 시 발화"},{"name":"purchase_success","role":"결제 완료 시 발화 (유료전환·구매깊이)"}],"mockupRef":"paywall"}];
+const SCHEDULE = [{"phase":"W1","title":"설계·기반 셋업","focus":["서재 와이어프레임 → Figma 정밀화","일러스트레이터 위촉 + 무드보드 + 컬러 팔레트","Unity 프로젝트 셋업 + 데이터 모델(SQLite 스키마) 확정","[병행] 법무 자문 위촉 — 보호자 영역·아동 데이터 정책"]},{"phase":"W2~W3","title":"P1 핵심 A — 서재·책 펼침","focus":["서재 5권 진열 + 본/안 본 시각 구분 (F-01·F-02)","책 펼침 트랜지션 + 챕터 목차 (F-03·F-04)","5권 표지·배경·소품 일러스트 1차","애널리틱스 SDK 연동 — Firebase+Amplitude 골격 (F-17 착수)"]},{"phase":"W4~W5","title":"P1 핵심 B — 진도·보호자","focus":["페이지 자동 저장 + 챕터 상태 추적 (F-05·F-06·F-07)","보호자 게이트 + 기본 통계 화면 (F-08·F-09)","설정 — 볼륨·자막 (F-10·F-11)","애널리틱스 이벤트 7종 구현 + 개인정보 미포함 검증 (F-17 완료)"]},{"phase":"W6","title":"P2 마감 + 통합","focus":["다운로드 관리 + OTA (F-12)","애널리틱스 대시보드 구성 + 게이트 기준선 (F-17)","[법무] 부모 동의·처리방침·수탁사 명시 검토 완료","전체 통합 + 시각 자산 최종 반영"]},{"phase":"W7","title":"QA + 출시","focus":["QA + 데이터 무결성·강제종료 복원 테스트","완독률 이벤트 출시 빌드 포함 최종 확인","🚀 v1.0 출시 (빨간모자)","P3(온보딩·알림·보상·사운드)는 출시 후 OTA 점진"]}];
+const ANALYTICS = {"version":"V0.1.0","updatedAt":"2026-06-09","intent":"MVP 단계 KPI(완독률·D7 리텐션·유료전환·평점)와 단계별 게이트를 '감'이 아닌 '데이터'로 판정하기 위해, 어떤 도구로 무엇을 어떻게 측정할지 정의한다.","legalConstraints":["개정 COPPA(2026-04 시행) — 분석 SDK가 수집하는 기기 ID·사용자 ID·IP는 각각 '개인정보'로 분류되어 부모 동의 필요","국내 PIPA·GDPR-K — 아동 데이터 최소 수집·보관기간 제한·수탁사 명시 의무","설계 방향: '데이터-프리' 설계 — 개인 식별 없이 행동 이벤트만 수집 (제품의 신뢰 자산)"],"tools":[{"layer":"기반층","tool":"Firebase Analytics","cost":"무료","role":"설치(first_open) · 세션 · 기본 리텐션 · 크래시 · 광고 설치 전환 기준점","reason":"필수 — 무료·무제한 이벤트(최대 500종), 광고 설치 전환 추적(CAC 계산)의 기준점. 키즈 설정(tag_for_child_directed_treatment) 켜고 광고 ID 수집 끔","essential":true},{"layer":"제품 분석층","tool":"Amplitude (권장)","cost":"MVP 규모 무료 등급","role":"완독률 퍼널 · 코호트 리텐션 · 작품별 비교 · 게이트 판정","reason":"핵심 질문이 '작품별 완독률·재방문 1위 = IP 후보'라 코호트·세그먼트 비교가 강한 Amplitude가 적합","essential":true,"alternative":"Mixpanel — 팀이 작고 빠른 셋업이 우선이면 4개 핵심 리포트 중심으로 대안 가능"},{"layer":"스토어층","tool":"App Store Connect · Play Console","cost":"콘솔 자동 제공","role":"평점 · 매출 · 설치 출처","reason":"스토어 출시에 기본 포함","essential":true}],"toolsCaveat":"Firebase·Amplitude 모두 데이터 처리 위탁에 해당 → 개인정보 처리방침에 수탁사로 명시하고 보관기간을 제한해야 함","kpis":[{"kpi":"설치(누적)","method":"first_open 자동 집계","tool":"Firebase"},{"kpi":"완독률","method":"chapter_start → book_complete 퍼널","tool":"Amplitude 퍼널","primary":true},{"kpi":"D7 리텐션","method":"설치 코호트의 7일 후 재방문 비율","tool":"Amplitude 리텐션"},{"kpi":"유료전환","method":"paywall_view → purchase_success 퍼널","tool":"Amplitude + 스토어"},{"kpi":"평점","method":"앱 외부 — 스토어 콘솔에서 확인","tool":"App Store / Play Console"}],"kpiPrimaryNote":"1순위 지표는 완독률. 작품별({book_id})로 분리하면 '어떤 동화가 끝까지 보게 만드나'가 바로 나오며, 이것이 IP 후보 판별의 핵심 데이터다.","events":[{"name":"book_open","params":["book_id","title"],"purpose":"작품별 진입"},{"name":"chapter_start","params":["book_id","chapter_no"],"purpose":"완독률 퍼널 시작","critical":true},{"name":"chapter_complete","params":["book_id","chapter_no","duration_sec"],"purpose":"챕터 이탈 지점 분석"},{"name":"book_complete","params":["book_id"],"purpose":"완독률 퍼널 종료 (핵심)","critical":true},{"name":"interaction_tap","params":["book_id","type"],"purpose":"참여도 · 인터랙션 빈도"},{"name":"paywall_view","params":["trigger"],"purpose":"유료전환 퍼널 시작"},{"name":"purchase_success","params":["product_id","price"],"purpose":"유료전환 · 구매 깊이"}],"paramTypes":[{"name":"book_id","type":"string","desc":"작품 고유 ID (예: rdcap_001)"},{"name":"chapter_no","type":"integer","desc":"챕터 순번 (1부터)"},{"name":"duration_sec","type":"integer","desc":"챕터 소요 시간(초)"},{"name":"type","type":"string","desc":"인터랙션 유형 (predict/quiz/vocab 등)"},{"name":"price","type":"integer","desc":"결제 금액(원)"}],"eventPrinciple":"모든 이벤트는 개인 식별 정보 없이 콘텐츠 식별자·행동만 기록한다","exampleCode":"amplitude.track('book_complete', {\n  book_id: 'rdcap_001'\n}); // 개인정보 파라미터 금지","gates":[{"label":"1권 완독률","data":"book_complete ÷ chapter_start","threshold":"≥ 40%","method":"Amplitude 퍼널","icon":"📖"},{"label":"2권 재방문","data":"1권 코호트의 2권 출시 후 복귀","threshold":"≥ 20%","method":"Amplitude 리텐션","icon":"🔁"},{"label":"3권 구매깊이","data":"유저당 purchase_success 평균","threshold":"≥ 2","method":"Amplitude 세그먼트","icon":"💰"},{"label":"4권 CAC","data":"광고비 ÷ 신규설치","threshold":"< 객단가","method":"Meta·Google Ads + Firebase","icon":"📊"},{"label":"5권 IP후보","data":"작품별 완독률·재방문 1위 식별","threshold":"1위 작품 선정","method":"Amplitude ({book_id} 세그먼트)","icon":"⭐"}],"gateStrategy":"위 5개 게이트를 Amplitude 대시보드 하나에 고정. '완독률 게이지 + 작품별 비교 막대 + 코호트 리텐션 곡선' 3개 차트면 매주 진척을 한 화면에서 확인 가능","implementationChecklist":[{"item":"Firebase SDK 연동 + 키즈 설정(child-directed) 적용","subitems":["설치·세션 자동 수집 확인"]},{"item":"Amplitude SDK 연동 + 4장 이벤트 7종 구현","subitems":["이벤트 파라미터에 개인정보 미포함 검증"]},{"item":"대시보드 구성: 완독률 퍼널 / 코호트 리텐션 / 작품별 비교","subitems":[]},{"item":"게이트 임계값(완독률 40% 등) 대시보드에 기준선 표시","subitems":[]},{"item":"출시 후 주간 점검 — 3주 창에서 다음 권 GO/STOP 판정","subitems":[]}],"preconditions":["이벤트가 출시 빌드에 포함돼야 완독률 측정 가능. 4장 이벤트 7종은 1권 MVP 출시 전 반드시 구현 완료","[법무] 부모 동의 흐름·개인정보 처리방침·수탁사 명시는 도구 설정과 별개로 출시 전 법무 검토 필수"],"eventGateMatrix":{"gates":[{"key":"G1","icon":"📖","label":"1권 완독률"},{"key":"G2","icon":"🔁","label":"2권 재방문"},{"key":"G3","icon":"💰","label":"3권 구매깊이"},{"key":"G4","icon":"📊","label":"4권 CAC"},{"key":"G5","icon":"⭐","label":"5권 IP후보"}],"rows":[{"event":"book_open","contrib":{"G2":"support","G5":"support"}},{"event":"chapter_start","contrib":{"G1":"primary","G5":"support"}},{"event":"chapter_complete","contrib":{"G1":"support"}},{"event":"book_complete","contrib":{"G1":"primary","G2":"support","G5":"primary"}},{"event":"interaction_tap","contrib":{"G5":"support"}},{"event":"paywall_view","contrib":{"G3":"support"}},{"event":"purchase_success","contrib":{"G3":"primary"}}],"legend":{"primary":"직접 기여 (핵심 지표)","support":"보조 기여"},"note":"G4 CAC는 first_open(Firebase 자동 집계)과 외부 광고 데이터 중심이라 앱 내 이벤트 7종의 직접 기여가 낮다. 나머지 4개 게이트는 위 이벤트로 판정 가능."}};
+
+const state = {
+  currentTab: 'overview',
+  filterPriority: 'all',
+  filterArea: 'all',
+  filterStatus: 'all',
+  currentTool: 'wireframe',
+};
+
+const STATUS_LABEL = { todo: '미착수', mockup: '목업', wip: '개발중', done: '완료' };
+
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function getArea(id) { return AREAS.find(a => a.id === id); }
+function getPriority(id) { return PRIORITIES.find(p => p.id === id); }
+
+// ─── 탭 전환 ───
+function switchTab(tabId) {
+  state.currentTab = tabId;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.toggle('active', s.id === 'section-' + tabId));
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+// 시각 시안으로 점프 (탭 전환 + 해당 시안 선택)
+function jumpToMockup(toolId) {
+  switchTab('tools');
+  if (toolId) {
+    state.currentTool = toolId;
+    if (typeof renderToolCategories === 'function') renderToolCategories();
+    if (typeof renderToolContent === 'function') renderToolContent();
+  }
+  document.getElementById('section-tools').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 특정 기능 카드로 점프 (탭 전환 + 스크롤 + 펼침 + 하이라이트)
+function jumpToFeature(featureId) {
+  switchTab('features');
+  // 필터가 카드를 숨겼을 수 있으니 전체로 초기화
+  state.filterPriority = 'all';
+  state.filterArea = 'all';
+  state.filterStatus = 'all';
+  document.querySelectorAll('#filter-priority .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.pri === 'all'));
+  document.querySelectorAll('#filter-area .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.area === 'all'));
+  document.querySelectorAll('#filter-status .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.status === 'all'));
+  renderFeatureCards();
+  setTimeout(() => {
+    const card = document.querySelector('.feature-card[data-id="' + featureId + '"]');
+    if (card) {
+      card.classList.add('open');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('feature-card-highlight');
+      setTimeout(() => card.classList.remove('feature-card-highlight'), 2000);
+    }
+  }, 50);
+}
+
+// ─── 개요 탭 렌더링 ───
+function renderOverview() {
+  // 영역 카드
+  const areasGrid = document.getElementById('areas-grid');
+  if (areasGrid) {
+    areasGrid.innerHTML = AREAS.map(a => {
+      const count = FEATURES.filter(f => f.area === a.id).length;
+      return `<div class="area-card" style="border-left-color: ${a.color}">
+        <div class="area-card-icon">${a.icon}</div>
+        <div class="area-card-title">${esc(a.label)}</div>
+        <div class="area-card-count">${count}개 기능</div>
+      </div>`;
+    }).join('');
+  }
+
+  // 우선순위 카드
+  const priGrid = document.getElementById('priorities-grid');
+  if (priGrid) {
+    priGrid.innerHTML = PRIORITIES.map(p => {
+      const count = FEATURES.filter(f => f.priority === p.id).length;
+      return `<div class="priority-card" style="border-top-color: ${p.color}">
+        <div class="priority-card-label" style="color: ${p.color}">${esc(p.label)}</div>
+        <div class="priority-card-desc">${esc(p.desc)}</div>
+        <div class="priority-card-count">${count}개 기능</div>
+      </div>`;
+    }).join('');
+  }
+
+  // 일정 카드
+  const schedGrid = document.getElementById('schedule-timeline');
+  if (schedGrid) {
+    schedGrid.innerHTML = SCHEDULE.map(s => `
+      <div class="schedule-card">
+        <div class="schedule-phase">${esc(s.phase)}</div>
+        <div class="schedule-title">${esc(s.title)}</div>
+        ${s.focus.map(f => `<div class="schedule-focus">${esc(f)}</div>`).join('')}
+      </div>
+    `).join('');
+  }
+
+  // 진행 현황
+  const counts = { todo: 0, mockup: 0, wip: 0, done: 0 };
+  FEATURES.forEach(f => { counts[f.status || 'todo'] = (counts[f.status || 'todo'] || 0) + 1; });
+  const total = FEATURES.length;
+  const flowEl = document.getElementById('progress-flow');
+  if (flowEl) {
+    flowEl.innerHTML = '클라이언트 개발자가 지난주까지 환경 셋업과 핵심 플로우 <strong>책장 → 구매 → 다운로드 → 읽기</strong> 목업을 완료했습니다. ' +
+      '해당 플로우의 기능 ' + counts.mockup + '개가 <strong>목업</strong> 상태이며, 나머지 ' + counts.todo + '개는 미착수입니다.';
+  }
+  const ovEl = document.getElementById('progress-overview');
+  if (ovEl) {
+    const order = [['done','완료'],['wip','개발중'],['mockup','목업'],['todo','미착수']];
+    ovEl.innerHTML = order.map(([k,label]) => `
+      <div class="progress-stat" data-k="${k}">
+        <div class="progress-stat-num">${counts[k] || 0}</div>
+        <div class="progress-stat-label">${label}</div>
+      </div>`).join('');
+  }
+  const barEl = document.getElementById('progress-bar');
+  if (barEl) {
+    const seg = (k) => counts[k] ? `<div class="progress-bar-seg" data-k="${k}" style="width:${(counts[k]/total*100).toFixed(1)}%"></div>` : '';
+    barEl.innerHTML = seg('done') + seg('wip') + seg('mockup');
+  }
+}
+
+// ─── 기능 명세 탭 ───
+function renderFeatures() {
+  // 우선순위 필터 버튼
+  const priFilter = document.getElementById('filter-priority');
+  if (priFilter && !priFilter.dataset.bound) {
+    priFilter.dataset.bound = '1';
+    let html = '<button class="filter-btn ' + (state.filterPriority === 'all' ? 'active' : '') + '" data-pri="all">전체</button>';
+    PRIORITIES.forEach(p => {
+      const cls = state.filterPriority === p.id ? 'active' : '';
+      const attr = 'data-' + p.id.toLowerCase();
+      html += '<button class="filter-btn ' + cls + '" data-pri="' + p.id + '" ' + attr + '>' + esc(p.label) + '</button>';
+    });
+    priFilter.innerHTML = html;
+    priFilter.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.filterPriority = btn.dataset.pri;
+        priFilter.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.pri === state.filterPriority);
+        });
+        renderFeatureCards();
+      });
+    });
+  }
+
+  // 영역 필터
+  const areaFilter = document.getElementById('filter-area');
+  if (areaFilter && !areaFilter.dataset.bound) {
+    areaFilter.dataset.bound = '1';
+    let html = '<button class="filter-btn ' + (state.filterArea === 'all' ? 'active' : '') + '" data-area="all">전체</button>';
+    AREAS.forEach(a => {
+      const cls = state.filterArea === a.id ? 'active' : '';
+      html += '<button class="filter-btn ' + cls + '" data-area="' + a.id + '">' + esc(a.label) + '</button>';
+    });
+    areaFilter.innerHTML = html;
+    areaFilter.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.filterArea = btn.dataset.area;
+        areaFilter.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.area === state.filterArea);
+        });
+        renderFeatureCards();
+      });
+    });
+  }
+
+  // 상태 필터
+  const statusFilter = document.getElementById('filter-status');
+  if (statusFilter && !statusFilter.dataset.bound) {
+    statusFilter.dataset.bound = '1';
+    const statusOpts = [['all','전체'],['done','완료'],['wip','개발중'],['mockup','목업'],['todo','미착수']];
+    let html = '';
+    statusOpts.forEach(([id,label]) => {
+      const cls = state.filterStatus === id ? 'active' : '';
+      html += '<button class="filter-btn ' + cls + '" data-status="' + id + '">' + esc(label) + '</button>';
+    });
+    statusFilter.innerHTML = html;
+    statusFilter.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.filterStatus = btn.dataset.status;
+        statusFilter.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.status === state.filterStatus);
+        });
+        renderFeatureCards();
+      });
+    });
+  }
+
+  renderFeatureCards();
+}
+
+function renderFeatureCards() {
+  const grid = document.getElementById('features-grid');
+  if (!grid) return;
+
+  const filtered = FEATURES.filter(f => {
+    if (state.filterPriority !== 'all' && f.priority !== state.filterPriority) return false;
+    if (state.filterArea !== 'all' && f.area !== state.filterArea) return false;
+    if (state.filterStatus !== 'all' && (f.status || 'todo') !== state.filterStatus) return false;
+    return true;
+  });
+
+  document.getElementById('feature-count-display').innerHTML = '총 <strong>' + filtered.length + '</strong>개 기능';
+
+  grid.innerHTML = filtered.map(f => {
+    const area = getArea(f.area);
+    return `
+      <div class="feature-card" data-id="${esc(f.id)}">
+        <div class="feature-card-header">
+          <span class="feature-card-id">${esc(f.id)}</span>
+          <span class="feature-card-pri" data-pri="${esc(f.priority)}">${esc(f.priority)}</span>
+          <span class="feature-card-status" data-status="${esc(f.status || 'todo')}">${esc(STATUS_LABEL[f.status] || STATUS_LABEL.todo)}</span>
+          <span class="feature-card-area">
+            <span class="feature-card-area-dot" style="background:${area.color}"></span>
+            ${esc(area.label)}
+          </span>
+          <div class="feature-card-title-wrap">
+            <div class="feature-card-title">${esc(f.title)}</div>
+            <div class="feature-card-summary">${esc(f.summary)}</div>
+          </div>
+          <span class="feature-card-toggle">▾</span>
+        </div>
+        <div class="feature-card-body">
+          ${f.overview ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">개요</div>
+            <div class="feature-detail-text">${esc(f.overview)}</div>
+          </div>` : ''}
+          ${f.uiux && f.uiux.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">UI / UX 요구사항</div>
+            <ul class="feature-detail-list">${f.uiux.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${f.data && f.data.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">데이터 모델</div>
+            <ul class="feature-detail-list">${f.data.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${f.tech && f.tech.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">기술 구현</div>
+            <ul class="feature-detail-list">${f.tech.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${f.policy && f.policy.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">정책 대응</div>
+            <ul class="feature-detail-list">${f.policy.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${f.deliverables && f.deliverables.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">준비 산출물</div>
+            <ul class="feature-detail-list">${f.deliverables.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${f.analyticsEvents && f.analyticsEvents.length ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">애널리틱스 연동</div>
+            <div>${f.analyticsEvents.map(e => `<div class="event-row"><span class="event-chip event-chip-link" data-jump-analytics="1">${esc(e.name)}</span><span class="event-role">${esc(e.role)}</span></div>`).join('')}</div>
+          </div>` : ''}
+          ${f.mockupRef ? `<div class="feature-detail-row">
+            <div class="feature-detail-label">시각 시안</div>
+            <div><button class="mockup-link" data-mockup="${esc(f.mockupRef)}">🎨 ${esc(getToolLabel(f.mockupRef))} 보기 →</button></div>
+          </div>` : ''}
+          <div class="feature-detail-row">
+            <div class="feature-detail-meta">
+              <span class="feature-detail-meta-key">담당</span>
+              <span class="feature-detail-meta-val">${esc(f.owner || '-')}</span>
+              <span class="feature-detail-meta-key">의존성</span>
+              <span class="feature-detail-meta-val">${linkifyDeps(f.dependencies)}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.feature-card-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+
+  // 시각 시안 링크
+  grid.querySelectorAll('.mockup-link').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      jumpToMockup(b.dataset.mockup);
+    });
+  });
+  // 의존성 → 해당 기능 카드로 점프
+  grid.querySelectorAll('.dep-link').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      jumpToFeature(b.dataset.dep);
+    });
+  });
+  // 이벤트 칩 → 애널리틱스 탭으로 점프
+  grid.querySelectorAll('.event-chip-link').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switchTab('analytics');
+      document.getElementById('section-analytics').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+// 시각 시안 라벨 조회
+function getToolLabel(toolId) {
+  const t = TOOL_CATEGORIES.find(c => c.id === toolId);
+  return t ? t.label : toolId;
+}
+
+// 의존성 문자열에서 F-NN을 클릭 가능한 링크로 변환
+function linkifyDeps(deps) {
+  if (!deps) return '-';
+  const validIds = FEATURES.map(f => f.id);
+  return esc(deps).replace(/F-\d{2}/g, (m) =>
+    validIds.includes(m) ? `<span class="dep-link" data-dep="${m}">${m}</span>` : m
+  );
+}
+
+// ─── 시각 시안 탭 ───
+const TOOL_CATEGORIES = [
+  { id: 'wireframe', label: '서재 와이어프레임', desc: '5권 책 진열 + 본/안 본 시각 + 보호자 영역 진입' },
+  { id: 'reader', label: '읽기 화면 (뷰어)', desc: '가로 화면 + 좌우 스와이프 + UI 자동 숨김 (몰입↔표시 2상태)' },
+  { id: 'paywall', label: '구매 화면 (페이월)', desc: '잠금 챕터 탭 → 미리보기·2옵션 비교(개별/번들) → 결제 직전 부모 게이트 (3단계)' },
+  { id: 'download', label: '다운로드 관리', desc: '저장공간 + 작품>챕터 트리(상태 5종) + 일괄 액션. 구매=모든 기기 공통 / 다운로드=기기별' },
+  { id: 'transition', label: '책 펼침 트랜지션', desc: '책 표지에서 챕터 목차로 가는 1초 모션 (5단계 키프레임)' },
+  { id: 'reward', label: '챕터 완료 보상', desc: '챕터 완독 시 별·도장 애니메이션 (4단계 키프레임)' },
+];
+
+function renderToolCategories() {
+  const nav = document.getElementById('tool-cat-nav');
+  if (!nav) return;
+  nav.innerHTML = TOOL_CATEGORIES.map(c => {
+    const cls = c.id === state.currentTool ? 'tool-cat-btn active' : 'tool-cat-btn';
+    return '<button class="' + cls + '" data-tool="' + c.id + '">' + esc(c.label) + '</button>';
+  }).join('');
+  nav.querySelectorAll('.tool-cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.currentTool = btn.dataset.tool;
+      renderToolCategories();
+      renderToolContent();
+    });
+  });
+}
+
+function renderToolContent() {
+  const container = document.getElementById('tool-content');
+  if (!container) return;
+  const cat = TOOL_CATEGORIES.find(c => c.id === state.currentTool);
+  if (!cat) return;
+  let body = '';
+  if (cat.id === 'wireframe') body = renderWireframe();
+  else if (cat.id === 'reader') body = renderReader();
+  else if (cat.id === 'paywall') body = renderPaywall();
+  else if (cat.id === 'download') body = renderDownload();
+  else if (cat.id === 'transition') body = renderTransition();
+  else if (cat.id === 'reward') body = renderReward();
+  container.innerHTML = '<div class="tool-section"><div class="tool-section-title">' + esc(cat.label) + '</div><div class="tool-section-desc">' + esc(cat.desc) + '</div>' + body + '</div>';
+  attachToolHandlers(cat.id);
+}
+
+function renderWireframe() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>해상도</strong> 모바일 9:16 (390 × 700 기준)</span>
+        <span class="wireframe-meta-item"><strong>앵글</strong> 어린이 시선, 살짝 비스듬 (위 5°)</span>
+        <span class="wireframe-meta-item"><strong>톤</strong> 황혼 황금빛 + 따뜻한 베이지</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 780 880" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBE4B5"/><stop offset="50%" stop-color="#FAF3E7"/><stop offset="100%" stop-color="#F0DBB5"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFD78A" stop-opacity="0.6"/><stop offset="100%" stop-color="#FFD78A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="780" height="880" fill="url(#bgGrad)"/>
+  <ellipse cx="650" cy="100" rx="180" ry="180" fill="url(#lampGlow)"/>
+  <g transform="translate(720, 50)"><circle r="22" fill="#fff" fill-opacity="0.7" stroke="#5C3F1F" stroke-width="1.5" stroke-dasharray="4 2"/><text y="5" text-anchor="middle" font-size="18" fill="#5C3F1F">⚙</text></g>
+  <text x="720" y="92" text-anchor="middle" font-size="9" fill="#5C3F1F" font-style="italic">긴 누름 3초</text>
+  <ellipse cx="390" cy="780" rx="320" ry="50" fill="#D4A574" fill-opacity="0.4"/>
+  <ellipse cx="390" cy="780" rx="280" ry="42" fill="none" stroke="#8C5A1F" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+  <g transform="translate(60, 280)">
+    <rect x="0" y="0" width="660" height="240" fill="#8C5A1F" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="10" y="10" width="640" height="220" fill="#A06D2E" stroke="#5C3F1F" stroke-width="0.5"/>
+    <g transform="translate(40, 30)">
+      <rect width="100" height="180" fill="#C8102E" stroke="#5C3F1F" stroke-width="1.5"/>
+      <rect x="6" y="6" width="88" height="168" fill="none" stroke="#fff" stroke-width="0.8" stroke-opacity="0.6"/>
+      <text x="50" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">빨간모자</text>
+      <rect x="65" y="-8" width="14" height="22" fill="#FFD78A" stroke="#5C3F1F" stroke-width="1"/>
+      <text x="50" y="195" text-anchor="middle" font-size="8" fill="#5C3F1F" font-style="italic">이어보기 ◐</text>
+    </g>
+    <g transform="translate(160, 30)">
+      <rect width="100" height="180" fill="#B86B23" stroke="#5C3F1F" stroke-width="1.5"/>
+      <rect x="6" y="6" width="88" height="168" fill="none" stroke="#fff" stroke-width="0.8" stroke-opacity="0.6"/>
+      <text x="50" y="95" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">헨젤과</text>
+      <text x="50" y="110" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">그레텔</text>
+      <text x="20" y="30" font-size="14" fill="#FFD78A">★</text>
+      <text x="80" y="50" font-size="10" fill="#FFD78A">★</text>
+      <text x="30" y="160" font-size="11" fill="#FFD78A">★</text>
+      <text x="50" y="195" text-anchor="middle" font-size="8" fill="#5C3F1F" font-style="italic">새 책 ✨</text>
+    </g>
+    <g transform="translate(280, 30)">
+      <rect width="100" height="180" fill="#5D4A8A" stroke="#5C3F1F" stroke-width="1.5"/>
+      <rect x="6" y="6" width="88" height="168" fill="none" stroke="#fff" stroke-width="0.8" stroke-opacity="0.6"/>
+      <text x="50" y="95" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">브레멘</text>
+      <text x="50" y="110" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">음악대</text>
+      <text x="20" y="40" font-size="13" fill="#FFD78A">★</text>
+      <text x="78" y="160" font-size="10" fill="#FFD78A">★</text>
+      <text x="50" y="195" text-anchor="middle" font-size="8" fill="#5C3F1F" font-style="italic">새 책 ✨</text>
+    </g>
+    <g transform="translate(400, 30)">
+      <rect width="100" height="180" fill="#C9A961" stroke="#5C3F1F" stroke-width="1.5"/>
+      <rect x="6" y="6" width="88" height="168" fill="none" stroke="#fff" stroke-width="0.8" stroke-opacity="0.6"/>
+      <text x="50" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">신데렐라</text>
+      <g transform="translate(75, 25)"><circle r="14" fill="#FFD78A" stroke="#5C3F1F" stroke-width="1.5"/><text y="5" text-anchor="middle" font-size="16" fill="#DC3545">★</text></g>
+      <text x="50" y="195" text-anchor="middle" font-size="8" fill="#5C3F1F" font-style="italic">완독 ★</text>
+    </g>
+    <g transform="translate(520, 30)" opacity="0.35">
+      <rect width="100" height="180" fill="#6B8E4E" stroke="#5C3F1F" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="50" y="100" text-anchor="middle" font-size="11" fill="#fff">미출시</text>
+      <text x="50" y="195" text-anchor="middle" font-size="8" fill="#5C3F1F" font-style="italic">Coming Soon</text>
+    </g>
+    <rect x="0" y="240" width="660" height="6" fill="#5C3F1F" opacity="0.3"/>
+  </g>
+  <g transform="translate(80, 580)">
+    <rect x="0" y="20" width="140" height="80" fill="#A0826A" stroke="#5C3F1F" stroke-width="1.5" rx="8"/>
+    <rect x="-8" y="0" width="20" height="100" fill="#A0826A" stroke="#5C3F1F" stroke-width="1.5" rx="6"/>
+    <rect x="128" y="0" width="20" height="100" fill="#A0826A" stroke="#5C3F1F" stroke-width="1.5" rx="6"/>
+    <rect x="20" y="30" width="100" height="50" fill="#C19A82" stroke="#5C3F1F" stroke-width="0.8" rx="4"/>
+    <text x="70" y="125" text-anchor="middle" font-size="10" fill="#5C3F1F" font-style="italic">1인 소파</text>
+  </g>
+  <g transform="translate(620, 580)">
+    <path d="M -25 30 L 25 30 L 18 0 L -18 0 Z" fill="#FFD78A" stroke="#5C3F1F" stroke-width="1.5"/>
+    <line x1="0" y1="30" x2="0" y2="90" stroke="#5C3F1F" stroke-width="2"/>
+    <ellipse cx="0" cy="95" rx="20" ry="6" fill="#8C5A1F" stroke="#5C3F1F" stroke-width="1.5"/>
+    <ellipse cx="0" cy="80" rx="60" ry="50" fill="url(#lampGlow)" opacity="0.5"/>
+    <text x="0" y="120" text-anchor="middle" font-size="10" fill="#5C3F1F" font-style="italic">작은 램프</text>
+  </g>
+  <g font-size="10" fill="#5C3F1F" font-style="italic">
+    <line x1="60" y1="280" x2="20" y2="220" stroke="#5C3F1F" stroke-width="0.8"/>
+    <text x="20" y="215" text-anchor="middle">책장 (1단)</text>
+    <line x1="220" y1="320" x2="220" y2="265" stroke="#5C3F1F" stroke-width="0.8"/>
+    <text x="220" y="260" text-anchor="middle">5권 face-out</text>
+    <line x1="390" y1="780" x2="390" y2="855" stroke="#5C3F1F" stroke-width="0.8"/>
+    <text x="390" y="868" text-anchor="middle">깔개 (방의 무드 형성)</text>
+  </g>
+  <g transform="translate(40, 40)">
+    <rect width="240" height="36" fill="#fff" fill-opacity="0.5" stroke="#5C3F1F" stroke-width="0.8" stroke-dasharray="3 2" rx="6"/>
+    <text x="120" y="23" text-anchor="middle" font-size="11" fill="#5C3F1F">상단 영역 (광고 X · 결제 X)</text>
+  </g>
+</svg></div>
+      <div class="wireframe-legend">
+        <h4>책 상태별 시각 구분</h4>
+        <div class="legend-grid">
+          <div class="legend-item">
+            <span class="legend-icon" style="background:#C8102E;color:#fff">◐</span>
+            <div><strong>이어보기</strong><br>책갈피 위쪽 튀어나옴</div>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon" style="background:#B86B23;color:#FFD78A">★</span>
+            <div><strong>새 책 (안 봄)</strong><br>표지에 작은 반짝임 1~3개</div>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon" style="background:#C9A961;color:#DC3545">★</span>
+            <div><strong>완독</strong><br>표지 우상단에 큰 별 도장</div>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon" style="background:#6B8E4E;color:#fff;opacity:0.5">—</span>
+            <div><strong>미출시</strong><br>책 실루엣 + 흐릿한 옅은 색</div>
+          </div>
+        </div>
+      </div>
+      <div class="wireframe-notes">
+        <h4>주요 설계 결정</h4>
+        <ul>
+          <li><strong>1단 책장 + face-out</strong> — 5세가 한눈에 5권 인지. 2단은 시선 분산 우려로 회피</li>
+          <li><strong>액센트 컬러 = 표지 컬러</strong> — 시퀀스 대시보드의 작품 컬러와 일관</li>
+      </div>
+    </div>
+  `;
+}
+
+function renderReader() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>방향</strong> 가로 (landscape) 16:10</span>
+        <span class="wireframe-meta-item"><strong>전환</strong> 좌우 스와이프 (책 넘김)</span>
+        <span class="wireframe-meta-item"><strong>UI</strong> 자동 숨김 — 탭 시 표시, 3초 후 페이드아웃</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 760" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs>
+    <linearGradient id="readerBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/>
+    </linearGradient>
+  </defs>
+
+  <text x="20" y="32" font-size="15" font-weight="bold" fill="#5C3F1F">상태 A — 몰입 모드 (UI 숨김, 기본)</text>
+  <g transform="translate(20, 48)">
+    <rect width="780" height="280" rx="10" fill="url(#readerBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="14" y="14" width="752" height="252" rx="6" fill="#FAF3E7" stroke="#C9A961" stroke-width="0.8" stroke-dasharray="5 4"/>
+    <g transform="translate(390, 120)" opacity="0.55">
+      <rect x="-46" y="-30" width="92" height="64" rx="6" fill="none" stroke="#8C5A1F" stroke-width="1.5"/>
+      <circle cx="-18" cy="-6" r="9" fill="none" stroke="#8C5A1F" stroke-width="1.5"/>
+      <path d="M-40 28 L-8 0 L14 18 L40 -8" fill="none" stroke="#8C5A1F" stroke-width="1.5"/>
+      <text y="56" text-anchor="middle" font-size="12" fill="#8C5A1F" font-style="italic">일러스트 — 화면 가득 (full-bleed)</text>
+    </g>
+    <g transform="translate(40, 140)"><circle r="20" fill="#fff" fill-opacity="0.6" stroke="#5C3F1F" stroke-width="1.2" stroke-dasharray="4 2"/><text y="6" text-anchor="middle" font-size="20" fill="#5C3F1F">‹</text><text y="44" text-anchor="middle" font-size="8" fill="#5C3F1F">넘김</text></g>
+    <g transform="translate(740, 140)"><circle r="20" fill="#fff" fill-opacity="0.6" stroke="#5C3F1F" stroke-width="1.2" stroke-dasharray="4 2"/><text y="6" text-anchor="middle" font-size="20" fill="#5C3F1F">›</text><text y="44" text-anchor="middle" font-size="8" fill="#5C3F1F">넘김</text></g>
+    <g transform="translate(330, 250)">
+      <circle cx="0" cy="0" r="4" fill="#8C5A1F" opacity="0.35"/>
+      <circle cx="20" cy="0" r="4" fill="#8C5A1F" opacity="0.35"/>
+      <rect x="34" y="-4" width="16" height="8" rx="4" fill="#C8102E"/>
+      <circle cx="64" cy="0" r="4" fill="#8C5A1F" opacity="0.35"/>
+      <circle cx="84" cy="0" r="4" fill="#8C5A1F" opacity="0.35"/>
+    </g>
+    <g transform="translate(610, 210)">
+      <rect x="0" y="0" width="120" height="30" rx="15" fill="#FFE2A8" stroke="#C8102E" stroke-width="1.2"/>
+      <text x="20" y="20" font-size="14" fill="#C8102E">☞</text>
+      <text x="40" y="20" font-size="11" fill="#993C1D" font-weight="bold">여기 눌러봐!</text>
+    </g>
+  </g>
+  <text x="20" y="360" font-size="10" fill="#5C3F1F" font-style="italic">컨트롤 전부 숨김 · 좌우 가장자리=스와이프 영역 · 하단 점=페이지 진행 · 인터랙션 페이지엔 손가락 힌트</text>
+
+  <text x="20" y="408" font-size="15" font-weight="bold" fill="#5C3F1F">상태 B — 표시 모드 (화면 1회 탭, 3초 후 자동 숨김)</text>
+  <g transform="translate(20, 424)">
+    <rect width="780" height="280" rx="10" fill="url(#readerBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <g transform="translate(390, 150)" opacity="0.4">
+      <rect x="-40" y="-26" width="80" height="56" rx="6" fill="none" stroke="#8C5A1F" stroke-width="1.5"/>
+      <text y="50" text-anchor="middle" font-size="11" fill="#8C5A1F" font-style="italic">일러스트</text>
+    </g>
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="780" height="46" rx="10" fill="#FAF3E7" fill-opacity="0.95"/>
+      <rect x="0" y="44" width="780" height="2" fill="#C9A961"/>
+      <text x="20" y="29" font-size="20" fill="#5C3F1F">✕</text>
+      <text x="48" y="29" font-size="12" fill="#8C5A1F">빨간모자 · 2장</text>
+      <text x="660" y="29" font-size="17" fill="#5C3F1F">♪</text>
+      <text x="700" y="29" font-size="15" fill="#5C3F1F">💬</text>
+      <text x="740" y="29" font-size="17" fill="#5C3F1F">☰</text>
+      <text x="668" y="44" font-size="7" fill="#8C5A1F">소리</text>
+      <text x="700" y="44" font-size="7" fill="#8C5A1F">자막</text>
+      <text x="738" y="44" font-size="7" fill="#8C5A1F">목차</text>
+    </g>
+    <g transform="translate(0, 226)">
+      <rect x="0" y="8" width="780" height="46" rx="10" fill="#FAF3E7" fill-opacity="0.95"/>
+      <rect x="0" y="8" width="780" height="2" fill="#C9A961"/>
+      <text x="28" y="38" font-size="22" fill="#5C3F1F">‹</text>
+      <rect x="60" y="27" width="600" height="8" rx="4" fill="#E5D3AF"/>
+      <rect x="60" y="27" width="252" height="8" rx="4" fill="#C8102E"/>
+      <text x="700" y="38" font-size="12" fill="#5C3F1F">5 / 12</text>
+      <text x="752" y="38" font-size="22" fill="#5C3F1F">›</text>
+    </g>
+  </g>
+  <text x="20" y="736" font-size="10" fill="#5C3F1F" font-style="italic">상단: 닫기·작품/장·소리·자막·목차 · 하단: 이전/다음 + 진행 슬라이더 + 페이지 번호 · 무동작 시 양쪽 바 페이드아웃 → 상태 A</text>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도</h4>
+        <ul>
+          <li><strong>가로 + full-bleed</strong> — 그림책 펼침처럼 일러스트를 화면 가득. 글 위주가 아닌 보고 듣는 화면</li>
+          <li><strong>UI 자동 숨김</strong> — 평소엔 컨트롤 0. 탭하면 상·하단 바 등장, 3초 무동작 시 페이드아웃해 몰입 유지</li>
+          <li><strong>스와이프는 좌우 가장자리만</strong> — 가운데는 인터랙션/탭에 양보. 그림 만지다 실수로 넘기는 것 방지</li>
+          <li><strong>컨트롤 배치</strong> — 아이가 닿기 쉬운 하단=페이지 이동, 부모용 닫기·설정성 버튼=상단</li>
+          <li><strong>인터랙션 힌트</strong> — predict/quiz 노드 페이지에 "여기 눌러봐" 신호. 단, 노드 발동 화면·자막 위치는 <strong>동화기획·디자이너 몫</strong> (뷰어는 골격만 책임)</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderPaywall() {
+  const PRICE_PER_CHAPTER = 1200;
+  const discountRate = 0.18;
+  const fmt = n => '₩' + Math.round(n).toLocaleString('ko-KR');
+  // 예시: 5챕터 책 (기본 4 + 분기 1회 → +1)
+  const chapters = 5;
+  const listPrice = chapters * PRICE_PER_CHAPTER;
+  const bundlePrice = listPrice * (1 - discountRate);
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>흐름</strong> 잠금 탭 → 페이월(미리보기) → 결제 직전 부모 게이트</span>
+        <span class="wireframe-meta-item"><strong>가격</strong> 챕터당 ${fmt(PRICE_PER_CHAPTER)} · 번들 할인 ${Math.round(discountRate*100)}% (조정 가능)</span>
+        <span class="wireframe-meta-item"><strong>예시</strong> 5챕터(기본4+분기1) 원가 ${fmt(listPrice)} → 번들 ${fmt(bundlePrice)}</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 1180" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs>
+    <linearGradient id="pwBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient>
+  </defs>
+
+  <text x="20" y="30" font-size="15" font-weight="bold" fill="#5C3F1F">1단계 — 목차에서 챕터 2 잠금 탭</text>
+  <g transform="translate(20, 46)">
+    <rect width="780" height="240" rx="10" fill="url(#pwBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <text x="30" y="36" font-size="13" font-weight="bold" fill="#5C3F1F">빨간모자 · 목차</text>
+    <g transform="translate(30, 56)">
+      <rect width="720" height="44" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+      <circle cx="28" cy="22" r="11" fill="none" stroke="#1D9E75" stroke-width="2"/><path d="M22 22 l5 5 l9 -10" fill="none" stroke="#1D9E75" stroke-width="2"/>
+      <text x="52" y="27" font-size="13" fill="#5C3F1F">1장 · 새 마을</text>
+      <text x="690" y="27" font-size="11" fill="#1D9E75" text-anchor="end">무료</text>
+    </g>
+    <g transform="translate(30, 108)">
+      <rect width="720" height="44" rx="8" fill="#F1EFE8" stroke="#BA7517" stroke-width="1.5"/>
+      <rect x="18" y="12" width="20" height="20" rx="4" fill="none" stroke="#854F0B" stroke-width="2"/><path d="M22 20 v-3 a6 6 0 0 1 12 0 v3" fill="none" stroke="#854F0B" stroke-width="2"/>
+      <text x="52" y="27" font-size="13" fill="#5C3F1F">2장 · 숲으로 가는 길</text>
+      <text x="690" y="27" font-size="11" fill="#854F0B" font-weight="bold" text-anchor="end">탭 →</text>
+    </g>
+    <g transform="translate(30, 160)" opacity="0.7">
+      <rect width="720" height="44" rx="8" fill="#F1EFE8" stroke="#C9A961" stroke-width="0.8"/>
+      <rect x="18" y="12" width="20" height="20" rx="4" fill="none" stroke="#888780" stroke-width="2"/><path d="M22 20 v-3 a6 6 0 0 1 12 0 v3" fill="none" stroke="#888780" stroke-width="2"/>
+      <text x="52" y="27" font-size="13" fill="#5C3F1F">3장 · 할머니 댁</text>
+    </g>
+  </g>
+  <text x="20" y="312" font-size="10" fill="#5C3F1F" font-style="italic">1장만 무료(체크), 2장부터 자물쇠. 잠긴 장 탭 → 페이월. "여긴 어른이 여는 곳" 톤.</text>
+
+  <text x="20" y="356" font-size="15" font-weight="bold" fill="#5C3F1F">2단계 — 페이월: 미리보기 + 개별 vs 번들 비교</text>
+  <g transform="translate(20, 372)">
+    <rect width="780" height="330" rx="10" fill="url(#pwBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <g transform="translate(30, 26)">
+      <rect width="60" height="60" rx="8" fill="#F0997B"/><text x="30" y="38" font-size="22" text-anchor="middle" fill="#4A1B0C">🖼</text>
+      <text x="76" y="24" font-size="14" font-weight="bold" fill="#5C3F1F">2장 · 숲으로 가는 길</text>
+      <text x="76" y="46" font-size="11" fill="#993C1D">잠긴 장 미리보기 — 제목·표지만 공개, 내용은 잠금</text>
+    </g>
+    <g transform="translate(30, 104)">
+      <rect width="350" height="160" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="1"/>
+      <text x="20" y="30" font-size="12" fill="#888780">이 챕터만</text>
+      <text x="20" y="62" font-size="24" font-weight="bold" fill="#5C3F1F">${fmt(PRICE_PER_CHAPTER)}</text>
+      <text x="20" y="86" font-size="11" fill="#888780">2장 1개 잠금 해제</text>
+      <rect x="20" y="106" width="310" height="38" rx="8" fill="#FFFFFF" stroke="#5C3F1F" stroke-width="1"/>
+      <text x="175" y="130" font-size="13" text-anchor="middle" fill="#5C3F1F">이 챕터 구매</text>
+    </g>
+    <g transform="translate(400, 104)">
+      <rect width="350" height="160" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="2.5"/>
+      <rect x="16" y="-11" width="150" height="22" rx="6" fill="#BA7517"/><text x="91" y="4" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">추천 · 가장 이득</text>
+      <text x="20" y="30" font-size="12" fill="#854F0B">책 전체 (${chapters}장)</text>
+      <text x="20" y="62" font-size="24" font-weight="bold" fill="#5C3F1F">${fmt(bundlePrice)}</text>
+      <text x="148" y="62" font-size="13" fill="#888780" text-decoration="line-through">${fmt(listPrice)}</text>
+      <text x="20" y="86" font-size="11" font-weight="bold" fill="#854F0B">약 ${Math.round(discountRate*100)}% 이득 · ${fmt(listPrice-bundlePrice)} 더 저렴</text>
+      <rect x="20" y="106" width="310" height="38" rx="8" fill="#BA7517"/>
+      <text x="175" y="130" font-size="13" font-weight="bold" text-anchor="middle" fill="#FFFFFF">책 전체 받기</text>
+    </g>
+    <line x1="30" y1="288" x2="750" y2="288" stroke="#E5D3AF" stroke-width="1"/>
+    <text x="30" y="308" font-size="11" fill="#888780">↻ 구매 복원</text>
+    <text x="750" y="308" font-size="11" fill="#888780" text-anchor="end">결제 시 보호자 확인 필요</text>
+  </g>
+  <text x="20" y="728" font-size="10" fill="#5C3F1F" font-style="italic">번들 = 2px 테두리 + "추천" 배지 + 할인 이득(취소선 원가 → 번들가). 카운트다운·과장 배지 없음(다크패턴 금지).</text>
+
+  <text x="20" y="772" font-size="15" font-weight="bold" fill="#5C3F1F">3단계 — 결제 누르면 → 부모 게이트</text>
+  <g transform="translate(210, 788)">
+    <rect width="400" height="320" rx="10" fill="url(#pwBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <circle cx="200" cy="56" r="26" fill="none" stroke="#854F0B" stroke-width="2.5"/><path d="M188 56 v-6 a12 12 0 0 1 24 0 v6 M182 56 h36 v22 h-36 z" fill="none" stroke="#854F0B" stroke-width="2.5"/>
+    <text x="200" y="118" font-size="15" font-weight="bold" text-anchor="middle" fill="#5C3F1F">어른에게 물어보세요</text>
+    <text x="200" y="140" font-size="11" text-anchor="middle" fill="#993C1D">결제 전 보호자 확인이 필요해요</text>
+    <text x="200" y="176" font-size="12" text-anchor="middle" fill="#5C3F1F">아래 숫자를 순서대로 누르세요</text>
+    <g transform="translate(130, 192)">
+      <rect width="44" height="44" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="22" y="29" font-size="18" text-anchor="middle" fill="#5C3F1F">3</text>
+      <rect x="52" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="74" y="29" font-size="18" text-anchor="middle" fill="#5C3F1F">9</text>
+      <rect x="104" width="44" height="44" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="126" y="29" font-size="18" text-anchor="middle" fill="#5C3F1F">1</text>
+    </g>
+    <text x="200" y="280" font-size="11" text-anchor="middle" fill="#888780">통과 후 스토어 결제창(StoreKit / Play)으로 연결</text>
+  </g>
+  <text x="20" y="1134" font-size="10" fill="#5C3F1F" font-style="italic">결제 직전에만 게이트(F-08 재사용). 통과 후 OS 표준 결제창 — 카드정보는 앱이 만지지 않음(스토어 처리).</text>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 가격 규칙</h4>
+        <ul>
+          <li><strong>챕터당 ₩1,200 고정</strong> — 책 챕터 수 = 기본 4 + 분기 가산(분기 1회 → +1장, 2회 → +2장)</li>
+          <li><strong>원가 산정</strong> — 5챕터 = ${fmt(5*PRICE_PER_CHAPTER)} · 6챕터 = ${fmt(6*PRICE_PER_CHAPTER)}</li>
+          <li><strong>번들 할인율 = 파라미터</strong> — 코드 상수(discountRate)로 분리, 사업부가 조정. 예시는 ${Math.round(discountRate*100)}%</li>
+          <li><strong>번들 강조</strong> — 추천 배지 + 취소선 원가 + "N개 장 더 저렴"으로 이득을 숫자로 제시</li>
+          <li><strong>게이트는 결제 직전만</strong> — 가격·옵션은 자유 열람, 돈 나가는 순간에만 차단. 통과 후 스토어 결제창 위임</li>
+          <li><strong>다크패턴 금지</strong> — 카운트다운·과장 배지 없음 (Apple/Google 키즈 심사 대응)</li>
+          <li><strong>미정 항목</strong> — 표시가 라운딩(₩4,920 → ₩4,900 여부) · 번들의 "전체 장" 정의(분기 포함 범위)는 사업부·콘텐츠 확정 필요</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderDownload() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>주체</strong> 부모 (보호자 영역)</span>
+        <span class="wireframe-meta-item"><strong>구매</strong> 계정 귀속 — 모든 기기 공통</span>
+        <span class="wireframe-meta-item"><strong>다운로드</strong> 기기 귀속 — 기기마다 따로</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 900" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs>
+    <linearGradient id="dlBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient>
+  </defs>
+  <rect width="820" height="900" rx="10" fill="url(#dlBg)" stroke="#5C3F1F" stroke-width="2"/>
+
+  <g transform="translate(30, 28)">
+    <text x="0" y="18" font-size="15" font-weight="bold" fill="#5C3F1F">⬇ 다운로드 관리</text>
+    <text x="760" y="18" font-size="12" fill="#993C1D" text-anchor="end">▢ 거실 태블릿</text>
+  </g>
+
+  <g transform="translate(30, 58)">
+    <rect width="760" height="64" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="16" y="24" font-size="12" fill="#888780">이 기기 저장 공간</text>
+    <text x="744" y="24" font-size="12" fill="#5C3F1F" text-anchor="end">플레이북 240 MB · 여유 12.4 GB</text>
+    <rect x="16" y="34" width="728" height="10" rx="5" fill="#E5D3AF"/>
+    <rect x="16" y="34" width="102" height="10" rx="5" fill="#BA7517"/>
+    <rect x="118" y="34" width="335" height="10" fill="#C9B58A"/>
+    <text x="16" y="58" font-size="10" fill="#854F0B">■ 플레이북</text>
+    <text x="92" y="58" font-size="10" fill="#888780">■ 다른 앱</text>
+  </g>
+
+  <g transform="translate(30, 134)">
+    <rect width="760" height="40" rx="8" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.8"/>
+    <text x="16" y="25" font-size="12" fill="#0C447C">☁ 구매한 챕터는 <tspan font-weight="bold">모든 기기에서 공통</tspan>으로 열려요. 다운로드는 기기마다 따로 받습니다.</text>
+  </g>
+
+  <g transform="translate(30, 186)">
+    <rect width="760" height="248" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <g transform="translate(0,0)">
+      <rect width="760" height="50" rx="8" fill="#FAF3E7"/>
+      <text x="20" y="30" font-size="14" fill="#5C3F1F">▾</text>
+      <rect x="40" y="10" width="30" height="30" rx="5" fill="#F0997B"/><text x="55" y="31" font-size="15" text-anchor="middle" fill="#4A1B0C">📕</text>
+      <text x="82" y="23" font-size="13" font-weight="bold" fill="#5C3F1F">빨간모자</text>
+      <text x="82" y="40" font-size="11" fill="#888780">5장 중 3장 구매 · 2장 받음</text>
+      <rect x="648" y="13" width="96" height="26" rx="6" fill="#FFFFFF" stroke="#C9A961"/><text x="696" y="30" font-size="11" text-anchor="middle" fill="#5C3F1F">전체 받기</text>
+    </g>
+    <g transform="translate(40, 58)">
+      <circle cx="10" cy="11" r="9" fill="none" stroke="#1D9E75" stroke-width="2"/><path d="M5 11 l4 4 l8 -8" fill="none" stroke="#1D9E75" stroke-width="2"/>
+      <text x="30" y="15" font-size="12" fill="#5C3F1F">1장 · 새 마을</text>
+      <text x="240" y="15" font-size="10" fill="#1D9E75">완료 · 오프라인 재생 가능</text>
+      <text x="630" y="15" font-size="11" fill="#888780">8 MB</text>
+      <text x="700" y="15" font-size="13" fill="#888780">🗑</text>
+    </g>
+    <g transform="translate(40, 88)">
+      <circle cx="10" cy="11" r="9" fill="none" stroke="#1D9E75" stroke-width="2"/><path d="M5 11 l4 4 l8 -8" fill="none" stroke="#1D9E75" stroke-width="2"/>
+      <text x="30" y="15" font-size="12" fill="#5C3F1F">2장 · 숲으로 가는 길</text>
+      <text x="630" y="15" font-size="11" fill="#888780">9 MB</text>
+      <text x="700" y="15" font-size="13" fill="#888780">🗑</text>
+    </g>
+    <g transform="translate(0, 110)">
+      <rect width="760" height="34" fill="#FAF3E7"/>
+      <circle cx="50" cy="17" r="9" fill="none" stroke="#185FA5" stroke-width="2" stroke-dasharray="3 2"/>
+      <text x="70" y="21" font-size="12" fill="#5C3F1F">3장 · 할머니 댁</text>
+      <rect x="230" y="13" width="360" height="6" rx="3" fill="#E5D3AF"/><rect x="230" y="13" width="223" height="6" rx="3" fill="#185FA5"/>
+      <text x="610" y="21" font-size="11" fill="#185FA5">62%</text>
+      <text x="700" y="21" font-size="13" fill="#888780">✕</text>
+    </g>
+    <g transform="translate(40, 152)">
+      <text x="4" y="15" font-size="15" fill="#888780">⬇</text>
+      <text x="30" y="15" font-size="12" fill="#5C3F1F">4장 · 사냥꾼</text>
+      <text x="240" y="15" font-size="10" fill="#888780">구매함 · 이 기기에 아직 없음</text>
+      <text x="610" y="15" font-size="11" fill="#888780">10 MB</text>
+      <rect x="648" y="3" width="56" height="22" rx="6" fill="#FFFFFF" stroke="#C9A961"/><text x="676" y="18" font-size="11" text-anchor="middle" fill="#5C3F1F">받기</text>
+    </g>
+    <g transform="translate(40, 188)" opacity="0.9">
+      <rect x="2" y="4" width="16" height="14" rx="3" fill="none" stroke="#854F0B" stroke-width="2"/><path d="M5 8 v-2 a5 5 0 0 1 10 0 v2" fill="none" stroke="#854F0B" stroke-width="2"/>
+      <text x="30" y="15" font-size="12" fill="#888780">5장 · 다시 만난 가족</text>
+      <rect x="636" y="3" width="68" height="22" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="670" y="18" font-size="11" text-anchor="middle" fill="#854F0B">구매 필요</text>
+    </g>
+  </g>
+
+  <g transform="translate(30, 446)">
+    <rect width="760" height="44" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="20" y="27" font-size="14" fill="#5C3F1F">▸</text>
+    <rect x="40" y="7" width="30" height="30" rx="5" fill="#85B7EB"/><text x="55" y="28" font-size="15" text-anchor="middle" fill="#042C53">📘</text>
+    <text x="82" y="20" font-size="13" font-weight="bold" fill="#5C3F1F">아기 돼지 삼형제</text>
+    <text x="82" y="37" font-size="11" fill="#854F0B">↻ 업데이트 필요 (1장)</text>
+    <rect x="640" y="10" width="104" height="26" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="692" y="27" font-size="11" text-anchor="middle" fill="#854F0B">업데이트</text>
+  </g>
+
+  <g transform="translate(30, 502)">
+    <rect width="372" height="40" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="186" y="25" font-size="12" text-anchor="middle" fill="#5C3F1F">⬇ 구매한 챕터 모두 받기</text>
+    <rect x="388" y="0" width="372" height="40" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="574" y="25" font-size="12" text-anchor="middle" fill="#A32D2D">🗑 이 기기 정리</text>
+  </g>
+
+  <g transform="translate(30, 558)">
+    <rect width="760" height="58" rx="8" fill="none" stroke="#888780" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="16" y="24" font-size="11" font-weight="bold" fill="#5F5E5A">⚐ 출시 후 업데이트 예정</text>
+    <text x="16" y="44" font-size="11" fill="#888780">기기별 다운로드 상태 표시 — "내 기기들" 목록에서 어느 태블릿에 무엇을 받았는지 한눈에. (1차 출시는 현재 기기 기준)</text>
+  </g>
+
+  <g transform="translate(30, 636)">
+    <text x="0" y="14" font-size="11" font-weight="bold" fill="#5C3F1F">챕터 상태 5종</text>
+    <text x="0" y="36" font-size="10" fill="#1D9E75">● 완료</text>
+    <text x="90" y="36" font-size="10" fill="#185FA5">◐ 다운로드 중</text>
+    <text x="210" y="36" font-size="10" fill="#888780">⬇ 미다운로드(구매함)</text>
+    <text x="380" y="36" font-size="10" fill="#854F0B">⬆ 업데이트 필요</text>
+    <text x="520" y="36" font-size="10" fill="#854F0B">🔒 미구매 잠금</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 멀티 디바이스</h4>
+        <ul>
+          <li><strong>주체는 부모</strong> — 보호자 영역(F-08 통과)에서 진입하는 관리 화면. 아이용 그림책 톤이 아닌 정돈된 관리 UI</li>
+          <li><strong>구매 ≠ 다운로드</strong> — 구매(엔타이틀먼트)는 계정 귀속 → 모든 기기 공통. 다운로드 완료는 기기 귀속 → 같은 챕터도 기기마다 상태 다름</li>
+          <li><strong>챕터 상태 5종</strong> — 완료 / 다운로드 중 / 미다운로드(구매함) / 업데이트 필요(OTA) / 미구매 잠금. 잠금은 계정 단위, 나머지 4종은 기기 단위</li>
+          <li><strong>구성 3층</strong> — 저장공간 요약(이 기기) + 작품&gt;챕터 트리(접기/펼치기) + 일괄 액션(작품 단위 전체 받기 / 전체 단위 받기·정리)</li>
+          <li><strong>"구매=모든 기기 공통" 배너</strong> — 부모가 다른 기기에서도 받을 수 있음을 명시. 4장의 "구매함·이 기기에 아직 없음"이 그 사례</li>
+          <li><strong>출시 후 과제</strong> — 기기별 다운로드 상태 표시("내 기기들" 목록)는 1차 출시 제외, 다음 업데이트 버전 목표. 1차는 현재 기기 기준</li>
+          <li><strong>미정 항목</strong> — 동시 사용 기기 수 정책(무제한 vs 상한)은 비즈니스 정책으로 확정 필요</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderTransition() {
+  return `
+    <div class="transition-wrap">
+      <div class="transition-controls">
+        <button class="transition-play-btn" id="transition-play">▶ 재생 (1초)</button>
+        <div class="transition-time" id="transition-time">0.0s / 1.0s</div>
+      </div>
+      <div class="transition-stage">
+        <div class="trans-book" id="trans-book">
+          <div class="trans-book-cover">
+            <div class="trans-book-title">빨간모자</div>
+            <div class="trans-book-decoration">★</div>
+          </div>
+          <div class="trans-book-content">
+            <div class="trans-content-left">
+              <div class="trans-toc-title">챕터 목차</div>
+              <div class="trans-toc-item">C1 · 새 마을</div>
+              <div class="trans-toc-item">C2A · 곧장 갔을 때</div>
+              <div class="trans-toc-item">C2B · 꽃 따러 갔을 때</div>
+            </div>
+            <div class="trans-content-right">
+              <div class="trans-info-title">빨간모자</div>
+              <div class="trans-info-desc">메타인지 · 위험 인지 · 도움 요청</div>
+              <div class="trans-info-pages">3 챕터 · 21 페이지</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="transition-keyframes">
+        <h4>모션 키프레임 (5단계)</h4>
+        <table class="keyframe-table">
+          <thead><tr><th>시간</th><th>단계</th><th>변환</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td>0.0s</td><td>탭</td><td>scale 1.0 → 0.97</td><td>책이 살짝 눌리는 피드백. 미세한 햅틱</td></tr>
+            <tr><td>0.1s</td><td>부상</td><td>scale 1.15, translateZ ↑</td><td>책이 책장에서 들어 올려짐</td></tr>
+            <tr><td>0.3s</td><td>중앙 이동</td><td>translate to center</td><td>책이 화면 중앙으로. 서재 배경 페이드 아웃</td></tr>
+            <tr><td>0.5s</td><td>펼침</td><td>rotateY 0° → -180°</td><td>표지가 좌측으로 회전 (CSS 3D transform)</td></tr>
+            <tr><td>0.8s</td><td>내용 등장</td><td>opacity 0 → 1 (글자별 80ms)</td><td>챕터 목차가 좌측 페이지에 fade-in</td></tr>
+            <tr><td>1.0s</td><td>완료</td><td>full visible</td><td>인터랙티브 영역 활성화</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="transition-notes">
+        <h4>구현 가이드 (Unity)</h4>
+        <ul>
+          <li><strong>DOTween 또는 Unity Timeline 사용</strong> — 키프레임 정확한 제어</li>
+          <li><strong>책 본체 = 단일 GameObject</strong> — Scale·Position·Rotation 시퀀스</li>
+          <li><strong>책 펼침은 두 GameObject로</strong> — 표지 (회전) + 안쪽 페이지 (정적)</li>
+          <li><strong>Easing 함수</strong> — 부상은 ease-out-back, 펼침은 ease-in-out, 내용은 ease-out</li>
+          <li><strong>오디오 동기화</strong> — 0.0s 톡 소리, 0.5s 종이 펼침, 0.8s 부드러운 "띵"</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderReward() {
+  return `
+    <div class="reward-wrap">
+      <div class="reward-controls">
+        <button class="reward-play-btn" id="reward-play">▶ 재생 (2.5초)</button>
+        <div class="reward-color-select">
+          <span>별 컬러:</span>
+          <button class="reward-color-btn active" data-color="#C8102E" style="background:#C8102E"></button>
+          <button class="reward-color-btn" data-color="#B86B23" style="background:#B86B23"></button>
+          <button class="reward-color-btn" data-color="#5D4A8A" style="background:#5D4A8A"></button>
+          <button class="reward-color-btn" data-color="#C9A961" style="background:#C9A961"></button>
+          <button class="reward-color-btn" data-color="#6B8E4E" style="background:#6B8E4E"></button>
+        </div>
+      </div>
+      <div class="reward-stage" id="reward-stage">
+        <div class="reward-overlay"></div>
+        <div class="reward-star" id="reward-star">★</div>
+        <div class="reward-star-glow" id="reward-star-glow"></div>
+        <div class="reward-stamp"><div class="reward-stamp-inner">챕터 1<br>완료</div></div>
+        <div class="reward-message">잘했어요!</div>
+        <div class="reward-buttons">
+          <button class="reward-action-btn primary">다음 챕터로</button>
+          <button class="reward-action-btn">오늘은 여기까지</button>
+        </div>
+      </div>
+      <div class="reward-keyframes">
+        <h4>애니메이션 키프레임 (4단계)</h4>
+        <table class="keyframe-table">
+          <thead><tr><th>시간</th><th>단계</th><th>이벤트</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td>0.0s</td><td>페이드 인</td><td>오버레이 등장</td><td>반투명 검정 layer (opacity 0 → 0.4)</td></tr>
+            <tr><td>0.4s</td><td>별 등장</td><td>scale + 광채</td><td>scale 0 → 1.2 → 1.0 (ease-out-back). 광채 확산</td></tr>
+            <tr><td>1.0s</td><td>도장 등장</td><td>translateY + bounce</td><td>책 모양 도장이 위에서 떨어지는 느낌</td></tr>
+            <tr><td>1.6s</td><td>축하 메시지</td><td>fade-in</td><td>"잘했어요!" 메시지가 별 아래에</td></tr>
+            <tr><td>2.5s</td><td>다음 단계</td><td>버튼 등장</td><td>"다음 챕터로" / "오늘은 여기까지"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reward-notes">
+        <h4>디자인 톤 가이드</h4>
+        <ul>
+          <li><strong>축하 톤이지만 절제</strong> — 과도한 화려함 회피 (5세 인지 부담)</li>
+          <li><strong>별 색상 = 작품 액센트 컬러</strong> — 위에서 5색 미리보기</li>
+          <li><strong>도장</strong> — 책 모양 또는 "챕터 N 완료" 텍스트</li>
+          <li><strong>축하 메시지</strong> — "잘했어요!" / "멋져요!" / "끝까지 봤어요!"</li>
+          <li><strong>효과음</strong> — 1.5초 이내의 "띠리링" (사운드 디자인 P3)</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function attachToolHandlers(toolId) {
+  if (toolId === 'transition') {
+    const btn = document.getElementById('transition-play');
+    const book = document.getElementById('trans-book');
+    const timeDisplay = document.getElementById('transition-time');
+    if (btn && book) {
+      btn.addEventListener('click', () => {
+        book.classList.remove('playing');
+        void book.offsetWidth;
+        book.classList.add('playing');
+        const startTime = performance.now();
+        const updateTime = () => {
+          const elapsed = (performance.now() - startTime) / 1000;
+          if (elapsed >= 1.0) { timeDisplay.textContent = '1.0s / 1.0s'; return; }
+          timeDisplay.textContent = elapsed.toFixed(1) + 's / 1.0s';
+          requestAnimationFrame(updateTime);
+        };
+        requestAnimationFrame(updateTime);
+      });
+    }
+  } else if (toolId === 'reward') {
+    const btn = document.getElementById('reward-play');
+    const stage = document.getElementById('reward-stage');
+    if (btn && stage) {
+      btn.addEventListener('click', () => {
+        stage.classList.remove('playing');
+        void stage.offsetWidth;
+        stage.classList.add('playing');
+      });
+    }
+    document.querySelectorAll('.reward-color-btn').forEach(cb => {
+      cb.addEventListener('click', () => {
+        document.querySelectorAll('.reward-color-btn').forEach(b => b.classList.remove('active'));
+        cb.classList.add('active');
+        const color = cb.dataset.color;
+        const star = document.getElementById('reward-star');
+        const glow = document.getElementById('reward-star-glow');
+        if (star) star.style.color = color;
+        if (glow) glow.style.background = 'radial-gradient(circle, ' + color + '66 0%, transparent 70%)';
+      });
+    });
+  }
+}
+
+// ─── 애널리틱스 탭 ───
+function renderAnalytics() {
+  const container = document.getElementById('analytics-content');
+  if (!container) return;
+  const a = ANALYTICS;
+
+  let html = '';
+
+  // 인트로
+  html += `
+    <div class="analytics-intro">
+      <div class="analytics-intro-header">
+        <h2>애널리틱스 설계 기획서</h2>
+        <span class="analytics-intro-badge">${esc(a.version)}</span>
+        <span class="analytics-intro-meta">${esc(a.updatedAt)} · 개발 전달용</span>
+      </div>
+      <p>${esc(a.intent)}</p>
+      <div class="analytics-constraints">
+        <div class="analytics-constraints-title">교육용 키즈 앱의 제약</div>
+        <ul>${a.legalConstraints.map(c => '<li>' + esc(c) + '</li>').join('')}</ul>
+      </div>
+    </div>
+  `;
+
+  // 2. 도구 구성
+  html += `
+    <div class="analytics-section">
+      <div class="analytics-section-title"><span class="analytics-section-num">2</span>애널리틱스 도구 구성</div>
+      <div class="analytics-section-desc">도구는 3계층으로 구성한다.</div>
+      <div class="tools-stack">
+        ${a.tools.map(t => `
+          <div class="tool-layer-card" data-layer="${esc(t.layer)}">
+            <div>
+              <div class="tool-layer-name">${esc(t.layer)}</div>
+              <div class="tool-layer-cost">${esc(t.cost)}</div>
+            </div>
+            <div>
+              <div class="tool-layer-tool">${esc(t.tool)}</div>
+              <div class="tool-layer-role">${esc(t.role)}</div>
+              <div class="tool-layer-reason">${esc(t.reason)}</div>
+              ${t.alternative ? '<div class="tool-layer-alt">대안: ' + esc(t.alternative) + '</div>' : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="analytics-caveat">⚠ ${esc(a.toolsCaveat)}</div>
+    </div>
+  `;
+
+  // 3. KPI 매핑
+  html += `
+    <div class="analytics-section">
+      <div class="analytics-section-title"><span class="analytics-section-num">3</span>KPI 측정 매핑 (사업화방향 19p)</div>
+      <table class="kpi-table">
+        <thead><tr><th>KPI</th><th>측정 방법</th><th>도구</th></tr></thead>
+        <tbody>
+          ${a.kpis.map(k => `
+            <tr class="${k.primary ? 'primary' : ''}">
+              <td>${esc(k.kpi)}</td>
+              <td>${esc(k.method)}</td>
+              <td>${esc(k.tool)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <div class="kpi-primary-note">★ ${esc(a.kpiPrimaryNote)}</div>
+    </div>
+  `;
+
+  // 4. 이벤트 명세
+  html += `
+    <div class="analytics-section">
+      <div class="analytics-section-title"><span class="analytics-section-num">4</span>이벤트 명세 (구현 대상)</div>
+      <div class="analytics-section-desc">${esc(a.eventPrinciple)}.</div>
+      <div class="events-grid">
+        ${a.events.map(e => `
+          <div class="event-card ${e.critical ? 'critical' : ''}">
+            <div class="event-card-name-wrap">
+              <span class="event-card-name">${esc(e.name)}</span>
+              ${e.critical ? '<span class="event-card-critical-badge">핵심</span>' : ''}
+              <div class="event-card-params">
+                ${e.params.map(p => '<span class="event-param">' + esc(p) + '</span>').join('')}
+              </div>
+            </div>
+            <div class="event-card-purpose">${esc(e.purpose)}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="param-types">
+        <h4>4.1 파라미터 타입</h4>
+        ${a.paramTypes.map(p => `
+          <div class="param-type-row">
+            <span class="param-type-name">${esc(p.name)}</span>
+            <span class="param-type-type">${esc(p.type)}</span>
+            <span class="param-type-desc">${esc(p.desc)}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top: 14px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">4.2 이벤트 전송 예시</div>
+        <pre class="code-block">${esc(a.exampleCode)}</pre>
+      </div>
+    </div>
+  `;
+
+  // 5. 게이트
+  html += `
+    <div class="analytics-section">
+      <div class="analytics-section-title"><span class="analytics-section-num">5</span>게이트 판정 기준 (사업화방향 20p)</div>
+      <div class="gates-grid">
+        ${a.gates.map(g => `
+          <div class="gate-card">
+            <div class="gate-card-icon">${esc(g.icon)}</div>
+            <div class="gate-card-label">${esc(g.label)}</div>
+            <div class="gate-card-threshold">${esc(g.threshold)}</div>
+            <div class="gate-card-data">${esc(g.data)}</div>
+            <div class="gate-card-method">${esc(g.method)}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="gate-strategy">📊 ${esc(a.gateStrategy)}</div>
+    </div>
+  `;
+
+  // 5.1 이벤트 ↔ 게이트 기여 매트릭스
+  if (a.eventGateMatrix) {
+    const mx = a.eventGateMatrix;
+    const cellClass = { primary: 'cell-primary', support: 'cell-support' };
+    const cellMark  = { primary: '●', support: '○' };
+    html += `
+      <div class="analytics-section">
+        <div class="analytics-section-title"><span class="analytics-section-num">5.1</span>이벤트 ↔ 게이트 기여 매트릭스</div>
+        <div class="analytics-section-desc">7개 이벤트가 5개 게이트 판정에 어떻게 기여하는지 한눈에 보는 매트릭스. ● 직접 기여 / ○ 보조 기여.</div>
+        <div class="matrix-legend">
+          <div class="matrix-legend-item"><span class="matrix-legend-box" style="background:#2A6BB0"></span>${esc(mx.legend.primary)}</div>
+          <div class="matrix-legend-item"><span class="matrix-legend-box" style="background:#D6E6F7"></span>${esc(mx.legend.support)}</div>
+        </div>
+        <div class="matrix-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th class="matrix-evhead">이벤트 \\ 게이트</th>
+                ${mx.gates.map(g => `<th><span class="matrix-gate-icon">${esc(g.icon)}</span><span class="matrix-gate-label">${esc(g.label)}</span></th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${mx.rows.map(r => `
+                <tr>
+                  <th class="matrix-evhead">${esc(r.event)}</th>
+                  ${mx.gates.map(g => {
+                    const c = r.contrib[g.key];
+                    if (c) return `<td class="${cellClass[c]}">${cellMark[c]}</td>`;
+                    return `<td class="cell-none">·</td>`;
+                  }).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="matrix-note">⚠️ ${esc(mx.note)}</div>
+      </div>
+    `;
+  }
+
+  // 6. 구현 순서
+  html += `
+    <div class="analytics-section">
+      <div class="analytics-section-title"><span class="analytics-section-num">6</span>구현 순서 (체크리스트)</div>
+      <div class="checklist">
+        ${a.implementationChecklist.map(c => `
+          <div class="checklist-item">
+            <div class="checklist-item-main">
+              <span class="checklist-checkbox">☐</span>
+              <span>${esc(c.item)}</span>
+            </div>
+            ${c.subitems.map(s => '<div class="checklist-item-sub">' + esc(s) + '</div>').join('')}
+          </div>
+        `).join('')}
+      </div>
+      <div class="precondition-warn">
+        <div class="precondition-warn-title">⚠ 선행 조건 + 법무</div>
+        <ul>${a.preconditions.map(p => '<li>' + esc(p) + '</li>').join('')}</ul>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+// ─── 초기화 ───
+renderOverview();
+renderFeatures();
+renderToolCategories();
+renderToolContent();
+renderAnalytics();
+
+// 딥링크: URL 해시(#F-06)가 있으면 해당 기능 카드로 점프
+function handleHash() {
+  const h = (location.hash || '').replace('#', '');
+  if (/^F-\d{2}$/.test(h) && FEATURES.some(f => f.id === h)) {
+    jumpToFeature(h);
+  }
+}
+window.addEventListener('hashchange', handleHash);
+if (location.hash) setTimeout(handleHash, 100);
+</script>
+
+</body>
+</html>
