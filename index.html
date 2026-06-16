@@ -413,6 +413,8 @@ section.tab-section.active { display: block; }
   padding: 6px 12px;
   cursor: pointer;
   transition: background 0.15s;
+  display: inline-block;
+  margin: 0 6px 6px 0;
 }
 .mockup-link:hover { background: #F7DEE2; }
 .dep-link {
@@ -734,6 +736,85 @@ section.tab-section.active { display: block; }
   font-size: 14px;
   font-weight: 700;
 }
+
+/* 보호자 통계 화면 */
+.g-screen { max-width: 420px; margin: 0 auto 18px; background: #F4EAD2; border: 1px solid #C9A961; border-radius: 14px; padding: 16px; }
+.g-row { display: flex; align-items: center; gap: 10px; }
+.g-head { margin-bottom: 14px; }
+.g-avatar { width: 34px; height: 34px; border-radius: 50%; background: #F0997B; display: flex; align-items: center; justify-content: center; color: #4A1B0C; font-size: 13px; font-weight: 700; }
+.g-name { font-size: 13px; font-weight: 700; color: #5C3F1F; }
+.g-sub { font-size: 11px; color: #888780; }
+.g-period { display: flex; gap: 3px; background: #fff; border: 1px solid #C9A961; border-radius: 8px; padding: 3px; }
+.g-period span { font-size: 11px; padding: 4px 10px; border-radius: 6px; color: #888780; }
+.g-period span.on { background: #E6F1FB; color: #185FA5; }
+.g-label { font-size: 11px; color: #A8917A; margin: 14px 4px 8px; }
+.g-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.g-metric { background: #fff; border-radius: 8px; padding: 12px; }
+.g-num { font-size: 22px; font-weight: 700; color: #5C3F1F; }
+.g-num small { font-size: 12px; color: #888780; font-weight: 400; }
+.g-mlabel { font-size: 11px; color: #888780; }
+.g-card { background: #fff; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+.g-heat { display: flex; gap: 6px; }
+.g-heat span { width: 30px; height: 30px; border-radius: 7px; background: #E5D3AF; }
+.g-heat .d0 { background: #EDE3CC; } .g-heat .d1 { background: #9FE1CB; } .g-heat .d2 { background: #5DCAA5; } .g-heat .d3 { background: #1D9E75; }
+.g-prog { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 13px; color: #5C3F1F; }
+.g-prog span { flex: 1; } .g-prog b { font-size: 11px; color: #888780; min-width: 48px; text-align: right; }
+.g-bar { width: 120px; height: 6px; border-radius: 3px; background: #EDE3CC; } .g-bar i { display: block; height: 100%; border-radius: 3px; }
+.g-repeat { font-size: 12px; color: #888780; padding-top: 8px; border-top: 1px solid #EDE3CC; } .g-repeat b { color: #5C3F1F; }
+.g-discover { background: #E6F1FB; }
+.g-disc-head { font-size: 13px; font-weight: 700; color: #185FA5; margin-bottom: 10px; }
+.g-disc-text { font-size: 12px; color: #185FA5; line-height: 1.5; } .g-disc-text b { font-weight: 700; }
+.g-tax-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.g-tag { font-size: 11px; background: #F1EFE8; color: #5F5E5A; padding: 4px 10px; border-radius: 12px; }
+.g-tag.on { background: #fff; color: #185FA5; }
+.g-word { font-size: 12px; background: #F1EFE8; color: #5C3F1F; padding: 4px 12px; border-radius: 8px; } .g-word.dim { color: #888780; }
+.g-act { font-size: 11px; color: #888780; margin-top: 4px; }
+.g-fine { font-size: 10px; color: #A8917A; margin-top: 8px; }
+.g-report { border: 1px solid #C9A961; }
+.g-btns { display: flex; gap: 8px; margin-top: 12px; }
+.g-btns button { flex: 1; font-size: 12px; padding: 8px; border: 1px solid #C9A961; border-radius: 8px; background: #fff; color: #5C3F1F; cursor: default; }
+.g-taxonomy { display: flex; flex-direction: column; gap: 12px; }
+.g-tax-cat { border-left: 3px solid #C9A961; padding-left: 12px; }
+.g-tax-head { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.g-tax-src { display: block; font-size: 11px; font-weight: 400; color: var(--text-tertiary); margin-top: 2px; }
+.g-tpl-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.g-tpl-table th { text-align: left; padding: 8px; background: var(--bg-surface); border: 1px solid var(--border); font-weight: 700; }
+.g-tpl-table td { padding: 8px; border: 1px solid var(--border); vertical-align: top; }
+.g-tpl-when { white-space: nowrap; color: var(--text-secondary); width: 120px; }
+.g-tpl-text { color: var(--text-primary); }
+.g-examples { margin: 8px 0 0; padding-left: 20px; } .g-examples li { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
+
+/* 상태·예외 화면 모음 */
+.st-section { margin-bottom: 22px; }
+.st-head { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.st-ref { font-size: 11px; font-weight: 400; color: var(--text-tertiary); background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 2px 10px; }
+.st-ref-warn { color: #854F0B; background: #FAEEDA; border-color: #EF9F27; }
+.st-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.st-grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.st-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-align: center; }
+.st-card-wide { display: flex; flex-direction: column; }
+.st-sm { padding: 16px 12px; }
+.st-cap { font-size: 11px; color: var(--text-tertiary); margin-bottom: 10px; }
+.st-ico { font-size: 30px; width: 56px; height: 56px; line-height: 56px; border-radius: 50%; margin: 0 auto 12px; }
+.st-ok { background: #E1F5EE; color: #0F6E56; }
+.st-crown { background: #FAEEDA; color: #854F0B; font-size: 30px; width: 56px; height: 56px; line-height: 56px; border-radius: 50%; margin: 0 auto 12px; }
+.st-ico-sm { font-size: 28px; margin-bottom: 8px; }
+.st-warn { color: #854F0B; }
+.st-title { font-size: 16px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+.st-title-sm { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+.st-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+.st-sub-sm { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+.st-ok-box { background: #E1F5EE; color: #0F6E56; border-radius: 6px; padding: 6px 8px; }
+.st-checks { font-size: 16px; color: #1D9E75; letter-spacing: 4px; margin-bottom: 16px; }
+.st-btn { font-size: 13px; font-weight: 500; border-radius: 8px; padding: 10px; cursor: default; }
+.st-btn-sm { font-size: 12px; padding: 8px; }
+.st-btn-primary { background: #185FA5; color: #fff; }
+.st-btn-ghost { background: #fff; border: 1px solid var(--border); color: var(--text-secondary); }
+.st-btn-row { display: flex; gap: 8px; margin-top: 8px; } .st-btn-row .st-btn { flex: 1; }
+.st-diff { text-align: left; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.st-diff-row { font-size: 12px; color: var(--text-secondary); } .st-diff-row b { display: block; color: var(--text-primary); margin-bottom: 2px; }
+.st-note { font-size: 11px; color: var(--text-tertiary); line-height: 1.6; margin-top: 10px; padding: 8px 12px; background: var(--bg-surface); border-radius: 6px; }
+.st-note-inline { font-size: 11px; color: #185FA5; line-height: 1.5; margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--border); }
 
 .legend-grid {
   display: grid;
@@ -1611,7 +1692,7 @@ section.tab-section.active { display: block; }
 
 <header class="app-header">
   <div class="app-header-inner">
-    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.5.9</span></div>
+    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.7.1</span></div>
     <div class="app-subtitle">서재 · 책 선택 · 진도 관리 · 보호자 영역 (4영역 × P1/P2/P3 우선순위)</div>
   </div>
 </header>
@@ -1619,8 +1700,8 @@ section.tab-section.active { display: block; }
 <nav class="tab-nav">
   <div class="tab-nav-inner">
     <button class="tab-btn active" data-tab="overview">개요</button>
-    <button class="tab-btn" data-tab="features">기능 명세 <span class="tab-btn-count">18</span></button>
-    <button class="tab-btn" data-tab="tools">시각 시안 <span class="tab-btn-count">6</span></button>
+    <button class="tab-btn" data-tab="features">기능 명세 <span class="tab-btn-count">20</span></button>
+    <button class="tab-btn" data-tab="tools">시각 시안 <span class="tab-btn-count">14</span></button>
     <button class="tab-btn" data-tab="analytics">애널리틱스 <span class="tab-btn-count">7</span></button>
   </div>
 </nav>
@@ -1687,9 +1768,10 @@ section.tab-section.active { display: block; }
 
 const AREAS = [{"id":"library","label":"서재 메인 화면","icon":"📚","color":"#DC3545"},{"id":"book","label":"책 선택 + 자동 펼침","icon":"📖","color":"#B86B23"},{"id":"progress","label":"진도 관리 + 자동 저장","icon":"💾","color":"#5D4A8A"},{"id":"parental","label":"보호자 영역 + 설정","icon":"👨‍👩‍👧","color":"#4A7E3A"}];
 const PRIORITIES = [{"id":"P1","label":"P1 필수","desc":"이것만으로도 \"기본 동작\"이 가능","color":"#DC3545"},{"id":"P2","label":"P2 강력 권장","desc":"학부모 만족 + 출시 가능 수준","color":"#B86B23"},{"id":"P3","label":"P3 있으면 좋음","desc":"출시 후 업데이트로 추가 가능","color":"#4A7E3A"}];
-const FEATURES = [{"id":"F-01","priority":"P1","area":"library","title":"서재 5권 책 진열","summary":"1단 책장에 5권 face-out 진열. 작품별 액센트 컬러 표지.","overview":"앱 첫 진입 화면. 5권의 책이 책장에 정면(face-out) 진열되어 5세가 한눈에 모든 작품을 인지. 어린이 시선 + 살짝 비스듬 앵글로 자연스러운 \"내 방 책장\" 메타포.","uiux":["배경: 따뜻한 베이지 #FAF3E7 + 황혼 황금빛 광원 #F4A261","책장: 갈색 나무 톤 #8C5A1F, 1단 (2단은 시선 분산)","앵글: 어린이 시선 + 위 5° (살짝 비스듬)","5권 face-out: 작품별 액센트 컬러 표지 (빨강·갈색·보라·황금·녹색)","소품: 1인 소파, 작은 램프, 깔개","광고·결제 영역 절대 없음"],"data":["Work { id, title, accentColor, isReleased, releaseDate }","WorkOrder: 진열 순서 (출시일 기반 또는 사용자 활동 기반)"],"tech":["Unity UI 또는 네이티브 (결정 필요)","메인 일러스트레이터 1명 전담 (톤 일관성)","5권 표지 + 배경 + 소품 일러스트"],"policy":["광고 영역 없음 — 마케팅 가치 \"광고 없음\"","결제 유도 없음 (MVP 무료)"],"deliverables":["서재 와이어프레임 → Figma 정밀화","메인 일러스트 무드보드 + 컬러 팔레트","5권 책 표지 일러스트","서재 배경 + 소품 일러스트","Unity 화면 구현 + 입력 처리"],"owner":"메인 일러스트레이터 + UX 디자이너 + Unity 개발자","dependencies":"작품 5편 메타데이터 + 액센트 컬러 확정","status":"mockup","analyticsEvents":[{"name":"book_open","role":"서재에서 작품 진입 시 발화"}],"mockupRef":"wireframe"},{"id":"F-02","priority":"P1","area":"library","title":"본/안 본 책 시각 구분","summary":"이어보기·새 책·완독·미출시 4가지 상태를 5세가 즉시 인지.","overview":"5세가 글자가 아닌 시각 단서로 \"어느 책 봤지?\"를 즉시 인지. 4가지 상태별 다른 시각 표현.","uiux":["이어보기: 책 위쪽에 책갈피 튀어나옴 #FFD78A","새 책 (안 봄): 표지에 작은 반짝임 ★ 1~3개","완독: 표지 우상단에 큰 별 도장 + 미세 글로우","미출시 (Coming Soon): 책 실루엣 + 흐릿한 옅은 색","글자 라벨 보조 가능 (이어보기·새 책 등) — 학부모 인지용"],"data":["UserWorkState { workId, status: 'unread'|'reading'|'completed'|'locked' }","ReadProgress { workId, completedChapters[], totalChapters }"],"tech":["상태 변경 시 즉시 시각 갱신 (앱 재진입 시)","4가지 시각 자산 (반짝임 · 책갈피 · 도장 · 실루엣)"],"policy":[],"deliverables":["4가지 상태 시각 자산 (책갈피·반짝임·도장·실루엣)","Unity 상태 → 시각 매핑 구현"],"owner":"일러스트레이터 + Unity 개발자","dependencies":"F-01 서재 5권 진열 + F-07 챕터 상태 추적","status":"mockup","mockupRef":"wireframe"},{"id":"F-03","priority":"P1","area":"book","title":"책 펼침 트랜지션 (1초 모션)","summary":"책 탭 → 1초 부드러운 펼침 → 챕터 목차. 5단계 키프레임.","overview":"동화책을 펼치는 자연스러운 메타포. 5단계 키프레임의 1초 모션. 시각 시안 탭에서 인터랙티브 미리보기 확인 가능.","uiux":["0.0s 탭: 책이 살짝 눌림 (scale 0.97). 미세한 햅틱","0.1s 부상: 책장에서 들어 올려짐 (scale 1.0→1.15)","0.3s 중앙 이동: 화면 중앙으로. 서재 배경 페이드 아웃","0.5s 펼침: 표지가 좌측으로 회전 rotateY 0°→-180°","0.8s 내용 등장: 챕터 목차가 글자별 fade-in (각 80ms 간격)","1.0s 완료: 인터랙티브 영역 활성화"],"data":["PageState: opening → toc_visible 전환"],"tech":["Unity DOTween 또는 Unity Timeline","책 본체 = 단일 GameObject (Scale·Position·Rotation 시퀀스)","펼침은 두 GameObject — 표지(회전) + 안쪽 페이지(정적)","Easing: 부상 ease-out-back, 펼침 ease-in-out, 내용 ease-out"],"policy":[],"deliverables":["트랜지션 시안 (시각 시안 탭 참조)","Unity DOTween 또는 Timeline 구현","페이지 종이 텍스처","오디오 동기화 (톡·종이·띵)"],"owner":"Unity 개발자 + 모션 디자이너 + 사운드 디자이너","dependencies":"F-01 서재 5권 진열","status":"mockup","mockupRef":"transition"},{"id":"F-04","priority":"P1","area":"book","title":"챕터 목차 화면","summary":"펼친 책의 좌측 페이지 = 챕터 목차, 우측 페이지 = 작품 소개.","overview":"책 펼침 후 보이는 챕터 목차 화면. 좌우 페이지 구조. 각 챕터의 본/안 본 상태 표시.","uiux":["좌측 페이지: 챕터 목차 리스트 (예: C1 새 마을 · C2A 곧장 갔을 때 · C2B 꽃 따러 갔을 때)","각 챕터 옆 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","우측 페이지: 작품 소개 + 시그니처 페이지 미리보기 (작은 일러스트)","페이지 하단: 좌측 \"← 책장으로\" 버튼 + 우측 \"이어보기\" / \"처음부터\" 버튼","분기 챕터 (C2A·C2B)는 들여쓰기 또는 그룹 표시"],"data":["Chapter { id, title, summary, pageCount, hasSignaturePage }","UserChapterState { workId, chapterId, status, lastPageId, completedAt }"],"tech":["Unity UI Canvas (좌우 페이지 레이아웃)","종이 텍스처 배경"],"policy":[],"deliverables":["챕터 목차 화면 UI 시안","상태 아이콘 자산 (☐ ◐ ★)","Unity 구현 + 데이터 바인딩"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-03 책 펼침 트랜지션 + F-07 챕터 상태 추적","status":"mockup","analyticsEvents":[{"name":"book_open","role":"챕터 목차 진입(작품 열람) 시 발화"}],"mockupRef":"transition"},{"id":"F-05","priority":"P1","area":"book","title":"마지막 페이지 자동 이동","summary":"이어보기 탭 시 마지막 본 페이지로 직접 점프.","overview":"이어보기 중인 작품 선택 시 마지막 본 페이지로 직접 이동. 챕터 1 첫 페이지로 가는 게 아니라 정확한 마지막 위치 복원.","uiux":["이어보기 중인 작품 → \"이어보기\" 버튼이 기본 강조","탭 시: 마지막 본 페이지로 직접 점프 (페이드 인 트랜지션)","앱 재시작 시 마지막 작품·페이지 기억","여러 작품 동시 진행 가능 (각 독립 진도)"],"data":["UserWorkState.currentPageId, lastPlayedAt","AppState.lastActiveWorkId"],"tech":["로컬 저장 (SQLite or PlayerPrefs)","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 fallback"],"policy":[],"deliverables":["자동 이동 로직","데이터 무결성 테스트 (강제 종료 후 복원)"],"owner":"Unity 개발자 + BE","dependencies":"F-04 챕터 목차 + F-06 자동 저장","status":"mockup","mockupRef":"reader"},{"id":"F-06","priority":"P1","area":"progress","title":"페이지 단위 자동 저장","summary":"페이지 종료 시 자동 저장. 사용자가 의식하지 않게.","overview":"페이지 단위 자동 저장. 자동 저장 표시 없음 (자동 저장의 미덕). 로컬만 (서버 전송 절대 없음).","uiux":["저장 표시 UI 없음 — 사용자가 의식하지 않게","저장 시점: 페이지 종료 + 챕터 종료 + 앱 백그라운드 진입","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 안전 복원"],"data":["UserWorkState { workId, status, currentChapterId, currentPageId, completedChapters[], chosenBranches[], lastPlayedAt }","UserAppState { lastActiveWorkId, lastUpdatedAt }"],"tech":["SQLite (Unity) 또는 PlayerPrefs JSON","트랜잭션 처리 (앱 강제 종료에도 일관성)"],"policy":["로컬만 — COPPA 2026 + 한국법 대응","어린이 식별자 UUID만 (이메일·이름 X)","서버 전송 절대 없음"],"deliverables":["SQLite 스키마 또는 PlayerPrefs 구조","자동 저장 구현","데이터 무결성 테스트"],"owner":"Unity 개발자 + BE","dependencies":"없음 (독립)","status":"todo","analyticsEvents":[{"name":"chapter_complete","role":"챕터 마지막 페이지 저장 시점에 발화"},{"name":"book_complete","role":"마지막 챕터 완료 저장 시 발화 (완독률 핵심)"}]},{"id":"F-07","priority":"P1","area":"progress","title":"본/안 본 챕터 상태 추적","summary":"각 챕터의 상태 (안 봄·이어보기·완독) 추적 + 시각화.","overview":"5세가 \"어느 챕터 봤지?\"를 즉시 인지할 수 있도록 챕터별 상태 추적. 본/안 본의 명확한 시각 구분.","uiux":["각 챕터 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","이어보기 중 챕터: 진행률 ?% 표시 (선택)","분기 챕터 (C2A·C2B)는 별도 추적","재생 중 페이지 시퀀스: 상단 작은 진행 표시 (예: \"3 / 8\")"],"data":["UserChapterState { workId, chapterId, status, lastPageId, completedPages[], completedAt }","ChapterProgress { workId, chapterId, completedPagesCount, totalPages }"],"tech":["페이지 종료 시 챕터 상태 갱신","챕터 마지막 페이지 도달 시 'completed' 상태로"],"policy":[],"deliverables":["챕터 상태 데이터 모델 + DB 스키마","상태 갱신 로직","상태 → 시각 매핑"],"owner":"Unity 개발자 + BE","dependencies":"F-06 자동 저장","status":"todo","analyticsEvents":[{"name":"chapter_start","role":"챕터 상태가 'reading'으로 전환될 때 발화 (완독률 퍼널 시작)"},{"name":"chapter_complete","role":"챕터 'completed' 전환 시 발화"},{"name":"book_complete","role":"모든 챕터 완료 판정 시 발화"}]},{"id":"F-08","priority":"P2","area":"parental","title":"보호자 잠금 (부모 게이트)","summary":"우상단 톱니바퀴 + 긴 누름 3초 + 곱셈 확인.","overview":"어린이가 우발적으로 접근하지 않도록 보호자 영역 진입 시 부모 게이트. COPPA 2026 권장 방식.","uiux":["진입 버튼: 서재 우상단 작은 톱니바퀴 아이콘","1단계: 긴 누름 3초 (어린이 우회 가능성 낮음)","2단계: 두 자릿수 곱셈 풀기 (7 × 8 = ?) — 어린이 차단 명확","권장: 1+2 혼합 (긴 누름 후 곱셈 확인)","실패 시 부드러운 안내 \"한번 더\"","통과 후 어른 톤 별도 UI (5세 톤과 명확히 분리)"],"data":["ParentalGateAttempt { attemptedAt, succeeded } — 보안 분석용"],"tech":["긴 누름 progress 시각 피드백 (3초 progress)","곱셈 입력 큰 숫자 키패드"],"policy":["COPPA 2026: 부모 동의 + 부모 게이트 필수"],"deliverables":["부모 게이트 UI 시안","긴 누름 progress 애니메이션","곱셈 입력 키패드","Unity 구현"],"owner":"Unity 개발자 + UX 디자이너 + 법무 자문","dependencies":"없음","status":"todo","mockupRef":"wireframe"},{"id":"F-09","priority":"P2","area":"parental","title":"기본 통계 화면","summary":"자녀 활동 통계: 작품별 진행률 + 일/주별 활동 시간.","overview":"보호자 영역에서만 표시되는 자녀 활동 통계. \"부드러운 자랑\" 톤 — 자녀를 격려하는 어조.","uiux":["진입: 보호자 영역 → \"자녀 활동\" 메뉴","기본: 5편 작품 × 진행률 막대 (0~100%) + 마지막 본 날짜","일별 활동 시간: 막대 그래프 7일","주별 활동 시간: 막대 그래프 4주","인터랙션 응답 수: 작품별 카운트","통계 데이터 삭제 가능 (학부모 선택)"],"data":["UserPageHistory { pageId, visitedAt, durationSec }","DailyActivity { date, totalDurationSec, pagesVisited }"],"tech":["Unity 막대 그래프 컴포넌트 또는 외부 라이브러리","일별/주별 집계 로직"],"policy":["통계 데이터 로컬만","통계 삭제 권한 (보호자)"],"deliverables":["통계 화면 UI 시안","막대 그래프 컴포넌트","일별/주별 집계 로직","통계 삭제 기능"],"owner":"Unity 개발자 + UX 디자이너","dependencies":"F-08 부모 게이트 + F-06 자동 저장","status":"todo"},{"id":"F-10","priority":"P2","area":"parental","title":"설정 — 볼륨 (4채널)","summary":"전체 / BGM / SFX / 내레이션 슬라이더 + 청각 보호.","overview":"기본적인 사용자 설정. 5세 보호 + 학부모 편의. 4채널 볼륨 + 최대 볼륨 제한.","uiux":["진입: 보호자 영역 → \"설정\" 메뉴","4채널 슬라이더 0~100%: 전체 / BGM / SFX / 내레이션","최대 볼륨 제한 (5세 청각 보호): 시스템 볼륨 80% 캡","기본값: 전체 70%, BGM 60%, SFX 80%, 내레이션 90%"],"data":["AudioSettings { master, bgm, sfx, narration } (PlayerPrefs)"],"tech":["Unity Audio Mixer 4채널 구성","시스템 볼륨 80% 캡 처리"],"policy":["어린이 청각 보호 (디바이스 시스템 볼륨 캡)"],"deliverables":["설정 화면 UI","볼륨 슬라이더 컴포넌트","Unity Audio Mixer 설정"],"owner":"Unity 개발자 + 사운드 디자이너","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-11","priority":"P2","area":"parental","title":"설정 — 자막","summary":"자막 ON/OFF + 크기 3단계 (작음·중간·큼).","overview":"내레이션 자막을 화면 하단에 표시. 학부모 동반 시청 시 + 청각 장애 가족 배려.","uiux":["자막 토글: ON / OFF","자막 크기 3단계: 작음 (12pt) / 중간 (16pt) / 큼 (20pt)","위치: 화면 하단 중앙","배경: 반투명 검정 (가독성)","타이밍: 내레이션 음성과 동기화 (페이지 timeline 데이터 활용)"],"data":["SubtitleSettings { enabled, size }","Page.timeline 데이터의 내레이션 텍스트 활용"],"tech":["내레이션 텍스트를 페이지 데이터에서 추출","오디오와 시각 동기화"],"policy":["접근성 (Apple Guidelines + WCAG)"],"deliverables":["자막 표시 시스템","자막 폰트 + 크기 변경 처리","내레이션 텍스트 데이터 정리"],"owner":"Unity 개발자 + 콘텐츠 기획자","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-12","priority":"P1","area":"parental","title":"다운로드 관리 (챕터 단위)","summary":"챕터별 다운로드/삭제 + 작품 일괄 다운로드 + 저장 공간 표시. 구매=모든 기기 공통, 다운로드=기기별.","overview":"챕터 단위 다운로드/삭제. 사용자가 보는 챕터만 받아 저장 공간을 아끼고, 구매한 챕터(또는 책 1권)만 선택적으로 내려받는다. 핵심 원칙은 구매와 다운로드의 분리 — 구매(엔타이틀먼트)는 계정에 귀속되어 모든 기기에서 공통으로 열리고, 다운로드 완료 상태는 기기에 귀속되어 같은 챕터도 기기마다 다르게 보인다. 가정에서 태블릿 여러 대를 쓰는 상황을 보장. 1차 출시는 현재 기기 기준으로 관리하고, 기기별 다운로드 상태 표시는 출시 후 업데이트로 확장한다.","uiux":["진입: 보호자 영역(F-08 통과) → \"다운로드\" 메뉴. 부모용 관리 화면","상단: 현재 기기명 표시 + \"구매=모든 기기 공통, 다운로드=기기별\" 안내 배너","작품 > 챕터 트리: 작품명 아래 챕터별 상태 + 크기. 작품 단위 접기/펼치기","챕터 상태 5종: 완료 / 다운로드 중(진행률+취소) / 미다운로드(구매함, 받기) / 업데이트 필요(OTA) / 미구매 잠금(구매 필요→F-18)","작품 단위 일괄: \"전체 받기\"(구매한 챕터 한꺼번에)","전체 단위 일괄: \"구매한 챕터 모두 받기\" / \"이 기기 정리\"(삭제로 공간 확보)","저장 공간 상단 표시 (이 기기 기준 — 플레이북 사용량 / 여유 공간)"],"data":["UserEntitlement { workId, unlockedChapters[], ownsFullBook } — 계정 귀속(모든 기기 공통)","DevicePackage { deviceId, workId, chapterId, version, sizeBytes, status, downloadedAt } — 기기 귀속","DownloadJob { workId, chapterId, progress, startedAt, error? }","status 5종: completed / downloading / not_downloaded / update_required / locked"],"tech":["OTA 챕터 단위 다운로드 (CDN 결정 + Unity 구현)","챕터 패키지 포맷 (JSON + 에셋 번들), 챕터별 독립 다운로드/삭제","엔타이틀먼트(구매)는 서버/계정에서 조회 — 기기 독립. 다운로드 상태는 로컬(기기) 저장","구매 상태(F-18) 확인 후 다운로드 허용. 미구매 챕터는 잠금 → 페이월","[출시 후] 기기별 다운로드 상태 동기화 — \"내 기기들\" 목록. 1차 출시는 현재 기기 기준"],"policy":["구매는 계정 귀속 — 기기 변경/추가 시 구매 복원(F-18)으로 재다운로드 가능","동시 사용 기기 수 정책(무제한 vs 상한)은 비즈니스 정책으로 확정 필요"],"deliverables":["다운로드 관리 화면 UI (작품 > 챕터 트리, 상태 5종)","OTA 챕터 단위 다운로드 시스템","챕터 패키지 포맷","디바이스 저장 공간 표시 (현재 기기 기준)","\"구매=모든 기기 공통\" 안내 + 다른 기기 재다운로드 지원","[출시 후] 기기별 다운로드 상태 표시 확장"],"owner":"Unity 개발자 + BE + 인프라","dependencies":"F-08 부모 게이트 + F-18 구매/결제 + Soft Launch 일정","status":"mockup","mockupRef":"download"},{"id":"F-13","priority":"P3","area":"library","title":"첫 실행 온보딩","summary":"3단계 짧은 안내 (환영 · 책 선택 · 학부모 안내).","overview":"앱 첫 실행 시 짧은 온보딩. 5세 친화 + 학부모 안내.","uiux":["1단계 환영: \"안녕, 플레이북에 어서 와!\" + 메인 캐릭터","2단계 책 선택: 손가락 애니메이션 \"책을 톡 눌러봐\"","3단계 학부모 안내: \"부모님께 알려주세요\" (긴 누름으로 보호자 영역)","스킵 옵션 (우상단)","두 번째 실행부터는 표시 안 함"],"data":["AppState.onboardingCompleted"],"tech":["Unity 온보딩 컨트롤러","손가락 애니메이션 (튜토리얼 hint)"],"policy":[],"deliverables":["온보딩 3단계 화면 시안","손가락 hint 애니메이션","Unity 구현"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-01 서재 5권 진열 + F-08 부모 게이트","status":"todo"},{"id":"F-14","priority":"P3","area":"parental","title":"알림 (Opt-in)","summary":"다음 챕터 알림 (학부모 동의 시).","overview":"챕터 경계에서 \"다음 챕터 알림 받기\" 토글. 학부모 동의 (Opt-in). 다음날 같은 시간대 한 번만.","uiux":["Opt-in: 챕터 경계에서 \"다음 챕터를 알림으로 받기\" 토글","발송: 다음날 같은 시간대 + 한 번만 (스팸 회피)","내용: \"새 챕터가 기다리고 있어요! — [작품] 다음 챕터\"","보호자 영역에서 모든 알림 끄기 가능"],"data":["NotificationSettings { enabled, optInPerWork[] }","ScheduledNotification { workId, chapterId, scheduledAt }"],"tech":["Unity Local Notifications (UnityEngine.iOS / Android)","권한 요청 시 부모 게이트 적용"],"policy":["어린이 앱 알림은 학부모 동의 필수","Push 권한 요청 시 부모 게이트"],"deliverables":["알림 Opt-in UI","Unity Local Notifications 구현","보호자 영역 알림 설정"],"owner":"Unity 개발자","dependencies":"F-08 부모 게이트","status":"todo"},{"id":"F-15","priority":"P3","area":"book","title":"챕터 완료 보상 애니메이션","summary":"챕터 완독 시 별·도장 4단계 애니메이션.","overview":"챕터 완독 시 별·도장 애니메이션. 시각 시안 탭에서 인터랙티브 미리보기.","uiux":["0.0s 페이드인: 반투명 검정 layer (opacity 0→0.4)","0.4s 별 등장: scale 0→1.2→1.0 (ease-out-back) + 광채 확산","1.0s 도장 등장: translateY -50→0 (ease-out-bounce)","1.6s 축하 메시지: \"잘했어요!\" fade-in","2.5s 다음 단계 버튼: \"다음 챕터로\" / \"오늘은 여기까지\"","별 색상 = 작품 액센트 컬러","도장 = 책 모양 + 챕터 번호"],"data":["ChapterCompletion { workId, chapterId, completedAt, animationShown }"],"tech":["Unity Timeline 애니메이션","별/도장 일러스트 5종 (작품별 다른 컬러)","효과음 동기화"],"policy":[],"deliverables":["보상 시안 (시각 시안 탭 참조)","별·도장 일러스트 5종","축하 효과음","Unity Timeline 구현"],"owner":"일러스트레이터 + Unity 개발자 + 사운드 디자이너","dependencies":"F-07 챕터 상태 추적","status":"todo","mockupRef":"reward"},{"id":"F-16","priority":"P3","area":"library","title":"사운드 디자인 (UI 효과음)","summary":"책 탭·펼침·챕터 선택·페이지 전환·완료 효과음 10~15개.","overview":"내레이션·BGM·SFX 외의 \"앱 인터페이스\" 효과음. UI 피드백 사운드.","uiux":["책 탭: 부드러운 책 표지 \"톡\" 소리","책 펼침: 종이 페이지 넘어가는 소리","챕터 선택: 부드러운 \"띵\"","페이지 전환: 미세한 종이 소리 (반복 부담 없게)","챕터 완료: \"띠리링\" 작은 축하 멜로디 (1.5초 이내)","보호자 영역 진입: 차분한 톤 (어린이 톤 X)"],"data":["SfxLibrary: 효과음 카탈로그 + 트리거 매핑"],"tech":["Unity Audio Mixer + Sound Effect 채널","효과음 파일 압축 (mp3/ogg)"],"policy":[],"deliverables":["사운드 디자이너 위촉","효과음 세트 10~15개","Unity Audio Mixer 설정"],"owner":"사운드 디자이너 + Unity 개발자","dependencies":"없음","status":"todo"},{"id":"F-17","priority":"P1","area":"progress","title":"애널리틱스 계측 (이벤트 7종)","summary":"완독률·리텐션·유료전환 측정을 위한 SDK 연동 + 이벤트 7종을 출시 빌드에 포함. 개인정보 미수집 설계.","overview":"MVP의 GO/STOP 판정을 '감'이 아닌 '데이터'로 내리기 위한 계측 구현. 측정 전략·KPI·게이트 정의는 애널리틱스 탭 참조. 본 기능은 그 정의를 코드로 구현하는 개발 작업이다. 완독률은 출시 빌드에 이벤트가 포함돼야만 측정 가능하므로 1권 MVP 출시 전 필수 완료(P1).","uiux":["사용자 노출 UI 없음 — 백그라운드 계측","계측 자체가 사용자 경험을 방해하지 않도록 비동기 전송","보호자 영역 통계 화면(F-09)과 데이터 소스 일부 공유 가능"],"data":["이벤트 7종: book_open · chapter_start · chapter_complete · book_complete · interaction_tap · paywall_view · purchase_success","핵심 퍼널: chapter_start → book_complete (완독률)","모든 이벤트는 콘텐츠 식별자(book_id 등)·행동만 기록 — 개인 식별 정보 금지"],"tech":["Firebase Analytics 연동 — 키즈 설정(tag_for_child_directed_treatment) ON, 광고 ID 수집 OFF","Amplitude SDK 연동 — 완독률 퍼널·코호트 리텐션·작품별 비교","대시보드 구성: 완독률 퍼널 / 코호트 리텐션 / 작품별 비교 + 게이트 기준선(완독률 40% 등)","SDK는 데이터 처리 위탁 — 개인정보 처리방침에 수탁사 명시 + 보관기간 제한"],"policy":["개정 COPPA(2026-04) + 국내 PIPA — 기기 ID·IP는 개인정보, 부모 동의 필요","'데이터-프리' 설계: 개인 식별 없이 행동 이벤트만 수집 (제품 신뢰 자산)","[법무] 부모 동의 흐름·처리방침·수탁사 명시는 출시 전 법무 검토 필수"],"deliverables":["Firebase SDK 연동 + 키즈 설정 적용","Amplitude SDK 연동 + 이벤트 7종 구현","이벤트 파라미터 개인정보 미포함 검증","애널리틱스 대시보드 + 게이트 기준선 구성","출시 빌드 이벤트 포함 최종 확인"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-06 자동 저장 + F-07 챕터 상태 추적 (이벤트 발생 지점)","status":"todo","analyticsEvents":[{"name":"interaction_tap","role":"페이지 인터랙션(predict/quiz/vocab 등) 응답 시 발화 — 콘텐츠 파트와 연계"}]},{"id":"F-18","priority":"P1","area":"book","status":"mockup","title":"인앱 구매 (챕터/책 단위)","summary":"챕터 1 무료 · 챕터 2부터 인앱 구매. 챕터 개별 구매 + 책 1권 번들 구매 옵션.","overview":"MVP 수익화의 핵심. 챕터 1은 무료로 열어 진입 장벽을 없애고, 챕터 2부터 인앱 구매로 전환. 사용자는 보고 싶은 챕터만 개별 구매하거나, 책 1권을 통째로(번들 할인) 구매할 수 있다. 결제 시점이 완독률·유료전환 퍼널(F-17)의 paywall_view·purchase_success 이벤트 발생 지점이다.","uiux":["챕터 1: 무료 — 잠금 표시 없음","챕터 2+: 잠금 자물쇠 표시. 탭 시 구매 화면(paywall)","구매 화면 2옵션: \"이 챕터만\" / \"책 전체 받기(번들, 할인)\"","구매 완료 즉시 해당 챕터 잠금 해제 + 다운로드(F-12) 트리거","결제 진입은 보호자 게이트(F-08) 통과 권장 — 어린이 우발 결제 방지","가격·번들 할인율 표시. 이미 구매한 챕터는 번들가에서 제외 계산"],"data":["Product { productId, type: \"chapter\"|\"book_bundle\", workId, chapterId?, price }","Purchase { productId, workId, chapterId?, purchasedAt, storeTxnId }","UserEntitlement { workId, unlockedChapters[], ownsFullBook }"],"tech":["StoreKit(iOS) / Google Play Billing — 인앱 소비성 아님(영구 잠금 해제)","서버 영수증 검증 또는 로컬 검증 정책 결정 필요","번들 구매 시 unlockedChapters 일괄 갱신 + ownsFullBook=true","구매 복원(Restore Purchases) 지원 — 스토어 가이드라인 필수"],"policy":["어린이 앱 결제: 보호자 게이트 + 스토어 부모 통제 준수","Apple Guideline 3.1.1 인앱 구매 / Google Play 결제 정책 준수","가격·번들 조건 명확 고지 (다크패턴 금지)"],"deliverables":["구매 화면(paywall) UI 시안 — 챕터/번들 2옵션","StoreKit / Play Billing 연동","엔타이틀먼트 관리 + 구매 복원","구매 → 잠금해제 → 다운로드 연결 로직"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-04 챕터 목차 + F-08 부모 게이트 + F-12 다운로드 + F-17 애널리틱스","analyticsEvents":[{"name":"paywall_view","role":"챕터 2+ 잠금 탭 → 구매 화면 노출 시 발화"},{"name":"purchase_success","role":"결제 완료 시 발화 (유료전환·구매깊이)"}],"mockupRef":"paywall"}];
+const FEATURES = [{"id":"F-01","priority":"P1","area":"library","title":"서재 5권 책 진열","summary":"5권 책 진열 + 본/안 본 시각 구분. 프로필별 개인화(진행·아바타·테마색).","overview":"앱 첫 진입 화면. 5권의 책이 책장에 정면(face-out) 진열되어 5세가 한눈에 모든 작품을 인지. 어린이 시선 + 살짝 비스듬 앵글로 자연스러운 \"내 방 책장\" 메타포. 서재는 공용이 아니라 프로필별 개인화 공간 — 진행 상태(읽음/이어보기/잠금)가 아이마다 다르게 표시되고, 아이가 고른 아바타·테마색이 서재 배경과 책 카드 톤에 적용된다. 단일 가정은 그대로, 형제 가정은 각자의 서재를 가진다.","uiux":["배경: 따뜻한 베이지 #FAF3E7 + 황혼 황금빛 광원 #F4A261","책장: 갈색 나무 톤 #8C5A1F, 1단 (2단은 시선 분산)","앵글: 어린이 시선 + 위 5° (살짝 비스듬)","5권 face-out: 작품별 액센트 컬러 표지 (빨강·갈색·보라·황금·녹색)","소품: 1인 소파, 작은 램프, 깔개","광고·결제 영역 절대 없음","프로필별 개인화 — 상단에 현재 아이 아바타·이름 + 테마색 적용. 진행은 프로필마다 다름","프로필 전환 버튼 — 서재에서 바로 다른 아이로 전환(→ F-20 선택 화면)"],"data":["Work { id, title, accentColor, isReleased, releaseDate }","WorkOrder: 진열 순서 (출시일 기반 또는 사용자 활동 기반)"],"tech":["Unity UI 또는 네이티브 (결정 필요)","메인 일러스트레이터 1명 전담 (톤 일관성)","5권 표지 + 배경 + 소품 일러스트"],"policy":["광고 영역 없음 — 마케팅 가치 \"광고 없음\"","결제 유도 없음 (MVP 무료)"],"deliverables":["서재 와이어프레임 → Figma 정밀화","메인 일러스트 무드보드 + 컬러 팔레트","5권 책 표지 일러스트","서재 배경 + 소품 일러스트","Unity 화면 구현 + 입력 처리","서재 빈 상태 화면 (시각 시안: 상태·예외 모음 참조)"],"owner":"메인 일러스트레이터 + UX 디자이너 + Unity 개발자","dependencies":"작품 5편 메타데이터 + 액센트 컬러 확정 · F-20 프로필","status":"mockup","analyticsEvents":[{"name":"book_open","role":"서재에서 작품 진입 시 발화"}],"mockupRef":["wireframe","profile","states"]},{"id":"F-02","priority":"P1","area":"library","title":"본/안 본 책 시각 구분","summary":"이어보기·새 책·완독·미출시 4가지 상태를 5세가 즉시 인지.","overview":"5세가 글자가 아닌 시각 단서로 \"어느 책 봤지?\"를 즉시 인지. 4가지 상태별 다른 시각 표현.","uiux":["이어보기: 책 위쪽에 책갈피 튀어나옴 #FFD78A","새 책 (안 봄): 표지에 작은 반짝임 ★ 1~3개","완독: 표지 우상단에 큰 별 도장 + 미세 글로우","미출시 (Coming Soon): 책 실루엣 + 흐릿한 옅은 색","글자 라벨 보조 가능 (이어보기·새 책 등) — 학부모 인지용"],"data":["UserWorkState { workId, status: 'unread'|'reading'|'completed'|'locked' }","ReadProgress { workId, completedChapters[], totalChapters }"],"tech":["상태 변경 시 즉시 시각 갱신 (앱 재진입 시)","4가지 시각 자산 (반짝임 · 책갈피 · 도장 · 실루엣)"],"policy":[],"deliverables":["4가지 상태 시각 자산 (책갈피·반짝임·도장·실루엣)","Unity 상태 → 시각 매핑 구현"],"owner":"일러스트레이터 + Unity 개발자","dependencies":"F-01 서재 5권 진열 + F-07 챕터 상태 추적","status":"mockup","mockupRef":"wireframe"},{"id":"F-03","priority":"P1","area":"book","title":"책 펼침 트랜지션 (1초 모션)","summary":"책 탭 → 1초 부드러운 펼침 → 챕터 목차. 5단계 키프레임.","overview":"동화책을 펼치는 자연스러운 메타포. 5단계 키프레임의 1초 모션. 시각 시안 탭에서 인터랙티브 미리보기 확인 가능.","uiux":["0.0s 탭: 책이 살짝 눌림 (scale 0.97). 미세한 햅틱","0.1s 부상: 책장에서 들어 올려짐 (scale 1.0→1.15)","0.3s 중앙 이동: 화면 중앙으로. 서재 배경 페이드 아웃","0.5s 펼침: 표지가 좌측으로 회전 rotateY 0°→-180°","0.8s 내용 등장: 챕터 목차가 글자별 fade-in (각 80ms 간격)","1.0s 완료: 인터랙티브 영역 활성화"],"data":["PageState: opening → toc_visible 전환"],"tech":["Unity DOTween 또는 Unity Timeline","책 본체 = 단일 GameObject (Scale·Position·Rotation 시퀀스)","펼침은 두 GameObject — 표지(회전) + 안쪽 페이지(정적)","Easing: 부상 ease-out-back, 펼침 ease-in-out, 내용 ease-out"],"policy":[],"deliverables":["트랜지션 시안 (시각 시안 탭 참조)","Unity DOTween 또는 Timeline 구현","페이지 종이 텍스처","오디오 동기화 (톡·종이·띵)"],"owner":"Unity 개발자 + 모션 디자이너 + 사운드 디자이너","dependencies":"F-01 서재 5권 진열","status":"mockup","mockupRef":"transition"},{"id":"F-04","priority":"P1","area":"book","title":"챕터 목차 화면","summary":"펼친 책의 좌측 페이지 = 챕터 목차, 우측 페이지 = 작품 소개.","overview":"책 펼침 후 보이는 챕터 목차 화면. 좌우 페이지 구조. 각 챕터의 본/안 본 상태 표시.","uiux":["좌측 페이지: 챕터 목차 리스트 (예: C1 새 마을 · C2A 곧장 갔을 때 · C2B 꽃 따러 갔을 때)","각 챕터 옆 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","우측 페이지: 작품 소개 + 시그니처 페이지 미리보기 (작은 일러스트)","페이지 하단: 좌측 \"← 책장으로\" 버튼 + 우측 \"이어보기\" / \"처음부터\" 버튼","분기 챕터 (C2A·C2B)는 들여쓰기 또는 그룹 표시"],"data":["Chapter { id, title, summary, pageCount, hasSignaturePage }","UserChapterState { workId, chapterId, status, lastPageId, completedAt }"],"tech":["Unity UI Canvas (좌우 페이지 레이아웃)","종이 텍스처 배경"],"policy":[],"deliverables":["챕터 목차 화면 UI 시안","상태 아이콘 자산 (☐ ◐ ★)","Unity 구현 + 데이터 바인딩"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-03 책 펼침 트랜지션 + F-07 챕터 상태 추적","status":"mockup","analyticsEvents":[{"name":"book_open","role":"챕터 목차 진입(작품 열람) 시 발화"}],"mockupRef":"transition"},{"id":"F-05","priority":"P1","area":"book","title":"마지막 페이지 자동 이동","summary":"이어보기 탭 시 마지막 본 페이지로 직접 점프.","overview":"이어보기 중인 작품 선택 시 마지막 본 페이지로 직접 이동. 챕터 1 첫 페이지로 가는 게 아니라 정확한 마지막 위치 복원.","uiux":["이어보기 중인 작품 → \"이어보기\" 버튼이 기본 강조","탭 시: 마지막 본 페이지로 직접 점프 (페이드 인 트랜지션)","앱 재시작 시 마지막 작품·페이지 기억","여러 작품 동시 진행 가능 (각 독립 진도)"],"data":["UserWorkState.currentPageId, lastPlayedAt","AppState.lastActiveWorkId"],"tech":["로컬 저장 (SQLite or PlayerPrefs)","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 fallback"],"policy":[],"deliverables":["자동 이동 로직","데이터 무결성 테스트 (강제 종료 후 복원)"],"owner":"Unity 개발자 + BE","dependencies":"F-04 챕터 목차 + F-06 자동 저장","status":"mockup","mockupRef":"reader","analyticsEvents":[{"name":"interaction_tap","role":"읽기 중 페이지 인터랙션(predict/quiz/vocab 등) 응답 시 발화 — 실제 발생 지점. 노드 정의는 콘텐츠(동화) 영역"}]},{"id":"F-06","priority":"P1","area":"progress","title":"페이지 단위 자동 저장","summary":"페이지 종료 시 자동 저장. 사용자가 의식하지 않게.","overview":"페이지 단위 자동 저장. 자동 저장 표시 없음 (자동 저장의 미덕). 로컬만 (서버 전송 절대 없음).","uiux":["저장 표시 UI 없음 — 사용자가 의식하지 않게","저장 시점: 페이지 종료 + 챕터 종료 + 앱 백그라운드 진입","데이터 무결성: 페이지 ID 무효 시 챕터 첫 페이지로 안전 복원"],"data":["UserWorkState { workId, status, currentChapterId, currentPageId, completedChapters[], chosenBranches[], lastPlayedAt }","UserAppState { lastActiveWorkId, lastUpdatedAt }"],"tech":["SQLite (Unity) 또는 PlayerPrefs JSON","트랜잭션 처리 (앱 강제 종료에도 일관성)"],"policy":["로컬만 — COPPA 2026 + 한국법 대응","어린이 식별자 UUID만 (이메일·이름 X)","서버 전송 절대 없음"],"deliverables":["SQLite 스키마 또는 PlayerPrefs 구조","자동 저장 구현","데이터 무결성 테스트"],"owner":"Unity 개발자 + BE","dependencies":"없음 (독립)","status":"todo","analyticsEvents":[{"name":"chapter_complete","role":"챕터 마지막 페이지 저장 시점에 발화"},{"name":"book_complete","role":"마지막 챕터 완료 저장 시 발화 (완독률 핵심)"}]},{"id":"F-07","priority":"P1","area":"progress","title":"본/안 본 챕터 상태 추적","summary":"각 챕터의 상태 (안 봄·이어보기·완독) 추적 + 시각화.","overview":"5세가 \"어느 챕터 봤지?\"를 즉시 인지할 수 있도록 챕터별 상태 추적. 본/안 본의 명확한 시각 구분.","uiux":["각 챕터 상태 아이콘: ☐ 안 봄 · ◐ 이어보기 · ★ 완독","이어보기 중 챕터: 진행률 ?% 표시 (선택)","분기 챕터 (C2A·C2B)는 별도 추적","재생 중 페이지 시퀀스: 상단 작은 진행 표시 (예: \"3 / 8\")"],"data":["UserChapterState { workId, chapterId, status, lastPageId, completedPages[], completedAt }","ChapterProgress { workId, chapterId, completedPagesCount, totalPages }"],"tech":["페이지 종료 시 챕터 상태 갱신","챕터 마지막 페이지 도달 시 'completed' 상태로"],"policy":[],"deliverables":["챕터 상태 데이터 모델 + DB 스키마","상태 갱신 로직","상태 → 시각 매핑"],"owner":"Unity 개발자 + BE","dependencies":"F-06 자동 저장","status":"todo","analyticsEvents":[{"name":"chapter_start","role":"챕터 상태가 'reading'으로 전환될 때 발화 (완독률 퍼널 시작)"},{"name":"chapter_complete","role":"챕터 'completed' 전환 시 발화"},{"name":"book_complete","role":"모든 챕터 완료 판정 시 발화"}]},{"id":"F-08","priority":"P2","area":"parental","title":"보호자 잠금 (부모 게이트)","summary":"보호자 잠금(부모 게이트). 한글 숫자 받아쓰기로 어른만 통과. 결제·보호자 진입 공통, 통과 후 5분 유지.","overview":"5세 아이는 못 풀고 부모는 쉽게 푸는 인증 관문. 한글로 쓰인 숫자(예: \"삼·구·일\")를 키패드에서 순서대로 누르게 한다 — 한글을 읽을 줄 알아야 풀리므로 아이를 차단. Apple/Google 키즈 게이트와 동일한 친숙한 패턴. 결제(F-18) 직전과 보호자 영역(설정·통계·다운로드·프로필 관리) 진입에 공통으로 쓰이며, 한 번 통과하면 5분간 재요구하지 않는다.","uiux":["제시: \"어른에게 물어보세요\" + 한글 숫자(랜덤) + 아라비아 숫자 키패드","한글 제시 → 아라비아 입력(읽기 능력 요구). 아라비아 제시는 회피(숫자만 아는 아이 통과 방지)","오답 시: 새 문제로 교체 + 입력 초기화 + 부드러운 안내(\"다시 해볼까요?\")","미잠금(no lockout) — 반복 실패해도 잠그지 않고 계속 재시도. 목적은 처벌이 아닌 차단","닫기(취소) 항상 제공 — 부모가 그만두면 이전 화면으로"],"data":["GateChallenge { digits[], createdAt } — 매번 랜덤 생성","GateSession { passedAt, validUntil } — 통과 후 5분 유효"],"tech":["문제 매번 랜덤 생성, 정답 검증은 로컬","통과 세션 5분 유지(결제↔설정 연속 작업 배려). 5분 경과·백그라운드 전환 시 재요구","결제·보호자 진입 공통 모듈 — 호출 지점만 다름","결제 게이트 적용 여부는 설정(F-19) '결제 시 항상 게이트' 토글과 연동"],"policy":["아동 우발 결제·설정 변경 방지 (Apple/Google 키즈 가이드라인 대응)","잠금(lockout) 없음 — 부모가 막히지 않도록"],"deliverables":["부모 게이트 화면 UI (기본·오답 상태)","한글 숫자 문제 생성 + 검증 로직","5분 세션 유지 관리","결제·보호자 진입 공통 호출 모듈"],"owner":"Unity 개발자 + UX 디자이너 + 법무 자문","dependencies":"F-18 결제(게이트 적용) + F-19 설정(게이트 토글·진입) + F-09 통계·F-12 다운로드·F-20 프로필(진입 보호)","status":"todo","mockupRef":"gate"},{"id":"F-09","priority":"P2","area":"parental","title":"기본 통계 화면","summary":"자녀 활동 통계: 작품별 진행률 + 일/주별 활동 시간.","overview":"보호자 영역에서만 표시되는 자녀 활동 통계. \"부드러운 자랑\" 톤 — 자녀를 격려하는 어조.","uiux":["진입: 보호자 영역 → \"자녀 활동\" 메뉴","기본: 5편 작품 × 진행률 막대 (0~100%) + 마지막 본 날짜","일별 활동 시간: 막대 그래프 7일","주별 활동 시간: 막대 그래프 4주","인터랙션 응답 수: 작품별 카운트","통계 데이터 삭제 가능 (학부모 선택)"],"data":["UserPageHistory { pageId, visitedAt, durationSec }","DailyActivity { date, totalDurationSec, pagesVisited }"],"tech":["Unity 막대 그래프 컴포넌트 또는 외부 라이브러리","일별/주별 집계 로직"],"policy":["통계 데이터 로컬만","통계 삭제 권한 (보호자)"],"deliverables":["통계 화면 UI 시안","막대 그래프 컴포넌트","일별/주별 집계 로직","통계 삭제 기능","통계 빈 상태 화면 (시각 시안: 상태·예외 모음 참조)"],"owner":"Unity 개발자 + UX 디자이너","dependencies":"F-08 부모 게이트 + F-06 자동 저장","status":"todo","mockupRef":["guardian","states"],"analyticsEvents":[{"name":"interaction_tap","role":"[소비] 발생은 읽기 화면(F-05). 통계의 '관심·취향 발견'에서 이 데이터를 집계·활용"},{"name":"chapter_complete","role":"[소비] 작품별 진행률·완독 표시에 활용 (발생은 F-06·F-07)"},{"name":"book_complete","role":"[소비] 완독 책 수·진도 표시에 활용 (발생은 F-06·F-07)"}]},{"id":"F-10","priority":"P2","area":"parental","title":"설정 — 볼륨 (4채널)","summary":"전체 / BGM / SFX / 내레이션 슬라이더 + 청각 보호.","overview":"기본적인 사용자 설정. 5세 보호 + 학부모 편의. 4채널 볼륨 + 최대 볼륨 제한.","uiux":["진입: 보호자 영역 → \"설정\" 메뉴","4채널 슬라이더 0~100%: 전체 / BGM / SFX / 내레이션","최대 볼륨 제한 (5세 청각 보호): 시스템 볼륨 80% 캡","기본값: 전체 70%, BGM 60%, SFX 80%, 내레이션 90%"],"data":["AudioSettings { master, bgm, sfx, narration } (PlayerPrefs)"],"tech":["Unity Audio Mixer 4채널 구성","시스템 볼륨 80% 캡 처리"],"policy":["어린이 청각 보호 (디바이스 시스템 볼륨 캡)"],"deliverables":["설정 화면 UI","볼륨 슬라이더 컴포넌트","Unity Audio Mixer 설정"],"owner":"Unity 개발자 + 사운드 디자이너","dependencies":"F-08 부모 게이트 · F-19 설정 화면에 포섭","status":"todo","mockupRef":"settings"},{"id":"F-11","priority":"P2","area":"parental","title":"설정 — 자막","summary":"자막 ON/OFF + 크기 3단계 (작음·중간·큼).","overview":"내레이션 자막을 화면 하단에 표시. 학부모 동반 시청 시 + 청각 장애 가족 배려.","uiux":["자막 토글: ON / OFF","자막 크기 3단계: 작음 (12pt) / 중간 (16pt) / 큼 (20pt)","위치: 화면 하단 중앙","배경: 반투명 검정 (가독성)","타이밍: 내레이션 음성과 동기화 (페이지 timeline 데이터 활용)"],"data":["SubtitleSettings { enabled, size }","Page.timeline 데이터의 내레이션 텍스트 활용"],"tech":["내레이션 텍스트를 페이지 데이터에서 추출","오디오와 시각 동기화"],"policy":["접근성 (Apple Guidelines + WCAG)"],"deliverables":["자막 표시 시스템","자막 폰트 + 크기 변경 처리","내레이션 텍스트 데이터 정리"],"owner":"Unity 개발자 + 콘텐츠 기획자","dependencies":"F-08 부모 게이트 · F-19 설정 화면에 포섭","status":"todo","mockupRef":"settings"},{"id":"F-12","priority":"P1","area":"parental","title":"다운로드 관리 (챕터 단위)","summary":"챕터별 다운로드/삭제 + 작품 일괄 다운로드 + 저장 공간 표시. 구매=모든 기기 공통, 다운로드=기기별.","overview":"챕터 단위 다운로드/삭제. 사용자가 보는 챕터만 받아 저장 공간을 아끼고, 구매한 챕터(또는 책 1권)만 선택적으로 내려받는다. 핵심 원칙은 구매와 다운로드의 분리 — 구매(엔타이틀먼트)는 계정에 귀속되어 모든 기기에서 공통으로 열리고, 다운로드 완료 상태는 기기에 귀속되어 같은 챕터도 기기마다 다르게 보인다. 가정에서 태블릿 여러 대를 쓰는 상황을 보장. 1차 출시는 현재 기기 기준으로 관리하고, 기기별 다운로드 상태 표시는 출시 후 업데이트로 확장한다.","uiux":["진입: 보호자 영역(F-08 통과) → \"다운로드\" 메뉴. 부모용 관리 화면","상단: 현재 기기명 표시 + \"구매=모든 기기 공통, 다운로드=기기별\" 안내 배너","작품 > 챕터 트리: 작품명 아래 챕터별 상태 + 크기. 작품 단위 접기/펼치기","챕터 상태 5종: 완료 / 다운로드 중(진행률+취소) / 미다운로드(구매함, 받기) / 업데이트 필요(OTA) / 미구매 잠금(구매 필요→F-18)","작품 단위 일괄: \"전체 받기\"(구매한 챕터 한꺼번에)","전체 단위 일괄: \"구매한 챕터 모두 받기\" / \"이 기기 정리\"(삭제로 공간 확보)","저장 공간 상단 표시 (이 기기 기준 — 플레이북 사용량 / 여유 공간)"],"data":["UserEntitlement { workId, unlockedChapters[], ownsFullBook } — 계정 귀속(모든 기기 공통)","DevicePackage { deviceId, workId, chapterId, version, sizeBytes, status, downloadedAt } — 기기 귀속","DownloadJob { workId, chapterId, progress, startedAt, error? }","status 5종: completed / downloading / not_downloaded / update_required / locked"],"tech":["OTA 챕터 단위 다운로드 (CDN 결정 + Unity 구현)","챕터 패키지 포맷 (JSON + 에셋 번들), 챕터별 독립 다운로드/삭제","엔타이틀먼트(구매)는 서버/계정에서 조회 — 기기 독립. 다운로드 상태는 로컬(기기) 저장","구매 상태(F-18) 확인 후 다운로드 허용. 미구매 챕터는 잠금 → 페이월","[출시 후] 기기별 다운로드 상태 동기화 — \"내 기기들\" 목록. 1차 출시는 현재 기기 기준"],"policy":["구매는 계정 귀속 — 기기 변경/추가 시 구매 복원(F-18)으로 재다운로드 가능","동시 사용 기기 수 정책(무제한 vs 상한)은 비즈니스 정책으로 확정 필요"],"deliverables":["다운로드 관리 화면 UI (작품 > 챕터 트리, 상태 5종)","OTA 챕터 단위 다운로드 시스템","챕터 패키지 포맷","디바이스 저장 공간 표시 (현재 기기 기준)","\"구매=모든 기기 공통\" 안내 + 다른 기기 재다운로드 지원","[출시 후] 기기별 다운로드 상태 표시 확장","오프라인·다운로드 실패 상태 (시각 시안: 상태·예외 모음 참조)"],"owner":"Unity 개발자 + BE + 인프라","dependencies":"F-08 부모 게이트 + F-18 구매/결제 + Soft Launch 일정","status":"mockup","mockupRef":["download","states"]},{"id":"F-13","priority":"P3","area":"library","title":"첫 실행 온보딩","summary":"점진형 온보딩. 첫 실행은 최소 셋업(가치전달·부모동의·신데렐라 1장)만, 프로필·게이트·알림은 첫 체험 후로 지연.","overview":"점진형(progressive) 온보딩. 무거운 셋업을 첫 체험 뒤로 미뤄 \"30초 안에 첫 이야기\"를 목표로 한다. 첫 실행(A 구간)은 가치 전달 → 부모 동의 → 신데렐라 1장 바로 진입까지만. 프로필·게이트·알림(B 구간)은 필요해지는 순간마다 하나씩 등장한다. 첫 출시작이 신데렐라이므로 온보딩 첫 체험작도 신데렐라로 맞춘다.","uiux":["A 첫 실행 — 1) 가치 전달(앱 소개 1~2장, 건너뛰기 가능) → 2) 개인정보 부모 동의(필수) → 3) 신데렐라 1장 바로 진입","B 지연 셋업 — 아이 프로필 생성(1장 완료 후 \"이 이야기를 본 친구는 누구예요?\")","B 지연 셋업 — 부모 게이트 최초 설정(2장 첫 유료 또는 보호자 영역 첫 진입 시)","B 지연 셋업 — 알림 권한 요청(첫 세션 끝 \"다음 이야기 알려드릴까요?\" — 가장 마지막)","첫 실행에서 프로필·게이트·알림은 묻지 않음 — 첫 이야기까지 마찰 최소화"],"data":["AppState.onboardingCompleted"],"tech":["온보딩 상태 머신: 단계별 완료 플래그 로컬 저장(재진입 시 중단 지점 복원)","부모 동의 완료 전 애널리틱스(F-17) 이벤트 발생 차단 — 동의 게이팅","지연 셋업은 트리거 기반(1장 완료 / 2장 탭 / 세션 종료)으로 호출","신데렐라 1장 = 무료 챕터(가격 모델 1장 무료/2장 유료와 정합)"],"policy":["개인정보 수집 부모 동의는 데이터 수집(애널리틱스 포함) 시작 전 필수 — 점진형이어도 첫 실행 앞에 배치","동의 화면은 핵심만 가볍게, 상세는 처리방침 링크로 (5세 키즈 앱 컴플라이언스)","알림 권한은 가치 경험 후 요청 — 첫 화면 강제 요구 지양"],"deliverables":["온보딩 플로우 UI (A 첫 실행 3단계 + B 지연 셋업 3종)","가치 전달 인트로 화면(1~2장, 건너뛰기)","부모 동의 화면(가벼운 + 처리방침 링크)","지연 셋업 트리거 연동(프로필 F-09 / 게이트 F-08 / 알림 F-14)","온보딩 진행 상태 저장·복원"],"owner":"UX 디자이너 + Unity 개발자","dependencies":"F-08 부모 게이트 + F-09 프로필 + F-14 알림 + F-17 애널리틱스(동의 게이팅) + F-18 페이월(1장 후 2장 잠금)","status":"todo","mockupRef":"onboarding"},{"id":"F-14","priority":"P3","area":"parental","title":"알림 (Opt-in)","summary":"사전 동의 화면 → OS 팝업(정석). 부모에게 유용한 소식(신작·리포트·챕터)만, 거절 시 가치 시점 재권유.","overview":"알림 권한 opt-in. OS 권한 팝업은 단 1회만 뜨고 재요청이 불가하므로, 앞에 앱 내 사전 동의 화면(pre-permission)을 둬서 '좋아요'를 누른 사용자에게만 OS 팝업을 띄운다(허용률 향상). 알림은 아이가 아니라 부모를 향하며, '아이를 다시 부르는' 리텐션성 알림이 아니라 신작 출시·주간 리포트(F-09)·산 책의 새 챕터 같은 '부모에게 유용한 정보'로 프레이밍한다. 첫 요청은 온보딩 B구간(첫 세션 끝).","uiux":["1) 사전 동의 화면(앱 내) — '새 소식을 받아보시겠어요?' + 종류 3가지 소개 + '좋아요'/'나중에'","2) '좋아요' 시에만 OS 권한 팝업 호출 (OS가 그리는 시스템 팝업, 앱 디자인 불가, 1회성)","3) '나중에'/거절 시 — 가치 시점(3권 완독·첫 리포트)에 부드럽게 재권유 + 설정(F-19)에서 켜기 안내","알림 종류는 소개만 — 신작/주간 리포트/챕터 업데이트. 종류별 on/off 토글은 설정(F-19)","권한 요청은 부모 게이트 뒤 권장(첫 세션 끝, 부모가 쥔 시점) — 아동 우발 허용 방지"],"data":["NotificationSettings { enabled, optInPerWork[] }","ScheduledNotification { workId, chapterId, scheduledAt }"],"tech":["사전 동의(앱 내 UI) → OS 권한 API 호출 분리. '좋아요'에서만 OS API 트리거","권한 거절 시 OS 재요청 불가 — 앱 내 재권유 + 설정 딥링크로 OS 설정 유도","알림 종류별 수신 설정은 서버/로컬 플래그(설정 F-19에서 토글)","푸시 발송 채널: 신작/리포트/챕터 — 종류별 구독 관리"],"policy":["리텐션성('계속 읽어요') 알림 배제 — 부모 거부감·스토어(특히 키즈) 정책 민감","권한 요청 타이밍은 가치 경험 후 — 첫 화면 강제 요구 지양","알림 빈도 절제 — 부모에게 유용한 정보 위주, 과도한 발송 금지"],"deliverables":["사전 동의 화면 UI (종류 소개 + 좋아요/나중에)","OS 권한 API 연동('좋아요' 트리거)","거절 후 재권유 로직(가치 시점 트리거) + 설정 딥링크","알림 종류별 구독 관리(설정 F-19 연동)"],"owner":"Unity 개발자","dependencies":"F-13 온보딩(첫 요청 시점) + F-09 리포트(알림 소스) + F-12 챕터 업데이트(알림 소스) + F-19 설정(종류 토글)","status":"todo","mockupRef":"notification"},{"id":"F-15","priority":"P3","area":"book","title":"챕터 완료 보상 애니메이션","summary":"챕터 완독 시 별·도장 4단계 애니메이션.","overview":"챕터 완독 시 별·도장 애니메이션. 시각 시안 탭에서 인터랙티브 미리보기.","uiux":["0.0s 페이드인: 반투명 검정 layer (opacity 0→0.4)","0.4s 별 등장: scale 0→1.2→1.0 (ease-out-back) + 광채 확산","1.0s 도장 등장: translateY -50→0 (ease-out-bounce)","1.6s 축하 메시지: \"잘했어요!\" fade-in","2.5s 다음 단계 버튼: \"다음 챕터로\" / \"오늘은 여기까지\"","별 색상 = 작품 액센트 컬러","도장 = 책 모양 + 챕터 번호"],"data":["ChapterCompletion { workId, chapterId, completedAt, animationShown }"],"tech":["Unity Timeline 애니메이션","별/도장 일러스트 5종 (작품별 다른 컬러)","효과음 동기화"],"policy":[],"deliverables":["보상 시안 (시각 시안 탭 참조)","별·도장 일러스트 5종","축하 효과음","Unity Timeline 구현","책 완독 축하와 역할 구분 (시각 시안: 상태·예외 모음 참조)"],"owner":"일러스트레이터 + Unity 개발자 + 사운드 디자이너","dependencies":"F-07 챕터 상태 추적","status":"todo","mockupRef":["reward","states"]},{"id":"F-16","priority":"P3","area":"library","title":"사운드 디자인 (UI 효과음)","summary":"책 탭·펼침·챕터 선택·페이지 전환·완료 효과음 10~15개.","overview":"내레이션·BGM·SFX 외의 \"앱 인터페이스\" 효과음. UI 피드백 사운드.","uiux":["책 탭: 부드러운 책 표지 \"톡\" 소리","책 펼침: 종이 페이지 넘어가는 소리","챕터 선택: 부드러운 \"띵\"","페이지 전환: 미세한 종이 소리 (반복 부담 없게)","챕터 완료: \"띠리링\" 작은 축하 멜로디 (1.5초 이내)","보호자 영역 진입: 차분한 톤 (어린이 톤 X)"],"data":["SfxLibrary: 효과음 카탈로그 + 트리거 매핑"],"tech":["Unity Audio Mixer + Sound Effect 채널","효과음 파일 압축 (mp3/ogg)"],"policy":[],"deliverables":["사운드 디자이너 위촉","효과음 세트 10~15개","Unity Audio Mixer 설정"],"owner":"사운드 디자이너 + Unity 개발자","dependencies":"없음","status":"todo"},{"id":"F-17","priority":"P1","area":"progress","title":"애널리틱스 계측 (이벤트 7종)","summary":"완독률·리텐션·유료전환 측정을 위한 SDK 연동 + 이벤트 7종을 출시 빌드에 포함. 개인정보 미수집 설계.","overview":"MVP의 GO/STOP 판정을 '감'이 아닌 '데이터'로 내리기 위한 계측 구현. 측정 전략·KPI·게이트 정의는 애널리틱스 탭 참조. 본 기능은 그 정의를 코드로 구현하는 개발 작업이다. 완독률은 출시 빌드에 이벤트가 포함돼야만 측정 가능하므로 1권 MVP 출시 전 필수 완료(P1).","uiux":["사용자 노출 UI 없음 — 백그라운드 계측","계측 자체가 사용자 경험을 방해하지 않도록 비동기 전송","보호자 영역 통계 화면(F-09)과 데이터 소스 일부 공유 가능"],"data":["이벤트 7종: book_open · chapter_start · chapter_complete · book_complete · interaction_tap · paywall_view · purchase_success","핵심 퍼널: chapter_start → book_complete (완독률)","모든 이벤트는 콘텐츠 식별자(book_id 등)·행동만 기록 — 개인 식별 정보 금지"],"tech":["Firebase Analytics 연동 — 키즈 설정(tag_for_child_directed_treatment) ON, 광고 ID 수집 OFF","Amplitude SDK 연동 — 완독률 퍼널·코호트 리텐션·작품별 비교","대시보드 구성: 완독률 퍼널 / 코호트 리텐션 / 작품별 비교 + 게이트 기준선(완독률 40% 등)","SDK는 데이터 처리 위탁 — 개인정보 처리방침에 수탁사 명시 + 보관기간 제한"],"policy":["개정 COPPA(2026-04) + 국내 PIPA — 기기 ID·IP는 개인정보, 부모 동의 필요","'데이터-프리' 설계: 개인 식별 없이 행동 이벤트만 수집 (제품 신뢰 자산)","[법무] 부모 동의 흐름·처리방침·수탁사 명시는 출시 전 법무 검토 필수"],"deliverables":["Firebase SDK 연동 + 키즈 설정 적용","Amplitude SDK 연동 + 이벤트 7종 구현","이벤트 파라미터 개인정보 미포함 검증","애널리틱스 대시보드 + 게이트 기준선 구성","출시 빌드 이벤트 포함 최종 확인"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-06 자동 저장 + F-07 챕터 상태 추적 (이벤트 발생 지점)","status":"todo","analyticsEvents":[{"name":"interaction_tap","role":"페이지 인터랙션(predict/quiz/vocab 등) 응답 시 발화 — 콘텐츠 파트와 연계"}]},{"id":"F-18","priority":"P1","area":"book","status":"mockup","title":"인앱 구매 (챕터/책 단위)","summary":"챕터 1 무료 · 챕터 2부터 인앱 구매. 챕터 개별 구매 + 책 1권 번들 구매 옵션.","overview":"MVP 수익화의 핵심. 챕터 1은 무료로 열어 진입 장벽을 없애고, 챕터 2부터 인앱 구매로 전환. 사용자는 보고 싶은 챕터만 개별 구매하거나, 책 1권을 통째로(번들 할인) 구매할 수 있다. 결제 시점이 완독률·유료전환 퍼널(F-17)의 paywall_view·purchase_success 이벤트 발생 지점이다.","uiux":["챕터 1: 무료 — 잠금 표시 없음","챕터 2+: 잠금 자물쇠 표시. 탭 시 구매 화면(paywall)","구매 화면 2옵션: \"이 챕터만\" / \"책 전체 받기(번들, 할인)\"","구매 완료 즉시 해당 챕터 잠금 해제 + 다운로드(F-12) 트리거","결제 진입은 보호자 게이트(F-08) 통과 권장 — 어린이 우발 결제 방지","가격·번들 할인율 표시. 이미 구매한 챕터는 번들가에서 제외 계산"],"data":["Product { productId, type: \"chapter\"|\"book_bundle\", workId, chapterId?, price }","Purchase { productId, workId, chapterId?, purchasedAt, storeTxnId }","UserEntitlement { workId, unlockedChapters[], ownsFullBook }"],"tech":["StoreKit(iOS) / Google Play Billing — 인앱 소비성 아님(영구 잠금 해제)","서버 영수증 검증 또는 로컬 검증 정책 결정 필요","번들 구매 시 unlockedChapters 일괄 갱신 + ownsFullBook=true","구매 복원(Restore Purchases) 지원 — 스토어 가이드라인 필수"],"policy":["어린이 앱 결제: 보호자 게이트 + 스토어 부모 통제 준수","Apple Guideline 3.1.1 인앱 구매 / Google Play 결제 정책 준수","가격·번들 조건 명확 고지 (다크패턴 금지)"],"deliverables":["구매 화면(paywall) UI 시안 — 챕터/번들 2옵션","StoreKit / Play Billing 연동","엔타이틀먼트 관리 + 구매 복원","구매 → 잠금해제 → 다운로드 연결 로직","구매 완료 확인 화면 (시각 시안: 상태·예외 모음 참조)"],"owner":"Unity 개발자 + BE + 법무 자문","dependencies":"F-04 챕터 목차 + F-08 부모 게이트 + F-12 다운로드 + F-17 애널리틱스","analyticsEvents":[{"name":"paywall_view","role":"챕터 2+ 잠금 탭 → 구매 화면 노출 시 발화"},{"name":"purchase_success","role":"결제 완료 시 발화 (유료전환·구매깊이)"}],"mockupRef":["paywall","states"]},{"id":"F-19","priority":"P2","area":"parental","status":"todo","title":"설정 화면 (종합)","summary":"소리·자막(게이트 앞) + 보호자 전용(결제·보안·계정·프로필, 게이트 뒤) + 앱 정보를 묶는 설정 허브.","overview":"앱의 종합 설정 화면. F-10 볼륨·F-11 자막을 포섭하고, 결제·보안·계정·프로필 등 보호자 항목을 한곳에 모은다. 핵심은 부모 게이트 경계 — 소리·자막은 아이도 만질 수 있게 게이트 앞에, 결제·보안·계정은 부모만 접근하도록 게이트 뒤(F-08)에 둔다. 다운로드 관리(F-12)·프로필 관리(F-09) 등은 독립 화면으로 연결되는 진입점(허브) 역할.","uiux":["진입: 보호자 영역 또는 글로벌 설정 아이콘","게이트 앞 구역(🔓 바로 사용): 배경음악·효과음·내레이션 볼륨 3채널, 자막 토글, 자막 크기 3단","게이트 뒤 구역(🔒 부모 게이트 필요): 상단 안내 배너 + 부모 게이트 재설정 / 결제 시 항상 게이트 토글 / 구매 복원 / 다운로드 관리(→F-12) / 구매 내역·결제 / 프로필 관리(→F-09)","앱 정보: 개인정보 처리방침·이용약관(외부 링크) + 버전. 게이트 없이 노출","다른 화면 연결 항목은 링크 형태(› 셰브론) — 설정은 진입점"],"data":["AudioSettings { bgmVolume, sfxVolume, narrationVolume } — 로컬 저장","SubtitleSettings { enabled, size: small|medium|large }","ParentalSettings { alwaysGateOnPurchase: bool }","앱 정보 링크 URL(처리방침·약관) + 빌드 버전"],"tech":["소리·자막은 로컬 설정(즉시 반영) — 게이트 불필요","보호자 구역 진입 시 부모 게이트(F-08) 호출","'결제 시 항상 게이트' = F-18 페이월 결제 직전 게이트 on/off. 기본 true","처리방침·약관은 외부 웹뷰/브라우저 링크"],"policy":["개인정보 처리방침·이용약관 접근은 키즈 앱 컴플라이언스 필수","결제·보안 항목은 부모 게이트 뒤 배치 (아동 우발 조작 방지)"],"deliverables":["설정 화면 UI (2구역 분리 + 앱 정보)","소리 3채널 + 자막 설정 (F-10·F-11 구현 포섭)","보호자 게이트 연동(F-08) + 결제 게이트 토글","다운로드·프로필·구매내역 화면 연결","처리방침·약관 링크 + 버전 표시"],"owner":"Unity 개발자 + BE","dependencies":"F-08 부모 게이트 + F-10 볼륨 + F-11 자막 + F-12 다운로드 + F-09 통계 + F-18 결제","mockupRef":"settings","roadmap":"사용 시간 제한(스크린타임)은 1차 출시 보류 → 출시 후 업데이트 목표"},{"id":"F-20","priority":"P2","area":"library","status":"todo","title":"프로필 선택 · 개인화","summary":"재진입 분기(1개 자동/2개+ 선택) + 아이별 아바타·테마색·진행이 다른 개인화 서재.","overview":"멀티 프로필(형제 가정) 지원. 앱 재진입 시 프로필이 1개면 자동으로 그 아이의 서재로 진입하고, 2개 이상이면 '누가 읽을까요?' 선택 화면을 거친다. 프로필은 진행·아바타·테마색의 개인화 단위이며, 선택 화면에선 고르기·추가만 하고 관리(삭제·이름 변경)는 보호자 영역(게이트 뒤). 최초 프로필 생성은 온보딩(F-13 B구간, 1장 완료 후)에서 일어난다.","uiux":["재진입 분기 — 프로필 1개: 자동 진입(마찰 0) / 2개 이상: 선택 화면","선택 화면 '누가 읽을까요?' — 아이 카드(아바타·이름·진행 요약 '3권 중 1권') + '추가' 카드","개인화 서재 — 상단 현재 아이 아바타·이름 + 테마색 적용, 프로필 전환 버튼","꾸미기(1차) — 아바타 선택 + 테마색 선택만. 테마색이 서재 배경·책 카드 톤에 반영","선택 vs 관리 분리 — 선택·추가는 게이트 앞, 삭제·이름 변경은 보호자 영역(게이트 뒤)"],"data":["Profile { profileId, name, age, avatarId, themeColor, createdAt } — 계정 하위","Progress { profileId, workId, chapterId, status } — 진행은 프로필별 분리","구매(UserEntitlement)는 계정 귀속 — 프로필 간 공유 (형제가 같은 책 공유)","lastActiveProfileId — 재진입 분기 판단용"],"tech":["프로필 수에 따른 진입 분기 로직(1개 자동 / 2개+ 선택)","진행 데이터는 profileId로 스코프 — 같은 작품도 프로필마다 상태 다름","구매는 계정 단위 조회(프로필 무관) — F-18·F-12와 정합","아바타 세트 + 테마색 팔레트(1차: 제한된 프리셋)"],"policy":["아동 프로필 정보(이름·나이)는 최소 수집 — 개인정보 부모 동의(F-13) 범위 내","프로필 관리(삭제·변경)는 부모 게이트 뒤 (아동 우발 조작 방지)"],"deliverables":["프로필 선택 화면 UI (카드 + 추가)","재진입 분기 로직","개인화 서재 — 아바타·테마색 적용 + 프로필별 진행","아바타 세트 + 테마색 팔레트(1차 프리셋)","프로필 전환 동선","프로필 빈 상태 화면 (시각 시안: 상태·예외 모음 참조)"],"owner":"Unity 개발자 + BE","dependencies":"F-01 서재 + F-09 통계(프로필별) + F-13 온보딩(최초 생성) + F-18 구매(계정 공통) + F-19 설정(관리)","mockupRef":["profile","states"],"roadmap":"서재 꾸미기 확장(배경·장식 아이템·완독 보상 언락 F-15 연동)은 출시 후 업데이트 목표"}];
 const SCHEDULE = [{"phase":"W1","title":"설계·기반 셋업","focus":["서재 와이어프레임 → Figma 정밀화","일러스트레이터 위촉 + 무드보드 + 컬러 팔레트","Unity 프로젝트 셋업 + 데이터 모델(SQLite 스키마) 확정","[병행] 법무 자문 위촉 — 보호자 영역·아동 데이터 정책"]},{"phase":"W2~W3","title":"P1 핵심 A — 서재·책 펼침","focus":["서재 5권 진열 + 본/안 본 시각 구분 (F-01·F-02)","책 펼침 트랜지션 + 챕터 목차 (F-03·F-04)","5권 표지·배경·소품 일러스트 1차","애널리틱스 SDK 연동 — Firebase+Amplitude 골격 (F-17 착수)"]},{"phase":"W4~W5","title":"P1 핵심 B — 진도·보호자","focus":["페이지 자동 저장 + 챕터 상태 추적 (F-05·F-06·F-07)","보호자 게이트 + 기본 통계 화면 (F-08·F-09)","설정 — 볼륨·자막 (F-10·F-11)","애널리틱스 이벤트 7종 구현 + 개인정보 미포함 검증 (F-17 완료)"]},{"phase":"W6","title":"P2 마감 + 통합","focus":["다운로드 관리 + OTA (F-12)","애널리틱스 대시보드 구성 + 게이트 기준선 (F-17)","[법무] 부모 동의·처리방침·수탁사 명시 검토 완료","전체 통합 + 시각 자산 최종 반영"]},{"phase":"W7","title":"QA + 출시","focus":["QA + 데이터 무결성·강제종료 복원 테스트","완독률 이벤트 출시 빌드 포함 최종 확인","🚀 v1.0 출시 (빨간모자)","P3(온보딩·알림·보상·사운드)는 출시 후 OTA 점진"]}];
 const ANALYTICS = {"version":"V0.1.0","updatedAt":"2026-06-09","intent":"MVP 단계 KPI(완독률·D7 리텐션·유료전환·평점)와 단계별 게이트를 '감'이 아닌 '데이터'로 판정하기 위해, 어떤 도구로 무엇을 어떻게 측정할지 정의한다.","legalConstraints":["개정 COPPA(2026-04 시행) — 분석 SDK가 수집하는 기기 ID·사용자 ID·IP는 각각 '개인정보'로 분류되어 부모 동의 필요","국내 PIPA·GDPR-K — 아동 데이터 최소 수집·보관기간 제한·수탁사 명시 의무","설계 방향: '데이터-프리' 설계 — 개인 식별 없이 행동 이벤트만 수집 (제품의 신뢰 자산)"],"tools":[{"layer":"기반층","tool":"Firebase Analytics","cost":"무료","role":"설치(first_open) · 세션 · 기본 리텐션 · 크래시 · 광고 설치 전환 기준점","reason":"필수 — 무료·무제한 이벤트(최대 500종), 광고 설치 전환 추적(CAC 계산)의 기준점. 키즈 설정(tag_for_child_directed_treatment) 켜고 광고 ID 수집 끔","essential":true},{"layer":"제품 분석층","tool":"Amplitude (권장)","cost":"MVP 규모 무료 등급","role":"완독률 퍼널 · 코호트 리텐션 · 작품별 비교 · 게이트 판정","reason":"핵심 질문이 '작품별 완독률·재방문 1위 = IP 후보'라 코호트·세그먼트 비교가 강한 Amplitude가 적합","essential":true,"alternative":"Mixpanel — 팀이 작고 빠른 셋업이 우선이면 4개 핵심 리포트 중심으로 대안 가능"},{"layer":"스토어층","tool":"App Store Connect · Play Console","cost":"콘솔 자동 제공","role":"평점 · 매출 · 설치 출처","reason":"스토어 출시에 기본 포함","essential":true}],"toolsCaveat":"Firebase·Amplitude 모두 데이터 처리 위탁에 해당 → 개인정보 처리방침에 수탁사로 명시하고 보관기간을 제한해야 함","kpis":[{"kpi":"설치(누적)","method":"first_open 자동 집계","tool":"Firebase"},{"kpi":"완독률","method":"chapter_start → book_complete 퍼널","tool":"Amplitude 퍼널","primary":true},{"kpi":"D7 리텐션","method":"설치 코호트의 7일 후 재방문 비율","tool":"Amplitude 리텐션"},{"kpi":"유료전환","method":"paywall_view → purchase_success 퍼널","tool":"Amplitude + 스토어"},{"kpi":"평점","method":"앱 외부 — 스토어 콘솔에서 확인","tool":"App Store / Play Console"}],"kpiPrimaryNote":"1순위 지표는 완독률. 작품별({book_id})로 분리하면 '어떤 동화가 끝까지 보게 만드나'가 바로 나오며, 이것이 IP 후보 판별의 핵심 데이터다.","events":[{"name":"book_open","params":["book_id","title"],"purpose":"작품별 진입"},{"name":"chapter_start","params":["book_id","chapter_no"],"purpose":"완독률 퍼널 시작","critical":true},{"name":"chapter_complete","params":["book_id","chapter_no","duration_sec"],"purpose":"챕터 이탈 지점 분석"},{"name":"book_complete","params":["book_id"],"purpose":"완독률 퍼널 종료 (핵심)","critical":true},{"name":"interaction_tap","params":["book_id","type"],"purpose":"참여도 · 인터랙션 빈도"},{"name":"paywall_view","params":["trigger"],"purpose":"유료전환 퍼널 시작"},{"name":"purchase_success","params":["product_id","price"],"purpose":"유료전환 · 구매 깊이"}],"paramTypes":[{"name":"book_id","type":"string","desc":"작품 고유 ID (예: rdcap_001)"},{"name":"chapter_no","type":"integer","desc":"챕터 순번 (1부터)"},{"name":"duration_sec","type":"integer","desc":"챕터 소요 시간(초)"},{"name":"type","type":"string","desc":"인터랙션 유형 (predict/quiz/vocab 등)"},{"name":"price","type":"integer","desc":"결제 금액(원)"}],"eventPrinciple":"모든 이벤트는 개인 식별 정보 없이 콘텐츠 식별자·행동만 기록한다","exampleCode":"amplitude.track('book_complete', {\n  book_id: 'rdcap_001'\n}); // 개인정보 파라미터 금지","gates":[{"label":"1권 완독률","data":"book_complete ÷ chapter_start","threshold":"≥ 40%","method":"Amplitude 퍼널","icon":"📖"},{"label":"2권 재방문","data":"1권 코호트의 2권 출시 후 복귀","threshold":"≥ 20%","method":"Amplitude 리텐션","icon":"🔁"},{"label":"3권 구매깊이","data":"유저당 purchase_success 평균","threshold":"≥ 2","method":"Amplitude 세그먼트","icon":"💰"},{"label":"4권 CAC","data":"광고비 ÷ 신규설치","threshold":"< 객단가","method":"Meta·Google Ads + Firebase","icon":"📊"},{"label":"5권 IP후보","data":"작품별 완독률·재방문 1위 식별","threshold":"1위 작품 선정","method":"Amplitude ({book_id} 세그먼트)","icon":"⭐"}],"gateStrategy":"위 5개 게이트를 Amplitude 대시보드 하나에 고정. '완독률 게이지 + 작품별 비교 막대 + 코호트 리텐션 곡선' 3개 차트면 매주 진척을 한 화면에서 확인 가능","implementationChecklist":[{"item":"Firebase SDK 연동 + 키즈 설정(child-directed) 적용","subitems":["설치·세션 자동 수집 확인"]},{"item":"Amplitude SDK 연동 + 4장 이벤트 7종 구현","subitems":["이벤트 파라미터에 개인정보 미포함 검증"]},{"item":"대시보드 구성: 완독률 퍼널 / 코호트 리텐션 / 작품별 비교","subitems":[]},{"item":"게이트 임계값(완독률 40% 등) 대시보드에 기준선 표시","subitems":[]},{"item":"출시 후 주간 점검 — 3주 창에서 다음 권 GO/STOP 판정","subitems":[]}],"preconditions":["이벤트가 출시 빌드에 포함돼야 완독률 측정 가능. 4장 이벤트 7종은 1권 MVP 출시 전 반드시 구현 완료","[법무] 부모 동의 흐름·개인정보 처리방침·수탁사 명시는 도구 설정과 별개로 출시 전 법무 검토 필수"],"eventGateMatrix":{"gates":[{"key":"G1","icon":"📖","label":"1권 완독률"},{"key":"G2","icon":"🔁","label":"2권 재방문"},{"key":"G3","icon":"💰","label":"3권 구매깊이"},{"key":"G4","icon":"📊","label":"4권 CAC"},{"key":"G5","icon":"⭐","label":"5권 IP후보"}],"rows":[{"event":"book_open","contrib":{"G2":"support","G5":"support"}},{"event":"chapter_start","contrib":{"G1":"primary","G5":"support"}},{"event":"chapter_complete","contrib":{"G1":"support"}},{"event":"book_complete","contrib":{"G1":"primary","G2":"support","G5":"primary"}},{"event":"interaction_tap","contrib":{"G5":"support"}},{"event":"paywall_view","contrib":{"G3":"support"}},{"event":"purchase_success","contrib":{"G3":"primary"}}],"legend":{"primary":"직접 기여 (핵심 지표)","support":"보조 기여"},"note":"G4 CAC는 first_open(Firebase 자동 집계)과 외부 광고 데이터 중심이라 앱 내 이벤트 7종의 직접 기여가 낮다. 나머지 4개 게이트는 위 이벤트로 판정 가능."}};
+const GUARDIAN_STATS = {"note": "보호자 통계 화면(F-09)의 '관심·취향 발견' 태그 체계와 '주간 리포트' 문구를 개발자 참고용으로 데이터화. 5권 라인업(빨간모자·헨젤과 그레텔·브레멘 음악대·신데렐라·아기 돼지 삼형제) 기반.", "interestTaxonomy": [{"category": "등장 소재 (subject)", "desc": "작품에 등장하는 캐릭터·사물·배경. book_open + 장면 체류로 추출", "source": "콘텐츠 메타데이터(작품·장면 태깅) + chapter_complete 체류시간", "tags": [{"tag": "동물 이야기", "books": ["빨간모자", "브레멘 음악대", "아기 돼지 삼형제"], "icon": "🐺"}, {"tag": "마법·요정", "books": ["신데렐라"], "icon": "✨"}, {"tag": "숲·자연", "books": ["빨간모자", "헨젤과 그레텔"], "icon": "🌲"}, {"tag": "집·건축", "books": ["아기 돼지 삼형제"], "icon": "🏠"}, {"tag": "가족 이야기", "books": ["헨젤과 그레텔", "신데렐라"], "icon": "👨‍👩‍👧"}, {"tag": "음악·악기", "books": ["브레멘 음악대"], "icon": "🎵"}, {"tag": "음식·먹을거리", "books": ["빨간모자", "헨젤과 그레텔"], "icon": "🍪"}, {"tag": "변신·변화", "books": ["신데렐라", "브레멘 음악대"], "icon": "🔄"}]}, {"category": "장면 유형 (scene)", "desc": "아이가 오래 머물거나 반복 재생한 장면의 성격", "source": "chapter_complete duration_sec + 페이지 체류 + 반복 재생", "tags": [{"tag": "노래 장면", "books": ["브레멘 음악대", "신데렐라"], "icon": "🎶"}, {"tag": "긴장·모험 장면", "books": ["빨간모자", "헨젤과 그레텔", "아기 돼지 삼형제"], "icon": "⚡"}, {"tag": "따뜻한 장면", "books": ["신데렐라", "브레멘 음악대"], "icon": "💛"}, {"tag": "반전 장면", "books": ["빨간모자", "헨젤과 그레텔"], "icon": "❗"}]}, {"category": "인터랙션 유형 (interaction)", "desc": "어떤 놀이 노드에 가장 많이 참여했나. interaction_tap의 type로 직접 추출", "source": "interaction_tap (type: predict/quiz/vocab/arrange/recall 등)", "tags": [{"tag": "예측 놀이", "node": "PREDICT", "desc": "다음에 무슨 일이? 예측", "icon": "❓"}, {"tag": "퀴즈 풀기", "node": "QUIZ", "desc": "질문에 답하기", "icon": "🧩"}, {"tag": "낱말 익히기", "node": "VOCAB", "desc": "새 낱말 만나기", "icon": "📖"}, {"tag": "순서 맞추기", "node": "ARRANGE", "desc": "이야기 순서 배열", "icon": "🔢"}, {"tag": "되돌아보기", "node": "RECALL", "desc": "지난 내용 회상", "icon": "💭"}, {"tag": "감정 고르기", "node": "EMOTION", "desc": "등장인물 마음 읽기", "icon": "😊"}]}, {"category": "정서·주제 (theme)", "desc": "작품의 시그니처 주제. 부모에게 '무엇을 느끼고 배우나'를 전달", "source": "콘텐츠 메타데이터(작품 시그니처 주제 태깅)", "tags": [{"tag": "용기·도전", "books": ["빨간모자", "아기 돼지 삼형제"], "icon": "🦁"}, {"tag": "협력·우정", "books": ["브레멘 음악대", "헨젤과 그레텔"], "icon": "🤝"}, {"tag": "지혜·문제해결", "books": ["아기 돼지 삼형제", "헨젤과 그레텔"], "icon": "💡"}, {"tag": "선택의 결과", "books": ["빨간모자"], "icon": "🔀"}, {"tag": "친절·배려", "books": ["신데렐라"], "icon": "💗"}, {"tag": "인내·희망", "books": ["신데렐라"], "icon": "🌟"}]}], "weeklyReportTemplates": {"note": "리포트는 '안심·발견' 톤. 점수·압박 표현 금지. {변수}는 실데이터로 치환.", "slots": [{"slot": "{child}", "desc": "아이 이름(프로필)"}, {"slot": "{book_count}", "desc": "이번 주 읽은 책 권수"}, {"slot": "{minutes}", "desc": "이번 주 읽은 시간(분)"}, {"slot": "{days}", "desc": "이번 주 읽은 날 수"}, {"slot": "{fav_book}", "desc": "가장 많이/오래 본 작품"}, {"slot": "{fav_interest}", "desc": "최다 관심 태그"}, {"slot": "{fav_interaction}", "desc": "최다 참여 인터랙션"}, {"slot": "{repeat_book}", "desc": "가장 많이 반복한 작품"}, {"slot": "{repeat_n}", "desc": "반복 횟수"}, {"slot": "{new_words}", "desc": "이번 주 만난 낱말 수"}], "templates": [{"id": "summary_active", "when": "활발히 읽은 주", "text": "이번 주 {child}가 {book_count}권을 읽고, {fav_interest}을(를) 가장 좋아했어요."}, {"id": "summary_time", "when": "독서 시간 강조", "text": "이번 주 {child}는 {days}일 동안 {minutes}분을 책과 함께 보냈어요."}, {"id": "discover_interest", "when": "취향 발견", "text": "{child}는 '{fav_interest}'에 가장 많이 반응했어요. 비슷한 이야기를 더 보여주면 좋아할 거예요."}, {"id": "discover_interaction", "when": "인터랙션 발견", "text": "{child}는 '{fav_interaction}' 놀이에 가장 많이 참여했어요. 이야기 흐름을 즐기는 편이에요."}, {"id": "repeat_positive", "when": "반복 독서", "text": "{child}가 {repeat_book}을(를) {repeat_n}번 다시 읽었어요 — 좋아하는 이야기예요!"}, {"id": "learning_words", "when": "낱말 학습", "text": "이번 주 {child}는 {new_words}개의 새 낱말을 만났어요."}, {"id": "fav_book", "when": "선호 작품", "text": "{child}는 {fav_book}을(를) 가장 좋아했어요."}, {"id": "gentle_return", "when": "뜸했던 주 (압박 없이)", "text": "이번 주는 {child}와 책 읽을 시간이 적었네요. 짧은 이야기부터 다시 시작해볼까요?"}, {"id": "first_complete", "when": "첫 완독", "text": "축하해요! {child}가 {fav_book}을(를) 처음으로 끝까지 읽었어요."}, {"id": "milestone", "when": "마일스톤", "text": "{child}가 지금까지 {book_count}권의 이야기를 만났어요. 작은 도서관이 생기고 있어요!"}], "filledExamples": ["이번 주 하리가 3권을 읽고, 동물 이야기를 가장 좋아했어요.", "하리는 '예측 놀이' 놀이에 가장 많이 참여했어요. 이야기 흐름을 즐기는 편이에요.", "하리가 빨간모자를 4번 다시 읽었어요 — 좋아하는 이야기예요!", "이번 주 하리는 8개의 새 낱말을 만났어요.", "축하해요! 하리가 빨간모자를 처음으로 끝까지 읽었어요."]}, "designPrinciples": ["점수·정답률·랭킹 금지 — 5세를 평가하지 않는다. '활동 참여'만 노출", "스트릭(연속일) 신중 — 끊겼을 때 죄책감 유발 가능. 부드러운 표현 또는 제외", "반복 독서는 긍정 신호로 — 5세에게 반복은 좋은 것", "데이터 의존성 — '관심 발견'·'학습 흔적'은 콘텐츠 인터랙션 노드(predict/vocab) 태깅과 interaction_tap 계측(F-17)에 품질이 좌우됨", "태그는 콘텐츠팀이 작품 제작 시 메타데이터로 태깅 — 본 데이터는 5권 기준 초기 사전(seed)"]};
 
 const state = {
   currentTab: 'overview',
@@ -1950,7 +2032,7 @@ function renderFeatureCards() {
           </div>` : ''}
           ${f.mockupRef ? `<div class="feature-detail-row">
             <div class="feature-detail-label">시각 시안</div>
-            <div><button class="mockup-link" data-mockup="${esc(f.mockupRef)}">🎨 ${esc(getToolLabel(f.mockupRef))} 보기 →</button></div>
+            <div>${[].concat(f.mockupRef).map(ref => `<button class="mockup-link" data-mockup="${esc(ref)}">🎨 ${esc(getToolLabel(ref))} 보기 →</button>`).join(' ')}</div>
           </div>` : ''}
           <div class="feature-detail-row">
             <div class="feature-detail-meta">
@@ -2016,6 +2098,14 @@ const TOOL_CATEGORIES = [
   { id: 'reader', label: '읽기 화면 (뷰어)', desc: '가로 화면 + 좌우 스와이프 + UI 자동 숨김 (몰입↔표시 2상태)' },
   { id: 'paywall', label: '구매 화면 (페이월)', desc: '잠금 챕터 탭 → 미리보기·2옵션 비교(개별/번들) → 결제 직전 부모 게이트 (3단계)' },
   { id: 'download', label: '다운로드 관리', desc: '저장공간 + 작품>챕터 트리(상태 5종) + 일괄 액션. 구매=모든 기기 공통 / 다운로드=기기별' },
+  { id: 'guardian', label: '보호자 통계', desc: '읽기 활동·진도·관심 발견·학습 흔적·주간 리포트 (6영역). 태그 사전 + 리포트 문구 데이터 포함' },
+  { id: 'settings', label: '설정 화면', desc: '소리·자막(게이트 앞) + 보호자 전용(결제·보안·계정·프로필, 게이트 뒤) + 앱 정보' },
+  { id: 'onboarding', label: '온보딩 플로우', desc: '점진형. 첫 실행(가치전달·부모동의·신데렐라 1장) + 지연 셋업(프로필·게이트·알림)' },
+  { id: 'profile', label: '프로필 선택·개인화 서재', desc: '재진입 분기(1개 자동/2개+ 선택) + 아이별 아바타·테마색·진행이 다른 개인화 서재' },
+  { id: 'notification', label: '알림 동의', desc: '사전 동의 화면 → OS 팝업(정석). 종류 소개(신작·리포트·챕터), 거절 시 가치 시점 재권유' },
+  { id: 'gate', label: '부모 게이트', desc: '한글 숫자 받아쓰기(Apple/Google 패턴). 결제·보호자 진입 공통, 통과 후 5분 유지, 미잠금' },
+  { id: 'states', label: '상태·예외 화면 모음', desc: '구매 완료 / 책 완독 축하 / 빈 상태 4종 / 오류·오프라인 4종. 여러 기능에 걸친 상태 화면' },
+  { id: 'branding', label: '스플래시·앱 아이콘', desc: '앱 아이콘(P 레터마크) + 스플래시 첫 화면 + 스토어 등록 자산 체크리스트. 출시 필수 브랜딩' },
   { id: 'transition', label: '책 펼침 트랜지션', desc: '책 표지에서 챕터 목차로 가는 1초 모션 (5단계 키프레임)' },
   { id: 'reward', label: '챕터 완료 보상', desc: '챕터 완독 시 별·도장 애니메이션 (4단계 키프레임)' },
 ];
@@ -2046,6 +2136,14 @@ function renderToolContent() {
   else if (cat.id === 'reader') body = renderReader();
   else if (cat.id === 'paywall') body = renderPaywall();
   else if (cat.id === 'download') body = renderDownload();
+  else if (cat.id === 'guardian') body = renderGuardian();
+  else if (cat.id === 'settings') body = renderSettings();
+  else if (cat.id === 'onboarding') body = renderOnboarding();
+  else if (cat.id === 'profile') body = renderProfile();
+  else if (cat.id === 'notification') body = renderNotification();
+  else if (cat.id === 'gate') body = renderGate();
+  else if (cat.id === 'states') body = renderStates();
+  else if (cat.id === 'branding') body = renderBranding();
   else if (cat.id === 'transition') body = renderTransition();
   else if (cat.id === 'reward') body = renderReward();
   container.innerHTML = '<div class="tool-section"><div class="tool-section-title">' + esc(cat.label) + '</div><div class="tool-section-desc">' + esc(cat.desc) + '</div>' + body + '</div>';
@@ -2171,6 +2269,20 @@ function renderWireframe() {
         <ul>
           <li><strong>1단 책장 + face-out</strong> — 5세가 한눈에 5권 인지. 2단은 시선 분산 우려로 회피</li>
           <li><strong>액센트 컬러 = 표지 컬러</strong> — 시퀀스 대시보드의 작품 컬러와 일관</li>
+        </ul>
+      </div>
+      <div class="wireframe-notes">
+        <h4>참고 분위기 (무드 레퍼런스)</h4>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.7; margin:0 0 10px;">초기 구상 단계에서 떠올린 "따뜻한 그림책 코너" 분위기. 아이 방 한켠의 아늑한 독서 공간을 메타포로 삼는다. 아래 무드 요소를 일러스트 톤·소품 배치의 출발점으로 참고:</p>
+        <ul>
+          <li><strong>조명</strong> — 따뜻한 황금빛 전구 줄조명(string lights)이 책장 위·창가에 은은하게. 황혼 무렵의 포근한 광원</li>
+          <li><strong>책장</strong> — 밝은 나무 톤, 책을 face-out으로 진열(표지가 보이게). 위 칸엔 봉제인형·작은 소품</li>
+          <li><strong>좌석</strong> — 크림색 1인 소파 + 노란 별 쿠션 + 니트 담요. "여기 앉아 읽고 싶다"는 아늑함</li>
+          <li><strong>바닥</strong> — 둥근 러그 + 바닥에 흩어진 책 몇 권 + 쿠션. 자유롭게 뒹굴며 읽는 느낌</li>
+          <li><strong>장식</strong> — 파스텔 삼각 가랜드(gerland), 벽에 작은 액자, 화분·봉제인형(곰·개구리). 과하지 않게 포인트만</li>
+          <li><strong>팔레트</strong> — 크림·베이지 바탕에 파스텔(연노랑·민트·연분홍) 액센트. 채도 낮고 따뜻하게</li>
+        </ul>
+        <p style="font-size:11px; color:var(--text-tertiary); line-height:1.6; margin:10px 0 0;">※ 실제 앱 서재는 위 와이어프레임 구조(1단 책장·5권·소품)를 따르되, 색감·조명·소품의 따뜻함은 이 레퍼런스를 지향. 프로필별 테마색(F-20)이 이 베이스 위에 입혀진다.</p>
       </div>
     </div>
   `;
@@ -2493,6 +2605,716 @@ function renderDownload() {
           <li><strong>"구매=모든 기기 공통" 배너</strong> — 부모가 다른 기기에서도 받을 수 있음을 명시. 4장의 "구매함·이 기기에 아직 없음"이 그 사례</li>
           <li><strong>출시 후 과제</strong> — 기기별 다운로드 상태 표시("내 기기들" 목록)는 1차 출시 제외, 다음 업데이트 버전 목표. 1차는 현재 기기 기준</li>
           <li><strong>미정 항목</strong> — 동시 사용 기기 수 정책(무제한 vs 상한)은 비즈니스 정책으로 확정 필요</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderGuardian() {
+  const g = GUARDIAN_STATS;
+  const taxRows = g.interestTaxonomy.map(cat => {
+    const chips = cat.tags.map(t => {
+      const src = t.books ? t.books.join(', ') : (t.desc || '');
+      return '<span class="g-tag" title="' + esc(src) + '">' + esc((t.icon||'') + ' ' + t.tag) + '</span>';
+    }).join('');
+    return '<div class="g-tax-cat"><div class="g-tax-head">' + esc(cat.category) + '<span class="g-tax-src">' + esc(cat.source) + '</span></div><div class="g-tax-chips">' + chips + '</div></div>';
+  }).join('');
+
+  const tplRows = g.weeklyReportTemplates.templates.map(t =>
+    '<tr><td class="g-tpl-when">' + esc(t.when) + '</td><td class="g-tpl-text">' + esc(t.text) + '</td></tr>'
+  ).join('');
+
+  const examples = g.weeklyReportTemplates.filledExamples.map(e =>
+    '<li>' + esc(e) + '</li>'
+  ).join('');
+
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>주체</strong> 부모 (보호자 영역)</span>
+        <span class="wireframe-meta-item"><strong>톤</strong> 안심·발견 + 성취·진도 균형</span>
+        <span class="wireframe-meta-item"><strong>6영역</strong> 읽기활동·진도·관심발견·학습흔적·리포트·프로필</span>
+      </div>
+
+      <div class="g-screen">
+        <div class="g-row g-head">
+          <div class="g-avatar">하리</div>
+          <div style="flex:1"><div class="g-name">하리 ▾</div><div class="g-sub">만 5세 · 프로필 전환</div></div>
+          <div class="g-period"><span class="on">주간</span><span>월간</span></div>
+        </div>
+
+        <div class="g-label">읽기 활동 · 6.10–6.16</div>
+        <div class="g-metrics">
+          <div class="g-metric"><div class="g-num">3<small>권</small></div><div class="g-mlabel">읽은 책</div></div>
+          <div class="g-metric"><div class="g-num">2<small>시간</small></div><div class="g-mlabel">읽은 시간</div></div>
+          <div class="g-metric"><div class="g-num">5<small>일</small></div><div class="g-mlabel">읽은 날</div></div>
+        </div>
+        <div class="g-card">
+          <div class="g-sub" style="margin-bottom:6px">이번 주 읽은 날</div>
+          <div class="g-heat">
+            <span class="d3"></span><span class="d1"></span><span class="d0"></span><span class="d3"></span><span class="d2"></span><span class="d3"></span><span class="d1"></span>
+          </div>
+        </div>
+
+        <div class="g-label">진도 현황</div>
+        <div class="g-card">
+          <div class="g-prog"><span>빨간모자</span><div class="g-bar"><i style="width:100%;background:#1D9E75"></i></div><b style="color:#0F6E56">완독 ✓</b></div>
+          <div class="g-prog"><span>아기 돼지 삼형제</span><div class="g-bar"><i style="width:60%;background:#BA7517"></i></div><b>3/5장</b></div>
+          <div class="g-repeat">🔁 빨간모자를 <b>4번</b> 다시 읽었어요 — 좋아하는 이야기예요!</div>
+        </div>
+
+        <div class="g-label">관심·취향 발견</div>
+        <div class="g-card g-discover">
+          <div class="g-disc-head">✨ 하리가 좋아하는 것</div>
+          <div class="g-tax-chips">
+            <span class="g-tag on">🐺 동물 이야기</span><span class="g-tag on">🎶 노래 장면</span><span class="g-tag on">❓ 예측 놀이</span>
+          </div>
+          <div class="g-disc-text">"다음에 무슨 일이?" 예측 활동에 <b>가장 많이</b> 참여했어요. 이야기 흐름을 즐기는 편이에요.</div>
+        </div>
+
+        <div class="g-label">학습 흔적</div>
+        <div class="g-card">
+          <div class="g-sub" style="margin-bottom:8px">이번 주 만난 낱말 <b>8개</b></div>
+          <div class="g-tax-chips"><span class="g-word">바구니</span><span class="g-word">숲길</span><span class="g-word">늑대</span><span class="g-word dim">+5</span></div>
+          <div class="g-act">💭 예측 놀이 6회 · 회상 활동 4회</div>
+          <div class="g-fine">※ 정답률·점수는 매기지 않아요. 활동 참여만 보여드려요.</div>
+        </div>
+
+        <div class="g-card g-report">
+          <div class="g-disc-head">✉ 주간 리포트</div>
+          <div class="g-disc-text">"이번 주 하리가 <b>3권</b>을 읽고, 늑대가 나오는 이야기를 가장 좋아했어요." 매주 받아보세요.</div>
+          <div class="g-btns"><button>🔔 다이제스트 받기</button><button>↗ 성장 기록 공유</button></div>
+        </div>
+      </div>
+
+      <div class="wireframe-notes">
+        <h4>관심·취향 태그 사전 (5권 기준 · 개발 참고)</h4>
+        <div class="g-taxonomy">${taxRows}</div>
+        <p class="g-fine" style="margin-top:8px">태그 위 마우스를 올리면 출처(작품/노드)가 표시됩니다. 콘텐츠팀이 작품 제작 시 메타데이터로 태깅하며, 본 사전은 5권 기준 초기 seed입니다.</p>
+      </div>
+
+      <div class="wireframe-notes">
+        <h4>주간 리포트 문구 (개발 참고)</h4>
+        <table class="g-tpl-table"><thead><tr><th>상황</th><th>문구 템플릿 ({변수} 치환)</th></tr></thead><tbody>${tplRows}</tbody></table>
+        <h4 style="margin-top:14px">실데이터 완성 예시</h4>
+        <ul class="g-examples">${examples}</ul>
+      </div>
+
+      <div class="wireframe-notes">
+        <h4>설계 원칙</h4>
+        <ul>${g.designPrinciples.map(p => '<li>' + esc(p) + '</li>').join('')}</ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderSettings() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>주체</strong> 소리·자막=누구나 / 결제·보안=부모</span>
+        <span class="wireframe-meta-item"><strong>게이트 경계</strong> 소리·자막 앞 · 결제·보안 뒤</span>
+        <span class="wireframe-meta-item"><strong>포섭</strong> F-10 볼륨 · F-11 자막</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 460 840" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs><linearGradient id="setBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient></defs>
+  <rect width="460" height="840" rx="12" fill="url(#setBg)" stroke="#5C3F1F" stroke-width="2"/>
+
+  <text x="24" y="38" font-size="16" font-weight="bold" fill="#5C3F1F">⚙ 설정</text>
+
+  <text x="24" y="72" font-size="12" fill="#854F0B">🔓 소리·표시 — 바로 사용 (게이트 앞)</text>
+  <g transform="translate(24, 84)">
+    <rect width="412" height="190" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="18" y="32" font-size="13" fill="#5C3F1F">♪ 배경음악</text>
+    <rect x="150" y="26" width="244" height="5" rx="2.5" fill="#E5D3AF"/><rect x="150" y="26" width="170" height="5" rx="2.5" fill="#BA7517"/><circle cx="320" cy="28" r="8" fill="#BA7517"/>
+    <text x="18" y="72" font-size="13" fill="#5C3F1F">♫ 효과음</text>
+    <rect x="150" y="66" width="244" height="5" rx="2.5" fill="#E5D3AF"/><rect x="150" y="66" width="207" height="5" rx="2.5" fill="#BA7517"/><circle cx="357" cy="68" r="8" fill="#BA7517"/>
+    <text x="18" y="112" font-size="13" fill="#5C3F1F">🎙 내레이션</text>
+    <rect x="150" y="106" width="244" height="5" rx="2.5" fill="#E5D3AF"/><rect x="150" y="106" width="244" height="5" rx="2.5" fill="#BA7517"/><circle cx="394" cy="108" r="8" fill="#BA7517"/>
+    <line x1="18" y1="134" x2="394" y2="134" stroke="#EDE3CC" stroke-width="1"/>
+    <text x="18" y="158" font-size="13" fill="#5C3F1F">자막 보이기</text>
+    <rect x="346" y="148" width="48" height="24" rx="12" fill="#1D9E75"/><circle cx="382" cy="160" r="9" fill="#fff"/>
+    <text x="18" y="183" font-size="13" fill="#5C3F1F">자막 크기</text>
+    <rect x="250" y="172" width="48" height="20" rx="6" fill="#F1EFE8"/><text x="274" y="186" font-size="10" text-anchor="middle" fill="#888780">작게</text>
+    <rect x="300" y="172" width="48" height="20" rx="6" fill="#E6F1FB"/><text x="324" y="186" font-size="11" text-anchor="middle" fill="#185FA5">보통</text>
+    <rect x="350" y="172" width="48" height="20" rx="6" fill="#F1EFE8"/><text x="374" y="186" font-size="12" text-anchor="middle" fill="#888780">크게</text>
+    <text x="151" y="-6" font-size="9" fill="#A8917A">F-10 볼륨 · F-11 자막</text>
+  </g>
+
+  <text x="24" y="306" font-size="12" fill="#854F0B">🔒 보호자 전용 — 부모 게이트 필요 (게이트 뒤)</text>
+  <g transform="translate(24, 318)">
+    <rect width="412" height="288" rx="8" fill="#FFFFFF" stroke="#BA7517" stroke-width="1.5"/>
+    <rect width="412" height="34" rx="8" fill="#FAEEDA"/>
+    <text x="16" y="22" font-size="10" fill="#854F0B">🔒 처음 탭하면 어른 확인(숫자 입력) 후 열려요</text>
+    <g font-size="13" fill="#5C3F1F">
+      <text x="18" y="62">🔑 부모 게이트 재설정</text><text x="394" y="62" text-anchor="end" fill="#C9A961">›</text>
+      <line x1="14" y1="76" x2="398" y2="76" stroke="#EDE3CC"/>
+      <text x="18" y="100">💳 결제 시 항상 게이트 요구</text>
+      <rect x="346" y="90" width="40" height="20" rx="10" fill="#1D9E75"/><circle cx="376" cy="100" r="7.5" fill="#fff"/>
+      <line x1="14" y1="120" x2="398" y2="120" stroke="#EDE3CC"/>
+      <text x="18" y="144">↻ 구매 복원</text><text x="394" y="144" text-anchor="end" fill="#C9A961">›</text>
+      <line x1="14" y1="158" x2="398" y2="158" stroke="#EDE3CC"/>
+      <text x="18" y="182">⬇ 다운로드 관리</text><text x="360" y="182" text-anchor="end" font-size="10" fill="#185FA5">F-12</text><text x="394" y="182" text-anchor="end" fill="#C9A961">›</text>
+      <line x1="14" y1="196" x2="398" y2="196" stroke="#EDE3CC"/>
+      <text x="18" y="220">🧾 구매 내역 · 결제 정보</text><text x="394" y="220" text-anchor="end" fill="#C9A961">›</text>
+      <line x1="14" y1="234" x2="398" y2="234" stroke="#EDE3CC"/>
+      <text x="18" y="258">👥 아이 프로필 관리</text><text x="360" y="258" text-anchor="end" font-size="10" fill="#185FA5">F-09</text><text x="394" y="258" text-anchor="end" fill="#C9A961">›</text>
+    </g>
+  </g>
+
+  <text x="24" y="638" font-size="12" fill="#5F5E5A">ⓘ 앱 정보</text>
+  <g transform="translate(24, 650)">
+    <rect width="412" height="100" rx="8" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <g font-size="13" fill="#5C3F1F">
+      <text x="18" y="28">개인정보 처리방침</text><text x="394" y="28" text-anchor="end" font-size="11" fill="#A8917A">↗</text>
+      <line x1="14" y1="40" x2="398" y2="40" stroke="#EDE3CC"/>
+      <text x="18" y="62">이용약관</text><text x="394" y="62" text-anchor="end" font-size="11" fill="#A8917A">↗</text>
+      <line x1="14" y1="74" x2="398" y2="74" stroke="#EDE3CC"/>
+      <text x="18" y="92" fill="#888780">버전 정보</text><text x="394" y="92" text-anchor="end" font-size="11" fill="#A8917A">v1.0.0</text>
+    </g>
+  </g>
+
+  <g transform="translate(24, 768)">
+    <rect width="412" height="50" rx="8" fill="none" stroke="#888780" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="16" y="22" font-size="11" font-weight="bold" fill="#5F5E5A">⚐ 출시 후 업데이트 예정</text>
+    <text x="16" y="40" font-size="11" fill="#888780">사용 시간 제한(스크린타임) — 1차 출시 보류, 다음 업데이트 버전 목표</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 게이트 경계</h4>
+        <ul>
+          <li><strong>2구역 분리</strong> — 소리·자막(F-10·F-11)은 게이트 앞(아이도 접근), 결제·보안·계정·프로필은 게이트 뒤(부모만). 키즈 앱 설정의 정석</li>
+          <li><strong>경계 시각화</strong> — "🔓 바로 사용" vs "🔒 부모 게이트 필요" 라벨 + 보호자 구역 상단 안내 배너로 명확히</li>
+          <li><strong>소리 3채널</strong> — 배경음악·효과음·내레이션 (오디오 4채널 중 사용자 노출 3종). 자막 토글 + 크기 3단</li>
+          <li><strong>"결제 시 항상 게이트" 토글</strong> — F-18 페이월의 결제 직전 게이트 on/off. 기본 켜짐(안전)</li>
+          <li><strong>허브 역할</strong> — 다운로드 관리(F-12)·프로필 관리(F-09)는 독립 화면으로 연결되는 링크(뱃지 표시). 설정은 진입점</li>
+          <li><strong>앱 정보</strong> — 처리방침·약관은 컴플라이언스 필수. 민감 정보 아니라 게이트 없이 노출</li>
+          <li><strong>출시 후 과제</strong> — 사용 시간 제한(스크린타임)은 1차 출시 보류, 다음 업데이트 목표 (별도 기능 개발 필요)</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderOnboarding() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>방식</strong> 점진형 (최소 셋업 → 빨리 체험)</span>
+        <span class="wireframe-meta-item"><strong>첫 출시작</strong> 신데렐라</span>
+        <span class="wireframe-meta-item"><strong>목표</strong> 30초 안에 첫 이야기로</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 600" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs><linearGradient id="obBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient></defs>
+  <rect width="820" height="600" rx="12" fill="url(#obBg)" stroke="#5C3F1F" stroke-width="2"/>
+
+  <rect x="24" y="22" width="320" height="22" rx="6" fill="#E6F1FB"/><text x="34" y="38" font-size="12" font-weight="bold" fill="#185FA5">A · 첫 실행 (콘텐츠 전 · 최소한만)</text>
+  <text x="360" y="38" font-size="11" fill="#854F0B">목표: 30초 안에 첫 이야기로</text>
+
+  <g transform="translate(24, 58)">
+    <rect width="220" height="120" rx="10" fill="#FFFFFF" stroke="#85B7EB" stroke-width="1"/>
+    <text x="16" y="26" font-size="11" fill="#A8917A">1 · 가치 전달</text>
+    <text x="16" y="56" font-size="26" fill="#185FA5">✨</text>
+    <text x="16" y="84" font-size="14" fill="#5C3F1F">참여하며 읽는 동화</text>
+    <text x="16" y="106" font-size="11" fill="#888780">1~2장, 건너뛰기 가능</text>
+  </g>
+  <text x="252" y="124" font-size="20" fill="#C9A961">›</text>
+  <g transform="translate(272, 58)">
+    <rect width="240" height="120" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+    <text x="16" y="26" font-size="11" fill="#854F0B">2 · 부모 동의</text>
+    <rect x="92" y="16" width="40" height="15" rx="4" fill="#BA7517"/><text x="112" y="27" font-size="9" text-anchor="middle" fill="#fff">필수</text>
+    <text x="16" y="56" font-size="26" fill="#854F0B">📋</text>
+    <text x="16" y="84" font-size="14" fill="#854F0B">개인정보 수집 동의</text>
+    <text x="16" y="106" font-size="11" fill="#854F0B" opacity="0.85">데이터 수집 전 법적 필수</text>
+  </g>
+  <text x="520" y="124" font-size="20" fill="#C9A961">›</text>
+  <g transform="translate(540, 58)">
+    <rect width="256" height="120" rx="10" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/>
+    <text x="16" y="26" font-size="11" fill="#185FA5">3 · 첫 체험</text>
+    <text x="16" y="56" font-size="26" fill="#185FA5">📖</text>
+    <text x="16" y="84" font-size="14" fill="#185FA5">신데렐라 1장 (무료)</text>
+    <text x="16" y="106" font-size="11" fill="#185FA5" opacity="0.85">바로 진입 · "아하" 순간</text>
+  </g>
+  <text x="24" y="200" font-size="11" font-style="italic" fill="#888780">프로필·게이트·알림은 여기서 묻지 않음 — 첫 이야기까지 마찰 최소화</text>
+
+  <rect x="24" y="222" width="360" height="22" rx="6" fill="#F1EFE8"/><text x="34" y="238" font-size="12" font-weight="bold" fill="#5F5E5A">B · 지연 셋업 (필요해지는 순간마다 · 첫 체험 이후)</text>
+
+  <g transform="translate(24, 258)" font-size="13">
+    <rect width="772" height="56" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="20" y="26" font-size="20" fill="#888780">＋</text>
+    <text x="52" y="24" fill="#5C3F1F">아이 프로필 생성</text>
+    <text x="52" y="44" font-size="11" fill="#888780">1장을 다 본 뒤 — "이 이야기를 본 친구는 누구예요?" (이름·나이)</text>
+    <rect x="710" y="18" width="46" height="20" rx="10" fill="#E6F1FB"/><text x="733" y="32" font-size="10" text-anchor="middle" fill="#185FA5">F-09</text>
+  </g>
+  <g transform="translate(24, 322)" font-size="13">
+    <rect width="772" height="56" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="20" y="28" font-size="18" fill="#888780">🛡</text>
+    <text x="52" y="24" fill="#5C3F1F">부모 게이트 최초 설정</text>
+    <text x="52" y="44" font-size="11" fill="#888780">2장(첫 유료) 또는 보호자 영역 첫 진입 시</text>
+    <rect x="710" y="18" width="46" height="20" rx="10" fill="#E6F1FB"/><text x="733" y="32" font-size="10" text-anchor="middle" fill="#185FA5">F-08</text>
+  </g>
+  <g transform="translate(24, 386)" font-size="13">
+    <rect width="772" height="56" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="20" y="28" font-size="18" fill="#888780">🔔</text>
+    <text x="52" y="24" fill="#5C3F1F">알림 권한 요청</text>
+    <text x="52" y="44" font-size="11" fill="#888780">첫 세션 끝에 — "다음 이야기 나오면 알려드릴까요?" (가장 마지막)</text>
+    <rect x="710" y="18" width="46" height="20" rx="10" fill="#E6F1FB"/><text x="733" y="32" font-size="10" text-anchor="middle" fill="#185FA5">F-14</text>
+  </g>
+
+  <g transform="translate(24, 462)">
+    <rect width="772" height="116" rx="10" fill="none" stroke="#888780" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="16" y="28" font-size="12" font-weight="bold" fill="#5C3F1F">왜 부모 동의만 첫 실행 앞에 두나</text>
+    <text x="16" y="52" font-size="11" fill="#5F5E5A">나머지(프로필·게이트·알림)는 모두 뒤로 미루지만, 개인정보 동의만은 예외 — 신데렐라 1장에서</text>
+    <text x="16" y="72" font-size="11" fill="#5F5E5A">book_open 등 애널리틱스(F-17) 이벤트가 발생하기 전에 부모 동의가 있어야 컴플라이언스 충족.</text>
+    <text x="16" y="96" font-size="11" fill="#5F5E5A">→ 동의 화면은 최대한 가볍게(핵심만, 자세히는 링크). 1장 무료는 가격 모델(1장 무료/2장 유료)과 정합.</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 점진형 온보딩</h4>
+        <ul>
+          <li><strong>A 첫 실행</strong> — 가치 전달(1~2장, 건너뛰기) → 부모 동의(필수) → 신데렐라 1장 바로 진입. "30초 안에 첫 이야기"가 목표</li>
+          <li><strong>B 지연 셋업</strong> — 프로필 생성(1장 완료 후) · 게이트 설정(2장/보호자 영역 진입 시) · 알림 권한(첫 세션 끝). 필요해지는 순간마다 하나씩</li>
+          <li><strong>부모 동의 선행 이유</strong> — 점진형이어도 개인정보 동의는 첫 실행 앞. 데이터 수집(F-17 애널리틱스) 시작 전 부모 동의 필수라는 법적 요건 때문. 동의 화면은 최대한 가볍게</li>
+          <li><strong>알림은 가장 마지막</strong> — 첫 화면에서 권한 요구 시 거절률 높음. 가치를 느낀 뒤 "다음 이야기 알림?" 맥락에서 요청</li>
+          <li><strong>1장 무료의 정합성</strong> — 온보딩 첫 체험(신데렐라 1장)이 가격 모델의 무료 챕터와 일치. 1장 끝 2장 잠금 = 자연스러운 페이월(F-18) 진입</li>
+          <li><strong>첫 출시작 신데렐라</strong> — 온보딩 첫 체험작을 첫 출시작으로 맞춤</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderProfile() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>재진입</strong> 1개 자동 진입 / 2개+ 선택</span>
+        <span class="wireframe-meta-item"><strong>개인화</strong> 아바타 · 테마색 · 진행 (아이별)</span>
+        <span class="wireframe-meta-item"><strong>꾸미기</strong> 1차: 아바타+테마색만</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 754" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs>
+    <linearGradient id="pfBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient>
+    <linearGradient id="pfHari" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBEAF0"/><stop offset="100%" stop-color="#F6DEE8"/></linearGradient>
+  </defs>
+
+  <text x="24" y="30" font-size="14" font-weight="bold" fill="#5C3F1F">재진입 분기</text>
+  <g transform="translate(24, 44)" font-size="12">
+    <rect width="120" height="34" rx="8" fill="#FFFFFF" stroke="#C9A961"/><text x="60" y="22" text-anchor="middle" fill="#5C3F1F">▶ 앱 실행</text>
+    <text x="132" y="22" font-size="16" fill="#C9A961">›</text>
+    <rect x="150" width="120" height="34" rx="8" fill="#FFFFFF" stroke="#888780"/><text x="210" y="22" text-anchor="middle" fill="#5C3F1F">프로필 1개?</text>
+    <text x="290" y="17" font-size="11" fill="#0F6E56">예 → 바로 서재</text>
+    <text x="290" y="31" font-size="11" fill="#185FA5">아니오 → 선택 화면 ↓</text>
+  </g>
+
+  <text x="24" y="110" font-size="12" fill="#185FA5" font-weight="bold">1 · 프로필 선택 (2개 이상일 때)</text>
+  <g transform="translate(24, 122)">
+    <rect width="772" height="214" rx="10" fill="#FFFFFF" stroke="#85B7EB" stroke-width="1"/>
+    <text x="20" y="32" font-size="14" font-weight="bold" fill="#5C3F1F">누가 읽을까요?</text>
+    <text x="748" y="32" font-size="16" text-anchor="end" fill="#888780">🛡</text>
+    <g transform="translate(20, 50)">
+      <rect width="100" height="100" rx="18" fill="#F0997B"/><text x="50" y="62" font-size="30" text-anchor="middle" fill="#4A1B0C">☺</text>
+      <text x="50" y="124" font-size="13" text-anchor="middle" fill="#5C3F1F">하리</text>
+      <text x="50" y="142" font-size="10" text-anchor="middle" fill="#888780">3권 중 1권</text>
+    </g>
+    <g transform="translate(140, 50)">
+      <rect width="100" height="100" rx="18" fill="#85B7EB"/><text x="50" y="62" font-size="30" text-anchor="middle" fill="#042C53">☺</text>
+      <text x="50" y="124" font-size="13" text-anchor="middle" fill="#5C3F1F">유진</text>
+      <text x="50" y="142" font-size="10" text-anchor="middle" fill="#888780">5권 중 3권</text>
+    </g>
+    <g transform="translate(260, 50)">
+      <rect width="100" height="100" rx="18" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="1" stroke-dasharray="5 3"/><text x="50" y="62" font-size="30" text-anchor="middle" fill="#888780">＋</text>
+      <text x="50" y="124" font-size="13" text-anchor="middle" fill="#888780">추가</text>
+      <text x="50" y="142" font-size="10" text-anchor="middle" fill="#A8917A">최초 생성</text>
+    </g>
+    <text x="20" y="204" font-size="10" fill="#A8917A">프로필 추가/삭제·이름 변경 등 관리는 보호자 영역(게이트 뒤). 여기선 선택·추가만.</text>
+  </g>
+
+  <text x="24" y="372" font-size="12" fill="#993556" font-weight="bold">2 · 개인화된 서재 (하리 선택 시)</text>
+  <g transform="translate(24, 384)">
+    <rect width="772" height="334" rx="10" fill="url(#pfHari)" stroke="#ED93B1" stroke-width="2"/>
+    <rect x="20" y="20" width="40" height="40" rx="10" fill="#F0997B"/><text x="40" y="47" font-size="18" text-anchor="middle" fill="#4A1B0C">☺</text>
+    <text x="72" y="38" font-size="14" font-weight="bold" fill="#993556">하리의 서재</text>
+    <text x="72" y="56" font-size="11" fill="#993556" opacity="0.8">테마: 산호빛 · 다시 읽기 좋아요</text>
+    <rect x="600" y="26" width="150" height="30" rx="8" fill="#FFFFFF" stroke="#ED93B1"/><text x="675" y="46" font-size="11" text-anchor="middle" fill="#993556">⇄ 프로필 전환</text>
+
+    <g transform="translate(20, 78)">
+      <rect width="232" height="200" rx="8" fill="#F0997B"/>
+      <text x="116" y="100" font-size="30" text-anchor="middle" fill="#4A1B0C" opacity="0.5">📕</text>
+      <rect x="86" y="150" width="60" height="20" rx="10" fill="#FFFFFF"/><text x="116" y="164" font-size="10" text-anchor="middle" fill="#0F6E56">읽음 ✓</text>
+      <text x="116" y="192" font-size="12" text-anchor="middle" fill="#fff">신데렐라</text>
+    </g>
+    <g transform="translate(270, 78)">
+      <rect width="232" height="200" rx="8" fill="#85B7EB"/>
+      <text x="116" y="100" font-size="30" text-anchor="middle" fill="#042C53" opacity="0.5">📘</text>
+      <rect x="56" y="156" width="120" height="6" rx="3" fill="#FFFFFF" opacity="0.6"/><rect x="56" y="156" width="48" height="6" rx="3" fill="#FFFFFF"/>
+      <text x="116" y="192" font-size="12" text-anchor="middle" fill="#fff">빨간모자 · 이어보기</text>
+    </g>
+    <g transform="translate(520, 78)" opacity="0.7">
+      <rect width="232" height="200" rx="8" fill="#D3D1C7"/>
+      <rect x="104" y="86" width="24" height="22" rx="4" fill="none" stroke="#5F5E5A" stroke-width="2.5"/><path d="M110 86 v-5 a6 6 0 0 1 12 0 v5" fill="none" stroke="#5F5E5A" stroke-width="2.5"/>
+      <text x="116" y="192" font-size="12" text-anchor="middle" fill="#5F5E5A">아기 돼지</text>
+    </g>
+    <text x="20" y="306" font-size="11" fill="#993556" opacity="0.85">진행(읽음/이어보기/잠금)은 프로필마다 다르게 표시. 아바타·테마색은 아이별 개인화.</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 멀티 프로필</h4>
+        <ul>
+          <li><strong>재진입 분기</strong> — 앱 실행 시 프로필 1개면 자동 진입(마찰 0), 2개 이상이면 선택 화면. 단일 가정·형제 가정 모두 자연스럽게</li>
+          <li><strong>프로필 = 개인화 단위</strong> — 서재가 공용이 아니라 아이별. 진행(읽음/이어보기/잠금)·아바타·테마색이 프로필마다 다름</li>
+          <li><strong>꾸미기 1차 범위</strong> — 아바타 + 테마색만. 테마색이 서재 배경·책 카드 톤에 적용돼 "내 서재" 소속감. 배경/장식/보상 언락은 출시 후 확장(F-15 연결 여지)</li>
+          <li><strong>선택 vs 관리 분리</strong> — 선택 화면에선 고르기·추가만. 삭제·이름 변경 등 관리는 보호자 영역(게이트 뒤, F-19 설정)</li>
+          <li><strong>최초 생성 연결</strong> — "추가"는 온보딩의 프로필 생성(F-13 B구간)과 같은 플로우. 1장 완료 후 첫 프로필이 만들어짐</li>
+          <li><strong>구매는 계정 공통</strong> — 프로필은 진행·개인화를 나누지만, 구매(엔타이틀먼트)는 계정 귀속이라 형제가 같은 책을 공유(F-18·F-12와 정합)</li>
+          <li><strong>첫 출시작 신데렐라</strong> — 서재 첫 칸을 신데렐라(읽음)로. 온보딩 흐름과 연결</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderNotification() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>패턴</strong> 사전 동의 → OS 팝업 (정석)</span>
+        <span class="wireframe-meta-item"><strong>주체</strong> 부모에게 유용한 정보</span>
+        <span class="wireframe-meta-item"><strong>세부 토글</strong> 설정(F-19)으로</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs><linearGradient id="ntBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient></defs>
+
+  <text x="24" y="28" font-size="12" font-weight="bold" fill="#185FA5">1 · 사전 동의 화면 (앱 내 · 첫 세션 끝)</text>
+  <g transform="translate(24, 40)">
+    <rect width="300" height="420" rx="12" fill="url(#ntBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="20" y="20" width="260" height="380" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="150" y="68" font-size="32" text-anchor="middle" fill="#185FA5">🔔</text>
+    <text x="150" y="100" font-size="15" font-weight="bold" text-anchor="middle" fill="#5C3F1F">새 소식을 받아보시겠어요?</text>
+    <text x="150" y="122" font-size="11" text-anchor="middle" fill="#888780">부모님께 도움이 되는 소식만 보내드려요</text>
+    <g font-size="12.5" fill="#5C3F1F">
+      <text x="40" y="166">📖  새 동화가 나오면</text>
+      <line x1="40" y1="180" x2="260" y2="180" stroke="#EDE3CC"/>
+      <text x="40" y="206">✉  주간 읽기 리포트 (F-09)</text>
+      <line x1="40" y1="220" x2="260" y2="220" stroke="#EDE3CC"/>
+      <text x="40" y="246">↻  산 책에 새 챕터가 추가되면</text>
+    </g>
+    <rect x="40" y="288" width="220" height="42" rx="8" fill="#185FA5"/><text x="150" y="314" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">좋아요, 받을래요</text>
+    <text x="150" y="358" font-size="13" text-anchor="middle" fill="#888780">나중에 할게요</text>
+  </g>
+  <text x="338" y="60" font-size="11" fill="#888780">종류는 소개만 —</text>
+  <text x="338" y="78" font-size="11" fill="#888780">세부 on/off는</text>
+  <text x="338" y="96" font-size="11" fill="#888780">설정(F-19)에서.</text>
+  <text x="338" y="124" font-size="11" fill="#0F6E56">"좋아요"를 누른</text>
+  <text x="338" y="142" font-size="11" fill="#0F6E56">경우에만 ↓ OS 팝업</text>
+
+  <text x="500" y="28" font-size="12" font-weight="bold" fill="#0F6E56">2 · "좋아요" → OS 팝업</text>
+  <g transform="translate(500, 40)">
+    <rect width="296" height="180" rx="12" fill="url(#ntBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="38" y="36" width="220" height="108" rx="12" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="1"/>
+    <text x="148" y="66" font-size="12" text-anchor="middle" fill="#5C3F1F">"플레이북"이(가) 알림을</text>
+    <text x="148" y="84" font-size="12" text-anchor="middle" fill="#5C3F1F">보내려고 합니다</text>
+    <line x1="148" y1="104" x2="148" y2="144" stroke="#E5D3AF"/>
+    <line x1="38" y1="104" x2="258" y2="104" stroke="#E5D3AF"/>
+    <text x="93" y="128" font-size="12" text-anchor="middle" fill="#888780">허용 안 함</text>
+    <text x="203" y="128" font-size="12" font-weight="bold" text-anchor="middle" fill="#185FA5">허용</text>
+    <text x="148" y="166" font-size="10" text-anchor="middle" fill="#888780">OS 시스템 팝업 — 앱이 디자인 못 함 · 단 1회</text>
+  </g>
+
+  <text x="500" y="252" font-size="12" font-weight="bold" fill="#5C3F1F">3 · "나중에" / 거절 → 재권유</text>
+  <g transform="translate(500, 264)">
+    <rect width="296" height="196" rx="12" fill="url(#ntBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="20" y="20" width="256" height="156" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <text x="40" y="50" font-size="13" font-weight="bold" fill="#5C3F1F">⏱ 가치 시점에 다시</text>
+    <text x="40" y="76" font-size="11" fill="#888780">예: 3권째 완독 후, 주간 리포트</text>
+    <text x="40" y="94" font-size="11" fill="#888780">첫 생성 시 —</text>
+    <text x="40" y="116" font-size="11" fill="#5C3F1F">"이런 소식 알림으로 받아볼까요?"</text>
+    <line x1="40" y1="134" x2="256" y2="134" stroke="#EDE3CC"/>
+    <text x="40" y="158" font-size="11" fill="#888780">⚙ 설정(F-19)에서 언제든 켤 수 있음</text>
+  </g>
+  <text x="500" y="476" font-size="10" font-style="italic" fill="#888780">거절 강요 없음. OS 재요청 불가 → 앱 내 부드러운 재권유 + 설정 유도.</text>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 알림 동의</h4>
+        <ul>
+          <li><strong>사전 동의 선행</strong> — OS 권한 팝업은 단 1회·재요청 불가. 앞에 앱 내 사전 화면을 둬서 "좋아요" 누른 사람에게만 OS 팝업 → 허용률↑</li>
+          <li><strong>부모에게 유용한 정보로 프레이밍</strong> — 신작·주간 리포트(F-09)·산 책의 새 챕터. "아이를 다시 부르는 알림"은 배제(부모 거부감·스토어 정책 민감)</li>
+          <li><strong>종류 소개만, 토글은 설정</strong> — 동의 화면은 전체 허용/나중에로 단순하게. 종류별 on/off는 설정(F-19)에서</li>
+          <li><strong>거절 후 재권유</strong> — 강요 없이 가치 시점(3권 완독·첫 리포트)에 부드럽게. OS 재요청 불가하므로 앱 내 권유 + 설정 유도</li>
+          <li><strong>온보딩 연결</strong> — 첫 요청은 온보딩 B구간(첫 세션 끝). 이 화면이 그 진입 지점</li>
+          <li><strong>권한 동의는 부모 게이트 뒤 권장</strong> — 아동 우발 허용 방지(첫 세션 끝 부모가 쥔 시점)</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderGate() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>방식</strong> 한글 숫자 받아쓰기 (Apple/Google 패턴)</span>
+        <span class="wireframe-meta-item"><strong>공통</strong> 결제·보호자 진입 동일</span>
+        <span class="wireframe-meta-item"><strong>유지</strong> 통과 후 5분</span>
+      </div>
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <defs><linearGradient id="gtBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBE4B5"/><stop offset="100%" stop-color="#F0DBB5"/></linearGradient></defs>
+
+  <text x="20" y="26" font-size="12" font-weight="bold" fill="#854F0B">기본 · 입력 대기</text>
+  <g transform="translate(20, 38)">
+    <rect width="350" height="390" rx="12" fill="url(#gtBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="24" y="22" width="302" height="346" rx="10" fill="#FFFFFF" stroke="#C9A961" stroke-width="0.8"/>
+    <circle cx="175" cy="68" r="22" fill="none" stroke="#854F0B" stroke-width="2.5"/><path d="M163 68 v-6 a12 12 0 0 1 24 0 v6 M157 68 h36 v20 h-36 z" fill="none" stroke="#854F0B" stroke-width="2.5"/>
+    <text x="175" y="122" font-size="15" font-weight="bold" text-anchor="middle" fill="#5C3F1F">어른에게 물어보세요</text>
+    <text x="175" y="144" font-size="12" text-anchor="middle" fill="#888780">아래 숫자를 순서대로 누르세요</text>
+    <text x="175" y="180" font-size="22" font-weight="bold" text-anchor="middle" fill="#5C3F1F" letter-spacing="4">삼 · 구 · 일</text>
+    <g transform="translate(112, 196)">
+      <rect width="38" height="46" rx="8" fill="none" stroke="#378ADD" stroke-width="2"/><text x="19" y="32" font-size="18" text-anchor="middle" fill="#5C3F1F">3</text>
+      <rect x="48" width="38" height="46" rx="8" fill="none" stroke="#B4B2A9" stroke-width="2"/>
+      <rect x="96" width="38" height="46" rx="8" fill="none" stroke="#B4B2A9" stroke-width="2"/>
+    </g>
+    <g transform="translate(98, 260)" font-size="18" fill="#5C3F1F" text-anchor="middle">
+      <rect width="48" height="34" rx="8" fill="#F1EFE8"/><text x="24" y="23">1</text>
+      <rect x="54" width="48" height="34" rx="8" fill="#F1EFE8"/><text x="78" y="23">2</text>
+      <rect x="108" width="48" height="34" rx="8" fill="#E6F1FB"/><text x="132" y="23" fill="#185FA5">3</text>
+      <rect y="40" width="48" height="34" rx="8" fill="#F1EFE8"/><text x="24" y="63">4</text>
+      <rect x="54" y="40" width="48" height="34" rx="8" fill="#F1EFE8"/><text x="78" y="63">5</text>
+      <rect x="108" y="40" width="48" height="34" rx="8" fill="#F1EFE8"/><text x="132" y="63">6</text>
+    </g>
+    <text x="175" y="356" font-size="11" text-anchor="middle" fill="#A8917A">✕ 닫기 (취소)</text>
+  </g>
+
+  <text x="392" y="26" font-size="12" font-weight="bold" fill="#A32D2D">오답 · 다시 안내</text>
+  <g transform="translate(392, 38)">
+    <rect width="350" height="390" rx="12" fill="url(#gtBg)" stroke="#5C3F1F" stroke-width="2"/>
+    <rect x="24" y="22" width="302" height="346" rx="10" fill="#FFFFFF" stroke="#E24B4A" stroke-width="1"/>
+    <circle cx="175" cy="68" r="22" fill="none" stroke="#A32D2D" stroke-width="2.5"/><path d="M165 58 l20 20 M185 58 l-20 20" stroke="#A32D2D" stroke-width="2.5"/>
+    <text x="175" y="122" font-size="15" font-weight="bold" text-anchor="middle" fill="#5C3F1F">다시 해볼까요?</text>
+    <text x="175" y="144" font-size="12" text-anchor="middle" fill="#A32D2D">순서가 맞지 않아요</text>
+    <text x="175" y="180" font-size="22" font-weight="bold" text-anchor="middle" fill="#5C3F1F" letter-spacing="4">칠 · 이 · 오</text>
+    <g transform="translate(112, 196)">
+      <rect width="38" height="46" rx="8" fill="none" stroke="#E24B4A" stroke-width="2"/>
+      <rect x="48" width="38" height="46" rx="8" fill="none" stroke="#E24B4A" stroke-width="2"/>
+      <rect x="96" width="38" height="46" rx="8" fill="none" stroke="#E24B4A" stroke-width="2"/>
+    </g>
+    <rect x="40" y="262" width="270" height="86" rx="8" fill="#F1EFE8"/>
+    <text x="56" y="288" font-size="11" fill="#5F5E5A">새 문제로 바뀌고 입력은 초기화.</text>
+    <text x="56" y="308" font-size="11" fill="#5F5E5A">반복 실패해도 잠그지 않고 계속</text>
+    <text x="56" y="328" font-size="11" fill="#5F5E5A">재시도 가능 (아이가 막혔을 뿐).</text>
+  </g>
+
+  <g transform="translate(20, 438)">
+    <text x="0" y="12" font-size="11" fill="#185FA5">⏱ 통과 후 5분 유지 — 재요구 안 함</text>
+    <text x="250" y="12" font-size="11" fill="#185FA5">⇄ 결제·보호자 진입 동일</text>
+    <text x="470" y="12" font-size="11" fill="#185FA5">가 글 읽기 기반 — 5세 차단</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 부모 게이트</h4>
+        <ul>
+          <li><strong>한글 숫자 받아쓰기</strong> — "삼·구·일"을 보고 키패드에서 3·9·1을 누름. 한글을 읽을 줄 알아야 풀려 5세 차단. Apple/Google 키즈 게이트와 동일 패턴</li>
+          <li><strong>아라비아 숫자 제시 회피</strong> — '3'을 보고 '3' 누르기는 숫자만 아는 아이도 통과 가능. 한글 제시로 읽기 능력을 요구</li>
+          <li><strong>결제·보호자 진입 공통</strong> — F-18 결제 직전, 설정·통계·다운로드·프로필 관리 진입 모두 동일 게이트 재사용</li>
+          <li><strong>통과 후 5분 유지</strong> — 한 번 통과하면 5분간 재요구 안 함(결제↔설정 연속 작업 배려). 5분 경과·백그라운드 전환 시 재요구</li>
+          <li><strong>미잠금(no lockout)</strong> — 반복 실패해도 잠그지 않고 새 문제로 계속 재시도. 게이트 목적은 처벌이 아닌 "아이 차단"</li>
+          <li><strong>닫기(취소) 항상 제공</strong> — 부모가 그만두면 이전 화면으로. 강제 가두지 않음</li>
+          <li><strong>구현 메모</strong> — 문제는 매번 랜덤 생성, 정답 검증은 로컬. 결제 게이트 on/off는 설정(F-19)의 "결제 시 항상 게이트" 토글과 연동</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderStates() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>성격</strong> 여러 기능에 걸친 상태·예외 화면</span>
+        <span class="wireframe-meta-item"><strong>4섹션</strong> 구매완료 · 완독축하 · 빈상태 · 오류/오프라인</span>
+        <span class="wireframe-meta-item"><strong>원칙</strong> 5세 안심 톤 · 다음 행동 명확</span>
+      </div>
+
+      <div class="st-section">
+        <div class="st-head">1 · 구매 완료 확인 <span class="st-ref">F-18 결제 직후</span></div>
+        <div class="st-grid">
+          <div class="st-card">
+            <div class="st-cap">챕터 1개 구매</div>
+            <div class="st-ico st-ok">✓</div>
+            <div class="st-title">잠금이 풀렸어요!</div>
+            <div class="st-sub">신데렐라 2장 · 내려받는 중 (45%)</div>
+            <div class="st-btn st-btn-primary">바로 이어서 보기</div>
+          </div>
+          <div class="st-card">
+            <div class="st-cap">책 전체(번들) 구매</div>
+            <div class="st-ico st-ok">📚</div>
+            <div class="st-title">신데렐라를 모두 받았어요!</div>
+            <div class="st-sub">5개 장이 전부 열렸어요 · 다운로드는 보호자 영역에서 관리</div>
+            <div class="st-btn st-btn-primary">이어서 보기</div>
+          </div>
+        </div>
+        <div class="st-note">결제 즉시 잠금 해제 + 다운로드(F-12) 자동 트리거 · 기본 행동 "바로 이어서 보기" · purchase_success(F-17) 발생 지점</div>
+      </div>
+
+      <div class="st-section">
+        <div class="st-head">2 · 책 전체 완독 축하 <span class="st-ref">book_complete</span></div>
+        <div class="st-grid">
+          <div class="st-card st-card-wide">
+            <div class="st-ico st-crown">👑</div>
+            <div class="st-title">신데렐라를 다 읽었어요!</div>
+            <div class="st-sub">5개의 장을 모두 끝냈어요 · 첫 완독 책</div>
+            <div class="st-checks">✓ ✓ ✓ ✓ ✓</div>
+            <div class="st-btn st-btn-primary">다음 책 보러 가기</div>
+            <div class="st-btn-row"><span class="st-btn st-btn-ghost">서재로</span><span class="st-btn st-btn-ghost">다시 읽기</span></div>
+          </div>
+          <div class="st-card st-diff">
+            <div class="st-diff-row"><b>챕터 보상(F-15)</b><span>장마다 · 별/도장 · 2~3초 가볍게</span></div>
+            <div class="st-diff-row"><b>책 완독(이 화면)</b><span>책 한 권 전체 · 큰 연출 · 다음 책 유도</span></div>
+            <div class="st-note-inline">완독률(MVP 핵심 GO/STOP 지표)이 측정되는 지점. 점수·등수 없이 성취만 따뜻하게.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="st-section">
+        <div class="st-head">3 · 빈 상태 (empty state) <span class="st-ref">"고장" 아닌 "다음 할 일"</span></div>
+        <div class="st-grid st-grid-4">
+          <div class="st-card st-sm">
+            <div class="st-cap">서재 — 책 없음</div>
+            <div class="st-ico-sm">📚</div>
+            <div class="st-title-sm">아직 책이 없어요</div>
+            <div class="st-sub-sm">첫 이야기를 만나러 가볼까요?</div>
+            <div class="st-btn st-btn-primary st-btn-sm">신데렐라 1장 무료로</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">다운로드 — 없음</div>
+            <div class="st-ico-sm">⬇</div>
+            <div class="st-title-sm">받은 챕터가 없어요</div>
+            <div class="st-sub-sm">와이파이 있을 때 받아두면 어디서든</div>
+            <div class="st-btn st-btn-ghost st-btn-sm">구매한 챕터 받기</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">프로필 — 없음</div>
+            <div class="st-ico-sm">🙂</div>
+            <div class="st-title-sm">누가 읽고 있나요?</div>
+            <div class="st-sub-sm">프로필을 만들면 진행이 따로 저장돼요</div>
+            <div class="st-btn st-btn-primary st-btn-sm">프로필 만들기</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">통계 — 데이터 없음</div>
+            <div class="st-ico-sm">📊</div>
+            <div class="st-title-sm">아직 보여드릴 게 없어요</div>
+            <div class="st-sub-sm">읽기 시작하면 여기에 쌓여요</div>
+            <div class="st-btn st-btn-ghost st-btn-sm">서재로 가기</div>
+          </div>
+        </div>
+        <div class="st-note">공통: 친근한 아이콘 + "다음 할 일" 버튼 1개 · 안심 톤("없음"이 아니라 "곧 채워져요") · 오류 아님을 분명히</div>
+      </div>
+
+      <div class="st-section">
+        <div class="st-head">4 · 오류 · 오프라인 <span class="st-ref st-ref-warn">무섭지 않게 · 부모 대처</span></div>
+        <div class="st-grid st-grid-4">
+          <div class="st-card st-sm">
+            <div class="st-cap">오프라인 — 인터넷 끊김</div>
+            <div class="st-ico-sm st-warn">📡</div>
+            <div class="st-title-sm">인터넷이 잠시 끊겼어요</div>
+            <div class="st-sub-sm st-ok-box">✓ 받아둔 책 3권은 지금도 열려요</div>
+            <div class="st-btn st-btn-primary st-btn-sm">받아둔 책 보기</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">결제 실패 (부모)</div>
+            <div class="st-ico-sm st-warn">💳</div>
+            <div class="st-title-sm">결제가 완료되지 않았어요</div>
+            <div class="st-sub-sm">요금이 청구되지 않았어요</div>
+            <div class="st-btn st-btn-primary st-btn-sm">다시 시도</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">콘텐츠 로드 실패</div>
+            <div class="st-ico-sm">🙁</div>
+            <div class="st-title-sm">이야기를 못 가져왔어요</div>
+            <div class="st-sub-sm">다시 한 번 열어볼까요?</div>
+            <div class="st-btn st-btn-primary st-btn-sm">다시 열기</div>
+          </div>
+          <div class="st-card st-sm">
+            <div class="st-cap">다운로드 실패 (부모)</div>
+            <div class="st-ico-sm st-warn">☁</div>
+            <div class="st-title-sm">받기가 멈췄어요</div>
+            <div class="st-sub-sm">받던 곳부터 이어받아요 (처음부터 X)</div>
+            <div class="st-btn st-btn-primary st-btn-sm">이어받기</div>
+          </div>
+        </div>
+        <div class="st-note">받아둔(오프라인) 콘텐츠는 계속 열림(최우선 안심) · 에러코드·빨간 경고 X · 결제 실패 시 "청구 안 됨" 명시로 불안 차단</div>
+      </div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 상태·예외 화면</h4>
+        <ul>
+          <li><strong>독립 기능 아님</strong> — 여러 기능(F-18 구매·F-12 다운로드·F-09 통계·F-20 프로필 등)에 걸친 상태 화면. 각 기능 구현 시 이 시안을 참조</li>
+          <li><strong>빈 상태 vs 오류 구분</strong> — 빈 상태는 "아직 안 했을 뿐"(안심·유도), 오류는 "문제 생김"(대처·재시도). 톤을 분명히 분리</li>
+          <li><strong>오프라인 최우선 안심</strong> — 받아둔 콘텐츠는 인터넷 없이 계속 열림. 다운로드(F-12)의 "기기 귀속" 설계가 여기서 가치 발휘</li>
+          <li><strong>결제 실패 불안 차단</strong> — "요금이 청구되지 않았어요" 명시. 부모의 최대 불안 요소 선제 해소</li>
+          <li><strong>5세 안심 톤</strong> — 에러 코드·빨간 경고·기술 용어 없음. 모든 화면이 친근한 아이콘 + 다음 행동 1개</li>
+          <li><strong>완독 축하 ≠ 챕터 보상</strong> — book_complete는 책 전체, F-15는 챕터 단위. 연출 크기·다음 행동이 다름</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderBranding() {
+  return `
+    <div class="wireframe-wrap">
+      <div class="wireframe-meta">
+        <span class="wireframe-meta-item"><strong>성격</strong> 브랜딩·시스템 화면 (출시 필수)</span>
+        <span class="wireframe-meta-item"><strong>브랜드</strong> Primary Red #DC3545 + Yellow #FACC15</span>
+        <span class="wireframe-meta-item"><strong>로고</strong> SuperStory 버블 + 'P' 레터마크</span>
+      </div>
+
+      <div class="wireframe-svg-wrap"><svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg">
+  <text x="20" y="26" font-size="12" font-weight="bold" fill="#5C3F1F">앱 아이콘</text>
+  <g transform="translate(20, 40)">
+    <rect width="120" height="120" rx="28" fill="#DC3545"/>
+    <text x="60" y="80" font-size="64" font-weight="bold" text-anchor="middle" fill="#fff">P</text>
+    <circle cx="92" cy="92" r="9" fill="#FACC15"/>
+    <rect x="138" y="38" width="48" height="48" rx="11" fill="#DC3545"/><text x="162" y="72" font-size="26" font-weight="bold" text-anchor="middle" fill="#fff">P</text>
+    <rect x="138" y="96" width="30" height="30" rx="7" fill="#DC3545"/><text x="153" y="118" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">P</text>
+    <text x="20" y="150" font-size="10" fill="#888780">여러 크기 대응 (홈·스토어·알림)</text>
+  </g>
+
+  <text x="300" y="26" font-size="12" font-weight="bold" fill="#5C3F1F">스플래시 화면 (앱 켤 때)</text>
+  <g transform="translate(300, 40)">
+    <rect width="220" height="240" rx="14" fill="#DC3545"/>
+    <rect x="78" y="48" width="64" height="64" rx="15" fill="#fff"/><text x="110" y="92" font-size="34" font-weight="bold" text-anchor="middle" fill="#DC3545">P</text><circle cx="132" cy="100" r="7" fill="#FACC15"/>
+    <text x="110" y="150" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">플레이북</text>
+    <text x="110" y="172" font-size="11" text-anchor="middle" fill="#fff" opacity="0.85">참여하며 읽는 동화</text>
+    <circle cx="96" cy="208" r="4" fill="#fff" opacity="0.9"/><circle cx="110" cy="208" r="4" fill="#fff" opacity="0.5"/><circle cx="124" cy="208" r="4" fill="#fff" opacity="0.3"/>
+  </g>
+  <text x="300" y="300" font-size="10" fill="#888780">단색 배경 + 로고 + 슬로건 + 로딩 점 · 1~2초 짧게</text>
+
+  <text x="560" y="26" font-size="12" font-weight="bold" fill="#5C3F1F">함께 챙길 스토어 자산</text>
+  <g transform="translate(560, 44)" font-size="12" fill="#5C3F1F">
+    <text x="0" y="14">☐ 앱 아이콘 (iOS/Android 규격)</text>
+    <text x="0" y="42">☐ 스플래시 (다해상도·세이프영역)</text>
+    <text x="0" y="70">☐ 스토어 스크린샷 5~8장</text>
+    <text x="0" y="98">☐ 연령 등급 (키즈 카테고리)</text>
+    <text x="0" y="126">☐ 스토어 설명·키워드</text>
+    <text x="0" y="154">☐ 앱 이름·부제 (스토어 표시)</text>
+  </g>
+      </svg></div>
+
+      <div class="wireframe-notes">
+        <h4>설계 의도 · 스플래시·앱 아이콘</h4>
+        <ul>
+          <li><strong>출시 필수 자산</strong> — 기능은 아니지만 스토어 등록·첫인상에 반드시 필요. 잊지 않도록 시안으로 기록</li>
+          <li><strong>로고 일관성</strong> — SuperStory 버블 위 'P' 레터마크 + 노란 포인트. 아이콘·스플래시·랜딩에서 동일하게</li>
+          <li><strong>스플래시는 짧게</strong> — 1~2초. 브랜드 각인용이지 로딩 연출이 아님. 길면 이탈</li>
+          <li><strong>키즈 제약</strong> — 스플래시·아이콘에 광고·외부 링크·결제 유도 절대 없음 (Apple/Google 키즈 심사)</li>
+          <li><strong>아이콘 다크/라이트</strong> — 다양한 배경(홈 화면 월페이퍼)에서 식별되게. 단색 레드 배경이 안전</li>
+          <li><strong>담당</strong> — 메인 일러스트레이터(로고 자산) + 개발자(다해상도 적용·스토어 등록)</li>
         </ul>
       </div>
     </div>
