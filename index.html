@@ -1692,7 +1692,7 @@ section.tab-section.active { display: block; }
 
 <header class="app-header">
   <div class="app-header-inner">
-    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.7.5</span></div>
+    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.7.6</span></div>
     <div class="app-subtitle">서재 · 책 선택 · 진도 관리 · 보호자 영역 (4영역 × P1/P2/P3 우선순위)</div>
   </div>
 </header>
@@ -1791,31 +1791,96 @@ function esc(s) {
 function getArea(id) { return AREAS.find(a => a.id === id); }
 function getPriority(id) { return PRIORITIES.find(p => p.id === id); }
 
-// ─── 무드 레퍼런스 라이트박스 ───
+// ─── 무드 레퍼런스 라이트박스 (휠 줌 + 드래그 패닝) ───
+var _moodZoom = { scale: 1, tx: 0, ty: 0, dragging: false, sx: 0, sy: 0 };
+
+function _moodApplyTransform() {
+  var img = document.getElementById('mood-lightbox-img');
+  if (img) img.style.transform = 'translate(' + _moodZoom.tx + 'px,' + _moodZoom.ty + 'px) scale(' + _moodZoom.scale + ')';
+}
+function _moodResetZoom() {
+  _moodZoom.scale = 1; _moodZoom.tx = 0; _moodZoom.ty = 0; _moodZoom.dragging = false;
+  _moodApplyTransform();
+}
+
 function openMoodLightbox(src) {
   let ov = document.getElementById('mood-lightbox');
   if (!ov) {
     ov = document.createElement('div');
     ov.id = 'mood-lightbox';
-    ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;padding:32px;cursor:zoom-out;';
-    ov.onclick = closeMoodLightbox;
+    ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;padding:32px;overflow:hidden;';
+    // 배경(이미지 바깥) 클릭 시에만 닫기
+    ov.addEventListener('click', function (e) { if (e.target === ov) closeMoodLightbox(); });
+
     const img = document.createElement('img');
     img.id = 'mood-lightbox-img';
-    img.style.cssText = 'max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.5);';
+    img.style.cssText = 'max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.5);transform-origin:0 0;cursor:zoom-in;transition:transform 0.05s linear;user-select:none;-webkit-user-drag:none;';
+    img.draggable = false;
+
+    // 휠 줌 — 포인터 위치 기준
+    ov.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var rect = img.getBoundingClientRect();
+      var px = e.clientX - rect.left;  // 이미지 좌상단 기준 포인터 위치
+      var py = e.clientY - rect.top;
+      var factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+      var newScale = Math.min(8, Math.max(1, _moodZoom.scale * factor));
+      var ratio = newScale / _moodZoom.scale;
+      // 포인터 아래 지점이 고정되도록 평행이동 보정
+      _moodZoom.tx -= px * (ratio - 1);
+      _moodZoom.ty -= py * (ratio - 1);
+      _moodZoom.scale = newScale;
+      if (_moodZoom.scale === 1) { _moodZoom.tx = 0; _moodZoom.ty = 0; }
+      img.style.cursor = _moodZoom.scale > 1 ? 'grab' : 'zoom-in';
+      _moodApplyTransform();
+    }, { passive: false });
+
+    // 드래그 패닝
+    img.addEventListener('mousedown', function (e) {
+      if (_moodZoom.scale <= 1) return;
+      e.preventDefault();
+      _moodZoom.dragging = true;
+      _moodZoom.sx = e.clientX - _moodZoom.tx;
+      _moodZoom.sy = e.clientY - _moodZoom.ty;
+      img.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!_moodZoom.dragging) return;
+      _moodZoom.tx = e.clientX - _moodZoom.sx;
+      _moodZoom.ty = e.clientY - _moodZoom.sy;
+      _moodApplyTransform();
+    });
+    window.addEventListener('mouseup', function () {
+      if (_moodZoom.dragging) { _moodZoom.dragging = false; var i = document.getElementById('mood-lightbox-img'); if (i) i.style.cursor = _moodZoom.scale > 1 ? 'grab' : 'zoom-in'; }
+    });
+    // 더블클릭으로 줌 리셋
+    img.addEventListener('dblclick', function (e) { e.preventDefault(); _moodResetZoom(); img.style.cursor = 'zoom-in'; });
+
     const cap = document.createElement('div');
-    cap.style.cssText = 'position:absolute;top:20px;right:24px;color:#fff;font-size:13px;opacity:0.8;';
-    cap.textContent = '✕ 닫기 (아무 곳이나 클릭)';
+    cap.style.cssText = 'position:absolute;top:20px;right:24px;color:#fff;font-size:13px;opacity:0.85;pointer-events:none;';
+    cap.textContent = '휠: 확대/축소 · 드래그: 이동 · 더블클릭: 원래대로 · ✕/ESC/바깥: 닫기';
+
+    const closeBtn = document.createElement('div');
+    closeBtn.style.cssText = 'position:absolute;top:18px;left:24px;color:#fff;font-size:22px;opacity:0.85;cursor:pointer;line-height:1;';
+    closeBtn.textContent = '✕';
+    closeBtn.addEventListener('click', closeMoodLightbox);
+
     ov.appendChild(img);
     ov.appendChild(cap);
+    ov.appendChild(closeBtn);
     document.body.appendChild(ov);
   }
-  document.getElementById('mood-lightbox-img').src = src;
+  _moodResetZoom();
+  var im = document.getElementById('mood-lightbox-img');
+  im.src = src;
+  im.style.cursor = 'zoom-in';
   ov.style.display = 'flex';
   document.addEventListener('keydown', moodLightboxEsc);
 }
 function closeMoodLightbox() {
   const ov = document.getElementById('mood-lightbox');
   if (ov) ov.style.display = 'none';
+  _moodResetZoom();
   document.removeEventListener('keydown', moodLightboxEsc);
 }
 function moodLightboxEsc(e) { if (e.key === 'Escape') closeMoodLightbox(); }
