@@ -1717,13 +1717,97 @@ section.tab-section.active { display: block; }
   margin-bottom: 4px;
   line-height: 1.6;
 }
+
+/* ===== 화면 설계 탭 (디자이너 명세, ss- prefix 스코프) ===== */
+
+  #section-screens {
+    --ss-paper:#FAF5EA; --ss-paper2:#F3EAD7; --ss-card:#FFFFFF; --ss-ink:#33291C; --ss-ink2:#6E5E48;
+    --ss-ink3:#9C8C72; --ss-line:#E4D8BF; --ss-line2:#D8C8A8;
+    --ss-red:#DC3545; --ss-gold:#C9A24B; --ss-green:#7E9C6B; --ss-plum:#B06A9C; --ss-blue:#4A6FA5; --ss-grayp:#6B5B73;
+    --ss-shadow:0 1px 3px rgba(51,41,28,.08), 0 8px 24px -12px rgba(51,41,28,.18);
+    --ss-mono:"SFMono-Regular",ui-monospace,Menlo,monospace;
+  }
+  .ss-wrap{max-width:1060px; margin:0 auto; padding:0 24px;}
+
+  /* ── 헤더 ── */
+  .ss-eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--ss-gold); font-weight:700;}
+  .ss-meta-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;}
+  .ss-chip{font-size:12px; background:#fff; border:1px solid var(--ss-line2); border-radius:999px; padding:5px 12px; color:var(--ss-ink2);}
+  .ss-chip b{color:var(--ss-ink); font-weight:700;}
+
+  /* ── 섹션 제목 ── */
+  .ss-sec-head{display:flex; align-items:baseline; gap:14px; margin:54px 0 18px; padding-bottom:12px; border-bottom:2px solid var(--ss-ink);}
+  .ss-sec-no{font-size:13px; font-weight:800; color:#fff; background:var(--ss-ink); width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; align-self:center;}
+  .ss-sec-head h2{font-size:23px; font-weight:800; letter-spacing:-.01em;}
+  .ss-sec-head .ss-ssub{font-size:13px; color:var(--ss-ink3); margin-left:auto; text-align:right;}
+
+  /* ── IA 플로우맵 ── */
+  .ss-ia{background:var(--ss-card); border:1px solid var(--ss-line); border-radius:14px; padding:24px; box-shadow:var(--ss-shadow); margin-top:24px;}  .ss-ia h3{font-size:15px; margin-bottom:4px;}
+  .ss-ia p.ss-cap{font-size:12.5px; color:var(--ss-ink3); margin-bottom:18px;}
+  .ss-ia-track{display:flex; flex-direction:column; gap:14px;}
+  .ss-ia-lane{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .ss-ia-lane-label{font-size:11px; font-weight:700; letter-spacing:.04em; color:#fff; padding:3px 9px; border-radius:6px; flex:0 0 auto; min-width:78px; text-align:center;}
+  .ss-ia-node{font-size:12px; background:var(--ss-paper); border:1px solid var(--ss-line2); border-radius:8px; padding:6px 11px; color:var(--ss-ink); white-space:nowrap;}
+  .ss-ia-node b{display:block; font-size:10px; color:var(--ss-ink3); font-weight:500;}
+  .ss-ia-arr{color:var(--ss-ink3); font-size:13px; flex:0 0 auto;}
+  .ss-ia-gate{border-color:var(--ss-gold); background:#FBF4E4;}
+
+  /* ── 화면 카드 ── */
+  .ss-screen{background:var(--ss-card); border:1px solid var(--ss-line); border-radius:16px; box-shadow:var(--ss-shadow); margin-top:22px; overflow:hidden; scroll-margin-top:16px;}
+  .ss-screen-top{display:flex; gap:22px; padding:22px 24px; border-bottom:1px solid var(--ss-line); flex-wrap:wrap;}
+  .ss-scr-wire{flex:0 0 auto;}
+  .ss-scr-info{flex:1 1 340px; min-width:280px;}
+  .ss-scr-id{font-family:var(--ss-mono); font-size:12px; color:var(--ss-gold); font-weight:700; letter-spacing:.02em;}
+  .ss-scr-title{font-size:20px; font-weight:800; letter-spacing:-.01em; margin:2px 0 8px;}
+  .ss-scr-purpose{font-size:13.5px; color:var(--ss-ink2); line-height:1.7;}
+  .ss-scr-feats{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;}
+  .ss-feat-tag{font-family:var(--ss-mono); font-size:10.5px; background:var(--ss-paper2); border:1px solid var(--ss-line2); color:var(--ss-ink2); border-radius:5px; padding:2px 7px;}
+
+  .ss-scr-body{padding:6px 24px 24px;}
+  .ss-block{margin-top:20px;}
+  .ss-block-h{font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ss-ink3); margin-bottom:10px; display:flex; align-items:center; gap:7px;}
+  .ss-block-h::before{content:""; width:5px; height:14px; border-radius:2px; background:var(--ss-accent,var(--ss-gold));}
+
+  table.ss-spec{width:100%; border-collapse:collapse; font-size:12.5px;}
+  table.ss-spec th{text-align:left; color:var(--ss-ink3); font-weight:600; padding:7px 10px; border-bottom:1px solid var(--ss-line); font-size:11px; letter-spacing:.03em; text-transform:uppercase;}
+  table.ss-spec td{padding:9px 10px; border-bottom:1px solid var(--ss-line); color:var(--ss-ink2); vertical-align:top; line-height:1.55;}
+  table.ss-spec td:first-child{color:var(--ss-ink); font-weight:600; white-space:nowrap;}
+  table.ss-spec tr:last-child td{border-bottom:none;}
+
+  .ss-flows{display:flex; flex-direction:column; gap:7px;}
+  .ss-flow-item{display:flex; align-items:baseline; gap:8px; font-size:12.5px;}
+  .ss-flow-trigger{font-weight:600; color:var(--ss-ink); flex:0 0 auto;}
+  .ss-flow-arr{color:var(--ss-ink3);}
+  .ss-flow-dest{color:var(--ss-blue); font-family:var(--ss-mono); font-size:11.5px;}
+
+  .ss-note{margin-top:18px; background:var(--ss-paper2); border-left:3px solid var(--ss-gold); border-radius:0 8px 8px 0; padding:12px 14px; font-size:12.5px; color:var(--ss-ink2); line-height:1.65;}
+  .ss-note b{color:var(--ss-ink);}
+
+  /* 와이어프레임 SVG 공통 */
+  .ss-wire{border:1px solid var(--ss-line2); border-radius:14px; background:#fff; display:block;}
+  .ss-wire-cap{font-size:10.5px; color:var(--ss-ink3); text-align:center; margin-top:6px;}
+
+  /* TOC */
+
+  .ss-guide-banner{display:flex; gap:14px; align-items:flex-start; background:#FBF4E4; border:1px solid var(--ss-line2); border-left:4px solid var(--ss-gold); border-radius:12px; padding:16px 18px; margin-top:24px;}
+  .ss-guide-banner .ss-gb-icon{font-size:20px; flex:0 0 auto; line-height:1.3;}
+  .ss-guide-banner .ss-gb-text{font-size:13px; color:var(--ss-ink2); line-height:1.7;}
+  .ss-guide-banner .ss-gb-text b{color:var(--ss-ink);}
+
+  @media (max-width:680px){
+    .ss-screen-top{flex-direction:column;}
+    .ss-sec-head .ss-ssub{display:none;}
+  }
+  
+  }
+
 </style>
 </head>
 <body>
 
 <header class="app-header">
   <div class="app-header-inner">
-    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.9.1</span></div>
+    <div class="app-title">플레이북 앱 — 핵심 기능 기획 <span class="app-version">v0.9.4</span></div>
     <div class="app-subtitle">서재 · 책 선택 · 진도 관리 · 보호자 영역 (4영역 × P1/P2/P3 우선순위)</div>
   </div>
 </header>
@@ -1734,6 +1818,7 @@ section.tab-section.active { display: block; }
     <button class="tab-btn" data-tab="features">기능 명세 <span class="tab-btn-count">22</span></button>
     <button class="tab-btn" data-tab="tools">시각 시안 <span class="tab-btn-count">16</span></button>
     <button class="tab-btn" data-tab="analytics">애널리틱스 <span class="tab-btn-count">7</span></button>
+    <button class="tab-btn" data-tab="screens">화면 설계 <span class="tab-btn-count">18</span></button>
   </div>
 </nav>
 
@@ -1816,6 +1901,14 @@ section.tab-section.active { display: block; }
 
   <section class="tab-section" id="section-analytics">
     <div id="analytics-content"></div>
+  </section>
+
+  <section class="tab-section" id="section-screens">
+    <div class="overview-intro" style="margin-bottom:16px;">
+      <h2>화면 설계 명세 (디자이너용)</h2>
+      <p>전체 화면 구조와 메뉴 순서. 각 화면의 레이아웃 영역·상태·화면 전환·디자인 노트를 사용 흐름 순서대로 정리했습니다. 전 화면 가로(landscape) 모드 기준.</p>
+    </div>
+    <div id="screens-content"></div>
   </section>
 
 </main>
@@ -1947,6 +2040,10 @@ function switchTab(tabId) {
   state.currentTab = tabId;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
   document.querySelectorAll('.tab-section').forEach(s => s.classList.toggle('active', s.id === 'section-' + tabId));
+  if (tabId === 'screens' && typeof renderScreens === 'function' && !window._screensRendered) {
+    renderScreens();
+    window._screensRendered = true;
+  }
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -3938,6 +4035,427 @@ function handleHash() {
 }
 window.addEventListener('hashchange', handleHash);
 if (location.hash) setTimeout(handleHash, 100);
+
+
+/* ===== 화면 설계 탭: 데이터 + 렌더러 (ss- prefix) ===== */
+
+// 디자이너용 화면 명세 데이터 — 기획서 v0.9.1 기준
+const SECTIONS = [
+  {id:'enter', no:'0', title:'진입', sub:'앱을 켜고 아이가 서재에 도착하기까지', color:'#C9A24B'},
+  {id:'library', no:'1', title:'서재 (홈)', sub:'아이가 스스로 책을 고르는 출발점', color:'#C24A3F'},
+  {id:'read', no:'2', title:'읽기', sub:'이야기에 들어가 페이지를 넘기고 끝맺기까지', color:'#7E9C6B'},
+  {id:'buy', no:'3', title:'구매 · 다운로드', sub:'잠긴 챕터를 열고 기기에 받기', color:'#B06A9C'},
+  {id:'guardian', no:'4', title:'보호자 영역', sub:'부모 게이트 뒤 — 통계 · 설정 · 결제', color:'#4A6FA5'},
+  {id:'common', no:'5', title:'공통 · 토큰', sub:'상태/예외 화면과 디자인 토큰', color:'#6B5B73'},
+];
+
+// 각 화면: 레이아웃 요소(zones), 상태(states), 연결(flows), 디자인 노트(notes), 관련 기능(feat)
+const SCREENS = [
+// ── 0. 진입 ──
+{
+  id:'S-00', sec:'enter', title:'스플래시', feat:['F-16','브랜딩'],
+  purpose:'앱을 켰을 때 가장 먼저 1~2초 노출되는 브랜드 화면. 로딩을 가리고 "이제 시작"의 정서를 만든다.',
+  layout:'splash',
+  zones:[
+    ['중앙','SuperStory 버블 위 P 레터마크 + 노란 포인트. 화면 정중앙','로고는 세로 중앙에서 살짝 위(시각 무게중심)'],
+    ['하단','앱 이름/한 줄 태그라인(선택). 작게','부모가 읽는 영역, 아이는 안 읽음'],
+  ],
+  states:[['기본','로고 페이드 인 → 약한 바운스'],['로딩 길어짐','로고 아래 잔잔한 인디케이터(스피너 아님, 점 3개 정도)']],
+  flows:[['자동 →','첫 실행이면 S-01 온보딩 / 이후엔 S-02 또는 S-03']],
+  notes:'키즈 앱 필수: 스플래시에 광고·외부 링크·결제 유도 절대 없음. 단색 레드 배경 권장(다양한 기기에서 안전).',
+},
+{
+  id:'S-01', sec:'enter', title:'첫 실행 온보딩 (부모 동의)', feat:['F-13'],
+  purpose:'이탈이 가장 많은 구간. 길고 복잡한 튜토리얼 대신, 핵심 가치를 빠르게 보여주고 → 부모 동의를 받고 → 신데렐라 1장 체험으로 바로 보낸다.',
+  layout:'phone',
+  zones:[
+    ['가치 소개(1~2장)','이 앱이 뭘 해주는지 큰 그림+삽화. 텍스트 최소','스와이프로 넘기는 캐러셀, 인디케이터'],
+    ['부모 동의 화면','개인정보 처리방침 링크 + 동의 체크. 핵심만 가볍게','상세는 처리방침 링크로(F-19). 5세가 아니라 부모가 읽는 화면'],
+    ['체험 유도 CTA','"신데렐라 1장 바로 보기" 버튼','동의 후 즉시 가치 경험'],
+  ],
+  states:[['동의 전','체험 진입 비활성'],['동의 거부','콘텐츠 본문 진입 불가 → 가치 시점에 재안내'],['건너뛰기','건너뛰어도 신데렐라 1장 체험까지는 도달 가능']],
+  flows:[['동의 + 체험 →','S-06 읽기(신데렐라 1장)'],['완료 →','S-02 프로필 선택']],
+  notes:'동의 화면은 부모용 — 글밀도 OK. 가치 소개는 아이도 보므로 삽화 중심. 두 톤을 한 흐름에서 구분.',
+},
+{
+  id:'S-02', sec:'enter', title:'프로필 선택 · 개인화', feat:['F-20'],
+  purpose:'한 가정에서 형제가 함께 쓸 때 진도·취향·테마가 섞이지 않게. "내 서재"라는 소속감.',
+  layout:'phone',
+  zones:[
+    ['프로필 카드 그리드','아바타 + 이름. 아이가 자기 걸 그림으로 알아봄','글 못 읽는 5세 기준 — 아바타/색이 1차 식별 단서'],
+    ['프로필 추가(＋)','부모 게이트 뒤. 아이는 선택만, 추가/삭제는 부모','선택=게이트 없음 / 관리=게이트 뒤(F-08)'],
+  ],
+  states:[['프로필 1개','자동 진입(이 화면 건너뜀)'],['새 프로필','데이터 없는 빈 서재로 안내'],['편집 모드','부모 게이트 통과 시 추가/삭제 노출']],
+  flows:[['프로필 탭 →','S-03 서재(해당 프로필)'],['＋ 추가 →','S-12 부모 게이트 → 프로필 생성']],
+  notes:'아바타는 동화 캐릭터 톤과 어울리게. 선택은 아이 친화(큰 탭 영역), 관리 진입은 눈에 안 띄게.',
+},
+// ── 1. 서재 ──
+{
+  id:'S-03', sec:'library', title:'서재 메인 (5권 진열)', feat:['F-01','F-02'],
+  purpose:'앱을 열면 처음 만나는 홈. 5세가 표지 그림만으로 책을 구분하고 고른다. "오늘 뭘 볼까"의 출발점.',
+  layout:'phone',
+  zones:[
+    ['글로벌 탑바','프로필 아바타(→마이/프로필) + 설정 진입(보호자)','아바타는 우상단 관습. 설정은 게이트 뒤로 이어짐'],
+    ['책장(5권)','표지 그림 중심 그리드/책장 진열. 본/안 본 시각 구분','표지가 1차 정보 — 제목 텍스트는 보조'],
+    ['본/안 본 뱃지','완독/진행 상태를 표지 위 뱃지·채도로 표시(F-02)','진도 데이터(F-07)에서 가져옴'],
+    ['최근/이어보기 강조(선택)','마지막에 보던 책을 눈에 띄게','이어보기(F-05) 유도'],
+  ],
+  states:[
+    ['기본','5권 진열, 상태 뱃지 표시'],
+    ['빈 서재','구매/다운로드 전 — 깨지지 않고 안내(상태·예외)'],
+    ['로딩','표지 에셋 로드 중 스켈레톤'],
+    ['표지 로드 실패','대체 표지/재시도 안내'],
+  ],
+  flows:[['책 탭 →','S-04 책 펼침 → S-05 목차'],['아바타 →','S-02 프로필 / 마이'],['설정 →','S-12 부모 게이트 → S-14 설정']],
+  notes:'서재는 프로필별 테마색/아바타가 입혀져 "내 서재" 느낌. 책장 메타포(나무 책장)는 데모 무드보드 참고.',
+},
+// ── 2. 읽기 ──
+{
+  id:'S-04', sec:'read', title:'책 펼침 트랜지션', feat:['F-03'],
+  purpose:'책을 고르면 펼쳐지는 1초 모션. 화면 전환이 아니라 "이 이야기로 들어간다"는 전환 의식.',
+  layout:'motion',
+  zones:[
+    ['표지 회전','선택한 표지가 rotateY로 열림(5단계 키프레임)','너무 길면 지루, 짧으면 끊김 → 1초'],
+    ['안쪽 페이지 등장','펼쳐지며 첫 화면(목차)로 연결','저사양 시 단축/생략 후 곧장 목차'],
+  ],
+  states:[['기본','1초 펼침'],['저사양','모션 단축/생략 → 체감 끊김 방지']],
+  flows:[['완료 →','S-05 챕터 목차']],
+  notes:'F-22 페이지 넘김과 연출 계열은 같지만 역할이 다름(여기는 진입). 모션 디자이너 명세 필요.',
+},
+{
+  id:'S-05', sec:'read', title:'챕터 목차', feat:['F-04','F-07','F-18'],
+  purpose:'작품의 챕터 목록 허브. 5세가 어디까지 봤고 다음은 뭔지 스스로 파악하고 이어본다.',
+  layout:'phone',
+  zones:[
+    ['작품 헤더','표지 썸네일 + 제목','어느 책인지 환기'],
+    ['챕터 리스트','각 챕터: 본/안 본 상태 + 무료/잠금 상태','상태(F-07)·잠금(F-18)을 한 화면에'],
+    ['잠금 뱃지','2장부터 자물쇠. 무료 1장 구분','탭 시 페이월'],
+  ],
+  states:[['기본','챕터별 상태 표시'],['메타 로드 실패','재시도 안내'],['전권 구매됨','자물쇠 없음']],
+  flows:[['본/안 본 챕터 →','S-06 읽기'],['잠긴 챕터 →','S-10 페이월'],['뒤로 →','S-03 서재']],
+  notes:'상태 아이콘 체계(안 봄/이어보기/완독)는 서재 뱃지(F-02)와 동일 언어로 — 일관성.',
+},
+{
+  id:'S-06', sec:'read', title:'읽기 뷰어', feat:['F-05','F-06','F-16'],
+  purpose:'실제로 이야기를 보는 핵심 화면. 인터랙티브 요소(탭 반응 등)가 살아있는 무대. 자주 끊으므로 이어보기·자동 저장이 핵심.',
+  layout:'reader',
+  zones:[
+    ['콘텐츠 영역(전체)','동화 페이지 — 삽화/텍스트/인터랙션. 거의 전체 화면','UI 최소 — 몰입 우선'],
+    ['상단 살짝 노출','뒤로(서재), 진행 표시(선택)','상시 노출 아님 — 탭하면 잠깐'],
+    ['소리 토글(검토)','읽기 화면 내 큼직한 소리 켜기/끄기 1개 수준이 5세 적당','정밀 설정은 보호자 영역(F-10)'],
+  ],
+  states:[['기본','첫 진입 시 첫 페이지'],['이어보기','마지막 본 페이지로 1초 내 복원(F-05)'],['저장 위치 무효','챕터 첫 페이지로 안전 복원'],['백그라운드 진입','진도 저장(F-06) — 의식 안 됨']],
+  flows:[['페이지 넘김 →','S-07'],['챕터 끝 →','S-08 보상'],['뒤로 →','S-03 또는 S-05']],
+  notes:'자동 저장은 화면에 노출하지 않음(자동 저장의 미덕). 인터랙티브 요소는 콘텐츠 파트 별도 명세와 연계.',
+},
+{
+  id:'S-07', sec:'read', title:'페이지 넘김 · 종이 휘어짐', feat:['F-22'],
+  purpose:'펼쳐진 책에서 한 장씩 넘기는 인터랙션 + 종이가 휘며 양면 내용이 매핑되는 표현. "진짜 책을 넘긴다"는 감각.',
+  layout:'reader',
+  zones:[
+    ['넘김 제스처 영역','가로 스와이프(좌/우) + 가장자리 탭. 넓은 히트 영역','5세 소근육 고려'],
+    ['모서리 단서','곧 넘길 수 있음을 암시(모서리 살짝 들림)','넘김 가능 신호'],
+    ['휨 음영','넘기는 동안 능선/그림자로 휨 표현','구현 3방식: 메시(상한)/렌더텍스처(권고)/단순(폴백)'],
+  ],
+  states:[['넘김 중','속도 비례, 임계 미달 시 되돌림'],['첫/마지막','고무줄처럼 당겼다 복귀(끝 알림)'],['저사양','종이 휘어짐 끄고 단순 슬라이드']],
+  flows:[['넘김 완료 →','다음/이전 페이지(S-06)']],
+  notes:'탭(요소 반응) vs 가로 드래그(넘김) 제스처 구분이 핵심. 권고안=렌더텍스처. 데모(별도)에서 느낌 확인 가능.',
+},
+{
+  id:'S-08', sec:'read', title:'챕터 완료 보상', feat:['F-15'],
+  purpose:'챕터를 끝낸 순간의 축하. "해냈다"는 성취감 → 다음 챕터로. 점수/별점 아닌 순수 축하.',
+  layout:'phone',
+  zones:[
+    ['축하 연출','애니메이션 + 소리. 화면 중앙','평가 아님 — 부담 없는 즐거움'],
+    ['다음 행동','다음 챕터 / 서재로','자연스러운 이어보기 유도'],
+  ],
+  states:[['기본','축하 연출 재생'],['연출 중 이탈','완독 상태는 이미 저장(손실 없음)']],
+  flows:[['다음 챕터 →','S-06'],['서재 →','S-03'],['책 전체 완독 시 →','S-09']],
+  notes:'챕터 완료(작게) vs 책 완독(크게) 연출 차등. 보상 시각 언어는 브랜드 톤 유지.',
+},
+{
+  id:'S-09', sec:'read', title:'책 완독', feat:['F-15','F-07'],
+  purpose:'책 한 권을 끝까지 본 큰 축하. MVP 핵심 지표(완독률)의 도달점.',
+  layout:'phone',
+  zones:[
+    ['완독 축하(크게)','챕터 보상보다 큰 연출','성취의 정점'],
+    ['다음 추천/서재','다른 책으로 유도(선택)','리텐션 자연 연결'],
+  ],
+  states:[['기본','완독 연출'],['이미 완독한 책 재완독','연출 간소화 가능']],
+  flows:[['서재 →','S-03'],['완독 상태 갱신','서재 뱃지(F-02)·통계(F-09) 반영']],
+  notes:'완독률 40%(7주 게이트)의 도달 화면 — 애널리틱스 book_complete 발화 지점(F-17).',
+},
+// ── 3. 구매 ──
+{
+  id:'S-10', sec:'buy', title:'페이월 (구매 화면 · 3단계)', feat:['F-18','F-08'],
+  purpose:'잠긴 챕터 진입 시. 1장 무료 후 2장부터. 다크패턴 없이 정직하게.',
+  layout:'paywall',
+  zones:[
+    ['1단계 — 잠금 안내','잠긴 장 탭 시. "여긴 어른이 여는 곳" 톤','아이가 결제로 직행 못 하게'],
+    ['2단계 — 개별 vs 번들','번들 = 2px 테두리 + 추천 배지 + 할인(취소선 원가→번들가)','카운트다운·과장 배지 없음(다크패턴 금지)'],
+    ['3단계 — 부모 게이트','결제 직전 게이트(F-08 재사용) → 통과 후 OS 표준 결제창','카드정보는 앱이 안 만짐(스토어 처리)'],
+  ],
+  states:[['결제 실패','"요금이 청구되지 않았어요" 명확 안내'],['구매 완료','해당 챕터가 모든 기기에서 열림(계정 귀속)'],['이미 구매','페이월 대신 바로 진입']],
+  flows:[['게이트 →','S-12 부모 게이트'],['구매 완료 →','S-11 다운로드 또는 S-06 읽기']],
+  notes:'폰트 가독성 중요(5세 부모가 빠르게 판단). 가격/할인은 명료하게. 이탤릭 캡션도 충분히 크게.',
+},
+{
+  id:'S-11', sec:'buy', title:'다운로드 관리', feat:['F-12'],
+  purpose:'구매(엔타이틀먼트)와 다운로드(기기 저장)의 분리. 가정에서 태블릿 여러 대 쓰는 맥락.',
+  layout:'phone',
+  zones:[
+    ['챕터별 다운로드 상태','받음/안 받음/받는 중. 용량 표시','OS별 저장소 차이는 F-21'],
+    ['다운로드/삭제 액션','받기, 기기에서 삭제(구매는 유지)','구매≠다운로드 — 삭제해도 재다운 가능'],
+    ['구매 복원','다른 기기 로그인 시 복원','계정 귀속 구매 다시 받기'],
+  ],
+  states:[['받는 중','진행률 + 취소'],['실패/끊김','상태 명확 + 재시도'],['미구매','다운로드 불가 → 페이월']],
+  flows:[['받기 완료 →','S-06 읽기(오프라인 가능)'],['복원 →','구매 목록 동기화']],
+  notes:'용량/진행률 시각화 필요. 부모 영역 성격(관리)이라 톤은 차분하게.',
+},
+// ── 4. 보호자 ──
+{
+  id:'S-12', sec:'guardian', title:'부모 게이트', feat:['F-08'],
+  purpose:'결제·보안·계정·프로필 관리 앞에 두는 장벽. 아이가 실수로 통과 못 하게.',
+  layout:'gate',
+  zones:[
+    ['게이트 챌린지','곱셈/긴 누르기 등 5세가 못 푸는 장벽','Apple/Google 키즈 규정 — OS 차이는 F-21'],
+    ['안내 문구','"어른에게 보여주세요" 톤','목적 설명'],
+  ],
+  states:[['실패','재시도(과도한 잠금 없이)'],['통과','요청한 보호자 기능으로 진행']],
+  flows:[['통과 →','S-13/S-14 또는 결제(S-10 3단계)']],
+  notes:'게이트는 결제/관리 진입마다 재사용되는 공통 컴포넌트. 한 번 디자인 → 여러 곳에서 호출.',
+},
+{
+  id:'S-13', sec:'guardian', title:'통계 (관심·취향 발견)', feat:['F-09'],
+  purpose:'부모가 아이가 무엇을·얼마나·무엇을 좋아하며 보는지 확인. 점수/등수 아님 — 취향 발견.',
+  layout:'phone',
+  zones:[
+    ['요약 카드','읽은 책/완독/시간 등','과한 수치화 지양'],
+    ['취향 인사이트','"예측 놀이를 가장 좋아해요" 식 발견','로컬·그 아이 부모에게만(F-17 용도 구분)'],
+    ['작품별 진행','책별 진도/반복','반복 독서 등 표시'],
+  ],
+  states:[['데이터 적음','"더 보면 보여드릴게요" 빈 상태'],['기본','인사이트 노출']],
+  flows:[['진입','S-12 게이트 뒤'],['책 탭 →','해당 작품 상세(선택)']],
+  notes:'아이를 평가 대상으로 만들지 않는 톤. 따뜻하고 관찰적인 카피.',
+},
+{
+  id:'S-14', sec:'guardian', title:'설정 (종합 허브)', feat:['F-19'],
+  purpose:'볼륨·자막·결제·보안·계정·프로필·앱 정보를 묶는 허브. 핵심은 게이트 경계.',
+  layout:'phone',
+  zones:[
+    ['게이트 앞 구역 🔓','소리(BGM/SFX/내레이션)·자막 토글/크기 — 부모가 게이트 없이 빠르게','아이 전용 UI 아님 — 보호 불필요한 일상 설정'],
+    ['게이트 뒤 구역 🔒','결제·보안(2FA 분기)·계정·프로필 관리','부모만(F-08)'],
+    ['앱 정보','처리방침·약관 링크 + 버전','게이트 없이 노출(컴플라이언스 필수)'],
+    ['독립 화면 진입점','다운로드(F-12)·통계(F-09)로 연결','허브 역할'],
+  ],
+  states:[['게이트 전','뒤 구역 잠김 표시'],['게이트 후','전체 노출']],
+  flows:[['서브 →','S-15 각 설정 상세'],['다운로드 →','S-11'],['통계 →','S-13']],
+  notes:'게이트 앞/뒤를 시각적으로 분명히 구분(자물쇠 아이콘 등). 부모용이라 정보밀도 OK.',
+},
+{
+  id:'S-15', sec:'guardian', title:'설정 서브 (볼륨/자막/알림/결제 등)', feat:['F-10','F-11','F-14','F-19'],
+  purpose:'설정 허브에서 갈라지는 상세 화면들. 한 틀로 일관되게.',
+  layout:'phone',
+  zones:[
+    ['볼륨 (F-10)','전체/BGM/SFX/내레이션 슬라이더 + 최대 볼륨 캡','부모용 정밀 UI'],
+    ['자막 (F-11)','ON/OFF + 크기 3단계','부모/청각 배려용 — 5세 본인용 아님'],
+    ['알림 (F-14)','사전 동의 설명 → OS 권한. 유용 정보 한정','리텐션 알림 배제'],
+    ['결제수단/내역, 비번 변경, 연결 계정','게이트 뒤 보안 항목','민감 — 게이트 필수'],
+  ],
+  states:[['알림 거부','앱 핵심 기능은 정상'],['2FA 분기','보안 설정에 따라 단계 추가']],
+  flows:[['뒤로 →','S-14 설정 허브']],
+  notes:'서브 화면 공통 레이아웃 템플릿 1개 만들고 항목만 교체 — 디자인 일관/효율.',
+},
+// ── 5. 공통 ──
+{
+  id:'S-16', sec:'common', title:'상태 · 예외 화면 모음', feat:['F-01','F-05','F-12','F-18'],
+  purpose:'정상 경로 밖 — 빈/로딩/오류/완료 상태. 깨지지 않고 다음 행동을 안내.',
+  layout:'states',
+  zones:[
+    ['빈 상태','빈 서재/데이터 없는 프로필/통계 적음','"무엇을 하면 되는지" 안내'],
+    ['로딩','스켈레톤/잔잔한 인디케이터','스피너 남발 금지'],
+    ['오류','표지 로드 실패/네트워크/결제 실패','원인+해결을 인터페이스 목소리로'],
+    ['완료','구매 완료/책 완독','다음 행동 제시'],
+  ],
+  states:[['—','각 패턴을 컴포넌트화']],
+  flows:[['각 상태 →','해당 정상 화면으로 복귀 경로']],
+  notes:'에러는 사과하지 않고, 무엇이 일어났고 어떻게 고치는지. 빈 화면은 행동 초대.',
+},
+{
+  id:'S-17', sec:'common', title:'디자인 토큰 · 공통 컴포넌트', feat:['전체'],
+  purpose:'색·타이포·간격·공통 부품의 단일 출처. 모든 화면이 여기서 파생.',
+  layout:'tokens',
+  zones:[
+    ['컬러','Primary Red #DC3545 · Yellow #FACC15 · 종이/잉크 톤','브랜드 + 동화 질감'],
+    ['타이포','Pretendard. 제목/본문/캡션 스케일','한글 가독 — 향후 영문 서체 병행 고려'],
+    ['공통 컴포넌트','부모 게이트 · 상태 뱃지 · 잠금 뱃지 · 빈/오류 패턴','재사용 부품'],
+    ['아이콘','자물쇠(게이트)·본/안 본·소리','일관된 아이콘 언어'],
+  ],
+  states:[['—','토큰 정의서']],
+  flows:[['→','모든 화면이 참조']],
+  notes:'글로벌(영문) 서비스 검토 중 — 영문 서체/문자열 길이 대응을 토큰 단계에서 미리 고려하면 추후 비용 절감.',
+},
+];
+
+
+function renderScreens(){
+
+  const app = document.getElementById('screens-content');
+  const toc = null;
+  const secColor = Object.fromEntries(SECTIONS.map(s=>[s.id,s.color]));
+
+  // ── IA 플로우맵 (메뉴 순서) ──
+  function buildIA(){
+    const lanes = [
+      {label:'진입', color:secColor.enter, nodes:[['스플래시','S-00'],['온보딩·동의','S-01'],['프로필 선택','S-02']]},
+      {label:'서재', color:secColor.library, nodes:[['서재 메인','S-03']]},
+      {label:'읽기', color:secColor.read, nodes:[['책 펼침','S-04'],['챕터 목차','S-05'],['읽기 뷰어','S-06'],['페이지 넘김','S-07'],['챕터 보상','S-08'],['책 완독','S-09']]},
+      {label:'구매', color:secColor.buy, nodes:[['페이월','S-10',1],['부모 게이트','S-12',1],['다운로드','S-11']]},
+      {label:'보호자', color:secColor.guardian, nodes:[['부모 게이트','S-12',1],['통계','S-13'],['설정 허브','S-14'],['설정 서브','S-15']]},
+    ];
+    let h = '<div class="ss-ia"><h3>전체 메뉴 순서 (IA 플로우맵)</h3><p class="ss-cap">앱을 켜고 → 서재 → 읽기 → (잠긴 챕터면) 구매 → 보호자 영역. 자물쇠 표시는 부모 게이트 뒤.</p><div class="ss-ia-track">';
+    lanes.forEach(ln=>{
+      h += '<div class="ss-ia-lane"><span class="ss-ia-lane-label" style="background:'+ln.color+'">'+ln.label+'</span>';
+      ln.nodes.forEach((n,i)=>{
+        if(i>0) h += '<span class="ss-ia-arr">→</span>';
+        h += '<a href="#'+n[1]+'" class="ia-node'+(n[2]?' ia-gate':'')+'" style="text-decoration:none">'+(n[2]?'🔒 ':'')+n[0]+'<b>'+n[1]+'</b></a>';
+      });
+      h += '</div>';
+    });
+    h += '</div></div>';
+    return h;
+  }
+
+  // ── 와이어프레임 SVG (레이아웃 종류별) ──
+  function wire(layout, color){
+    const c=color||'#C9A24B';
+    const fr='#EDE3CF', st='#C9BBA0', tx='#B8A988';
+    const W=280, H=210;   // 가로(landscape) 4:3 고정
+    const box=(x,y,w,h,r,fill)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(r||4)+'" fill="'+(fill||fr)+'" stroke="'+st+'" stroke-width="1"/>';
+    const line=(x,y,w)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="5" rx="2.5" fill="'+tx+'"/>';
+    let inner='';
+    if(layout==='splash'){
+      inner = '<rect x="0" y="0" width="'+W+'" height="'+H+'" rx="16" fill="'+c+'" opacity="0.9"/>'
+        + '<circle cx="'+W/2+'" cy="'+(H/2-6)+'" r="30" fill="#fff" opacity="0.95"/>'
+        + '<text x="'+W/2+'" y="'+(H/2+2)+'" font-size="26" font-weight="800" fill="'+c+'" text-anchor="middle">P</text>'
+        + '<circle cx="'+(W/2+22)+'" cy="'+(H/2-28)+'" r="6" fill="#FACC15"/>'
+        + '<rect x="'+(W/2-40)+'" y="'+(H/2+34)+'" width="80" height="5" rx="2.5" fill="#fff" opacity="0.7"/>';
+    } else if(layout==='phone'){   // 서재·목차·통계·설정 등 일반 가로 화면
+      inner = box(14,14,W-28,24,6)            // 글로벌 탑바
+        + '<circle cx="'+(W-28)+'" cy="26" r="8" fill="'+st+'"/>'  // 아바타(우상단)
+        // 가로 책장: 카드 3~4개 가로 배열
+        + box(14,50,(W-44)/3,H-100,8) + box(20+(W-44)/3,50,(W-44)/3,H-100,8) + box(26+2*(W-44)/3,50,(W-44)/3,H-100,8)
+        + box(14,H-40,W-28,22,6);             // 하단바
+    } else if(layout==='motion'){   // 책 펼침 — 가로로 양면이 열림
+      inner = '<rect x="30" y="30" width="'+(W-60)+'" height="'+(H-60)+'" rx="10" fill="'+fr+'" stroke="'+st+'"/>'
+        + '<path d="M'+(W/2)+' 30 L'+(W/2)+' '+(H-30)+'" stroke="'+c+'" stroke-width="2"/>'  // 책등(중앙)
+        + '<path d="M'+(W/2)+' 38 q '+(W/2-46)+' 0 '+(W/2-46)+' '+((H-76)/2)+' q 0 '+((H-76)/2)+' -'+(W/2-46)+' '+((H-76)/2)+'" fill="'+c+'" opacity="0.16" stroke="'+c+'"/>'  // 오른쪽 페이지 열림
+        + '<text x="'+(W*0.72)+'" y="'+(H/2+3)+'" font-size="9" fill="'+tx+'" text-anchor="middle">펼침</text>'
+        + '<text x="'+(W*0.28)+'" y="'+(H/2+3)+'" font-size="8" fill="'+tx+'" text-anchor="middle">표지</text>';
+    } else if(layout==='reader'){   // 읽기/넘김 — 가로 양면 펼침
+      inner = '<rect x="10" y="10" width="'+(W-20)+'" height="'+(H-20)+'" rx="10" fill="'+fr+'" stroke="'+st+'"/>'
+        + '<line x1="'+(W/2)+'" y1="16" x2="'+(W/2)+'" y2="'+(H-16)+'" stroke="'+st+'" stroke-width="1.5" stroke-dasharray="3 3"/>'  // 책등(중앙 접지선)
+        + box(16,16,W-32,16,5,'#fff')  // 상단 살짝 노출(탭 시)
+        // 왼쪽 면: 삽화
+        + '<circle cx="'+(W*0.28)+'" cy="'+(H/2)+'" r="26" fill="'+c+'" opacity="0.2" stroke="'+c+'"/>'
+        // 오른쪽 면: 텍스트
+        + line(W*0.55,H/2-6,W*0.32) + line(W*0.55,H/2+8,W*0.24)
+        // 오른쪽 가장자리 넘김 곡선
+        + '<path d="M'+(W-20)+' 24 q -16 '+(H/2-12)+' 0 '+(H-48)+'" fill="none" stroke="'+c+'" stroke-width="1.5" stroke-dasharray="3 3"/>'
+        + '<text x="'+(W-34)+'" y="'+(H-22)+'" font-size="8" fill="'+tx+'">넘김</text>';
+    } else if(layout==='paywall'){   // 페이월 — 가로로 카드 좌우 + 게이트
+      inner = box(16,16,W-32,18,5)            // 헤더
+        + box(20,44,(W-58)/2,H-110,8)          // 개별 카드(좌)
+        + '<rect x="'+(28+(W-58)/2)+'" y="40" width="'+((W-58)/2)+'" height="'+(H-102)+'" rx="8" fill="#FBF4E4" stroke="'+c+'" stroke-width="2"/>'  // 번들(우, 강조)
+        + '<rect x="'+(28+(W-58)/2+6)+'" y="34" width="44" height="14" rx="7" fill="'+c+'"/>'  // 추천 배지
+        + '<text x="'+(28+(W-58)/2+28)+'" y="44" font-size="8" fill="#fff" text-anchor="middle">추천</text>'
+        + box(16,H-50,W-32,22,6)               // 하단 게이트 안내
+        + '<text x="'+(W/2)+'" y="'+(H-35)+'" font-size="8" fill="'+tx+'" text-anchor="middle">🔒 결제 직전 부모 게이트</text>';
+    } else if(layout==='gate'){   // 부모 게이트 — 가로 중앙 모달
+      inner = '<rect x="'+(W/2-90)+'" y="36" width="180" height="'+(H-72)+'" rx="12" fill="'+fr+'" stroke="'+st+'"/>'
+        + '<text x="'+(W/2)+'" y="80" font-size="22" text-anchor="middle">🔒</text>'
+        + line(W/2-44,98,88) + line(W/2-30,112,60)
+        + box(W/2-70,134,140,26,8,'#fff') + box(W/2-44,H-44,88,22,11,c);
+    } else if(layout==='states'){   // 상태 모음 — 가로 4분할
+      const q=(x,y,emo,lb)=>'<rect x="'+x+'" y="'+y+'" width="120" height="68" rx="8" fill="'+fr+'" stroke="'+st+'"/><text x="'+(x+60)+'" y="'+(y+34)+'" font-size="18" text-anchor="middle">'+emo+'</text><text x="'+(x+60)+'" y="'+(y+56)+'" font-size="8" fill="'+tx+'" text-anchor="middle">'+lb+'</text>';
+      inner = q(18,18,'📭','빈')+q(142,18,'⏳','로딩')+q(18,98,'⚠️','오류')+q(142,98,'✅','완료');
+    } else if(layout==='tokens'){   // 토큰 — 가로
+      inner = '<circle cx="40" cy="44" r="15" fill="#DC3545"/><circle cx="78" cy="44" r="15" fill="#FACC15"/><circle cx="116" cy="44" r="15" fill="#FAF5EA" stroke="'+st+'"/><circle cx="154" cy="44" r="15" fill="#33291C"/>'
+        + '<text x="186" y="40" font-size="17" font-weight="800" fill="#33291C">Aa</text><text x="216" y="40" font-size="11" fill="'+ink2()+'">본문</text><text x="186" y="58" font-size="8" fill="'+tx+'">캡션</text>'
+        + '<line x1="20" y1="84" x2="'+(W-20)+'" y2="84" stroke="'+st+'"/>'
+        + box(20,100,70,34,8)+box(100,100,70,34,8)+box(180,100,80,34,8)
+        + '<text x="'+(W/2)+'" y="'+(H-22)+'" font-size="8" fill="'+tx+'" text-anchor="middle">컬러 · 타이포 · 공통 컴포넌트</text>';
+    } else {
+      inner = box(14,14,W-28,H-28,10);
+    }
+    return '<svg class="ss-wire" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'
+      + '<rect x="0.5" y="0.5" width="'+(W-1)+'" height="'+(H-1)+'" rx="15" fill="#fff"/>' + inner + '</svg>';
+  }
+  function ink2(){return '#6E5E48';}
+
+  // ── 화면 카드 ──
+  function screenCard(s){
+    const color = secColor[s.sec];
+    let h = '<section class="ss-screen" id="'+s.id+'" style="--accent:'+color+'">';
+    // top
+    h += '<div class="ss-screen-top"><div class="ss-scr-wire">'+wire(s.layout,color)
+       + '<div class="ss-wire-cap">레이아웃 가이드 · 가로</div></div>';
+    h += '<div class="ss-scr-info"><div class="ss-scr-id">'+s.id+'</div><div class="ss-scr-title">'+s.title+'</div>'
+       + '<div class="ss-scr-purpose">'+s.purpose+'</div>';
+    if(s.feat&&s.feat.length){ h+='<div class="ss-scr-feats">'+s.feat.map(f=>'<span class="ss-feat-tag">'+f+'</span>').join('')+'</div>'; }
+    h += '</div></div>';
+    // body
+    h += '<div class="ss-scr-body">';
+    // zones
+    if(s.zones&&s.zones.length){
+      h += '<div class="ss-block"><div class="ss-block-h">레이아웃 영역</div><table class="ss-spec"><thead><tr><th>영역</th><th>내용</th><th>디자인 의도</th></tr></thead><tbody>';
+      s.zones.forEach(z=> h+='<tr><td>'+z[0]+'</td><td>'+z[1]+'</td><td>'+z[2]+'</td></tr>');
+      h += '</tbody></table></div>';
+    }
+    // states
+    if(s.states&&s.states.length){
+      h += '<div class="ss-block"><div class="ss-block-h">상태</div><table class="ss-spec"><tbody>';
+      s.states.forEach(st=> h+='<tr><td>'+st[0]+'</td><td>'+st[1]+'</td></tr>');
+      h += '</tbody></table></div>';
+    }
+    // flows
+    if(s.flows&&s.flows.length){
+      h += '<div class="ss-block"><div class="ss-block-h">화면 전환</div><div class="ss-flows">';
+      s.flows.forEach(f=>{
+        const dest = f[1].replace(/S-\d+\w?/g, m=>'<a href="#'+m+'" style="color:inherit">'+m+'</a>');
+        h += '<div class="ss-flow-item"><span class="ss-flow-trigger">'+f[0]+'</span><span class="ss-flow-arr"></span><span class="ss-flow-dest">'+dest+'</span></div>';
+      });
+      h += '</div></div>';
+    }
+    // note
+    if(s.notes){ h += '<div class="ss-note"><b>디자인 노트</b> · '+s.notes+'</div>'; }
+    h += '</div></section>';
+    return h;
+  }
+
+  // ── 렌더 ──
+  let out = '';
+  out += '<div class="ss-guide-banner"><div class="ss-gb-icon">📐</div><div class="ss-gb-text">'
+    + '<b>레이아웃 가이드는 확정 시안이 아니라 기본 배치 제안입니다.</b> 각 화면의 '
+    + '<b>레이아웃 영역·상태·화면 전환</b>은 기획서 기준이라 지켜 주세요. 반면 와이어프레임에 그려진 '
+    + '<b>시각적 배치(위치·비율·정렬)는 출발점</b>이며, 더 나은 안으로 자유롭게 바꿔도 됩니다. '
+    + '전 화면은 가로(landscape) 모드 기준입니다.'
+    + '</div></div>';
+  out += buildIA();
+  SECTIONS.forEach(sec=>{
+    out += '<div class="ss-sec-head"><span class="ss-sec-no" style="background:'+sec.color+'">'+sec.no+'</span>'
+      + '<h2>'+sec.title+'</h2><span class="ss-ssub">'+sec.sub+'</span></div>';
+    SCREENS.filter(s=>s.sec===sec.id).forEach(s=> out += screenCard(s));
+    // TOC
+  });
+  app.innerHTML = out;
+  // 섹션 앵커
+  SECTIONS.forEach(sec=>{
+    const head = [...document.querySelectorAll('.sec-head')].find(h=>h.querySelector('h2').textContent===sec.title);
+    if(head) head.id = 'sec-'+sec.id;
+  });
+
+}
 </script>
 
 </body>
